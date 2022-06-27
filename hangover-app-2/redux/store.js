@@ -2,7 +2,7 @@ import rootReducer        from "./rootReducer";
 import { configureStore } from "@reduxjs/toolkit";
 
 const reducer = {
-    reducerRoot : rootReducer
+    state : rootReducer
 }
 
 const reduxStore = configureStore ({ reducer });
