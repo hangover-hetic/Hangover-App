@@ -1,7 +1,7 @@
 import { USER_TOKEN } from "./userConstants";
 
 const initialState = {
-    userToken: ""
+    userToken: "boomm"
 };
 
 const userReducer = (state = initialState, action) => {
@@ -16,4 +16,4 @@ const userReducer = (state = initialState, action) => {
     }
 }
 
-export default { userReducer };
+export default userReducer;

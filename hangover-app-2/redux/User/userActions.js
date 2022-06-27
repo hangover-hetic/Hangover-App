@@ -5,4 +5,4 @@ export const userToken = (token) => {
         type   : USER_TOKEN,
         payload: token
     }
-} 
+}
