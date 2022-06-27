@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "hangover-app-2",
+    "slug": "hangover-app-2",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
