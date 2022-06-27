@@ -2,11 +2,16 @@ import React       from 'react'
 import { Text }    from 'react-native-web'
 import { connect } from 'react-redux'
 
-class Index extends React.Component {
+class Homepage extends React.Component {
     constructor (props) {
         super(props)
     }
-  render() {
+
+    componentDidMount() {
+        console.log(this.props.userToken)
+    }
+
+    render() {
         return (
             <Text>Je suis la page d'index</Text>
         )
@@ -16,9 +21,9 @@ const mapStateToProps = (state) => ({
     userToken : state
 })
 
-const IndexConnected = connect (
+const HomepageConnected = connect (
     mapStateToProps
-)(Index);
+)(Homepage);
 
-export default IndexConnected;
+export default HomepageConnected;
 
