@@ -6,7 +6,12 @@ class Index extends React.Component {
     constructor (props) {
         super(props)
     }
-  render() {
+
+    componentDidMount() {
+        console.log(this.props.userToken)
+    }
+
+    render() {
         return (
             <Text>Je suis la page d'index</Text>
         )

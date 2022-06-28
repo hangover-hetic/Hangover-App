@@ -1,7 +1,8 @@
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Text } from 'react-native';
 import { Provider }    from 'react-redux';
 import reduxStore      from './redux/store';
 import App             from './App';
+import { registerRootComponent } from 'expo';
 
 const RNRedux = () => (
     <Provider store={ reduxStore }>
@@ -9,4 +10,5 @@ const RNRedux = () => (
     </Provider>
 )
 
+registerRootComponent(RNRedux);
 AppRegistry.registerComponent(RNRedux);

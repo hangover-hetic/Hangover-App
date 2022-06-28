@@ -7,11 +7,11 @@ import {
 import Index from './pages/Index';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-        <Index />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Index />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
