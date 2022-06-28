@@ -1,1 +1,2 @@
 export const USER_TOKEN = "USER_TOKEN";
+export const USER_LOADING_LOGIN = "USER_LOADING_LOGIN";
