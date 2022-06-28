@@ -10,13 +10,17 @@ import {
     useForm, 
     Controller 
 }                         from 'react-hook-form';
+import { postLogin }      from '../redux/User/userAsync-actions';
+import Link               from 'react-router-native'
+import { connect }        from 'react-redux';
 
 
-const Login = () => {
+const Login = (props) => {
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
+        props.login(data)
     }
 
     useEffect(() => {
@@ -63,8 +67,17 @@ const Login = () => {
                 title={"Submit"}
                 onPress={handleSubmit(onSubmit)}
             />
+           
         </View>
     </>
+}
+
+const mapStateToProps = ( state ) => {
+    userLoading : userReducer.user
+}
+
+const mapActionsToProps = {
+    postLogin
 }
 
 const styles = StyleSheet.create({
@@ -87,5 +100,9 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
   });
+
+//const LoginConnected = connect(
+    //mapActionsToProps,
+//)(Login);
 
 export default Login;
