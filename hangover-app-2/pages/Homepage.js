@@ -1,5 +1,5 @@
 import React       from 'react'
-import { Text }    from 'react-native-web'
+import { Text }    from 'react-native'
 import { connect } from 'react-redux'
 
 class Homepage extends React.Component {
@@ -12,11 +12,12 @@ class Homepage extends React.Component {
     }
 
     render() {
-        return (
-            <Text>Je suis la page d'index</Text>
-        )
+        return <>
+            <Text>Je suis la page d'index de jessy</Text>
+        </>
     }
 }
+
 const mapStateToProps = (state) => ({
     userToken : state
 })
