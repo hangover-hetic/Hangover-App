@@ -2,7 +2,7 @@ import React       from 'react'
 import { Text }    from 'react-native-web'
 import { connect } from 'react-redux'
 
-class Index extends React.Component {
+class Homepage extends React.Component {
     constructor (props) {
         super(props)
     }
@@ -21,9 +21,9 @@ const mapStateToProps = (state) => ({
     userToken : state
 })
 
-const IndexConnected = connect (
+const HomepageConnected = connect (
     mapStateToProps
-)(Index);
+)(Homepage);
 
-export default IndexConnected;
+export default HomepageConnected;
 
