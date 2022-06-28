@@ -1,6 +1,6 @@
 import React             from 'react';
 import { View }          from 'react-native';
-import Login             from './pages/Login';
+import LoginConnected    from './pages/Login';
 import Register          from './pages/Register';
 import HomepageConnected from './pages/Homepage';
 import NotFound          from './pages/NotFound';
@@ -16,7 +16,7 @@ export default function App() {
         <NativeRouter>
             <View style={styles.container}>
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={<LoginConnected />} />
                     <Route exact path="/homepage" element={<HomepageConnected />} />
                     <Route path="/register" element={<Register />} />
                     <Route element={<NotFound />} />
