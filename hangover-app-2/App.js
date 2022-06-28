@@ -1,15 +1,14 @@
-import React            from 'react';
-import { View }         from 'react-native';
-import Login            from './Pages/Login';
-import Register         from './Pages/Register';
-import NotFound         from './Pages/NotFound'
+import React             from 'react';
+import { View }          from 'react-native';
+import Login             from './pages/Login';
+import HomepageConnected from './pages/Homepage';
+import Register          from './pages/Register';
+import NotFound          from './pages/NotFound';
 import { 
     NativeRouter, 
     Route,
     Routes,
-}                       from 'react-router-native';
-import HomepageConnected from './Pages/Homepage'
-
+}                        from 'react-router-native';
 
 export default function App() {
     return <>
