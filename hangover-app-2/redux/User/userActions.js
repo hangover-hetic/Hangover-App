@@ -10,7 +10,7 @@ export const userToken = (token) => {
 
 export const userLoadingLogin = (loading) => {
     return {
-        type   : USER_TOUSER_LOADING_LOGINKEN,
+        type   : USER_LOADING_LOGIN,
         payload: loading
     }
 }

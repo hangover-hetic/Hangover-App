@@ -4,7 +4,7 @@ import { userLoadingLogin } from "./userActions";
 export const postLogin = ( data ) => {
     return async dispatch => {
         dispatch(userLoadingLogin(true))
-
+        console.log(data)
         try {
             await request.post(
                 `authentification_token`,

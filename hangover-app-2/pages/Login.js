@@ -13,19 +13,27 @@ import {
 import { postLogin }      from '../redux/User/userAsync-actions';
 import Link               from 'react-router-native'
 import { connect }        from 'react-redux';
+import { useDispatch }    from 'react-redux';
 
+const Login = () => {
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues: {
+            userName: '',
+            password: ''
+          }
+    });
 
-const Login = (props) => {
-    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm();
+    const dispatch = useDispatch();
 
     const onSubmit = (data) => {
-        console.log(data);
-        props.postLogin(data)
+        dispatch(postLogin(data))
     }
 
-    useEffect(() => {
-        
-    });
+    const onChange = arg => {
+        return {
+          value: arg.nativeEvent.text,
+        };
+    };
 
     return <>
         <View style={styles.inputContainer}>
@@ -37,7 +45,7 @@ const Login = (props) => {
                         style={styles.input}
                         placeholder="Username"
                         onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
+                        onChangeText={value =>onChange(value)}
                         value={value}
                         secureTextEntry={false} 
                     />
@@ -67,7 +75,6 @@ const Login = (props) => {
                 title={"Submit"}
                 onPress={handleSubmit(onSubmit)}
             />
-           
         </View>
     </>
 }
@@ -99,7 +106,7 @@ const styles = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
     },
-  });
+});
 
 const LoginConnected = connect(
     mapStateToProps,
