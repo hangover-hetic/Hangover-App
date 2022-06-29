@@ -1,22 +1,45 @@
-import React        from 'react'
+import React, { useEffect } from 'react'
 import { 
     Text,
     View,
     TextInput,
     StyleSheet
-}                   from 'react-native';
-import SubmitButton from '../components/customButton';
+}                       from 'react-native';
+import SubmitButton     from '../components/customButton';
 import { 
     useForm, 
     Controller 
-}                         from 'react-hook-form';
+}                       from 'react-hook-form';
+import { postRegister } from '../redux/User/userAsync-actions';
+import { 
+    connect, 
+    useDispatch 
+}                       from 'react-redux';
 
-const Register = () => {
-    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm();
+const Register = (props) => {
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues : {
+            firstName : '',
+            lastName  : '',
+            email     : '',
+            password  : '',
+            phone     : '',
+            address   : '',
+            country   : '',
+        }
+    });
 
+    useEffect(() => {
+        //console log de la properties contenu dans le store
+        console.log(props.loadingRegister)
+    })
+
+    const dispatch = useDispatch();
 
     const onSubmit = (data) => {
         console.log(data);
+        //appel de l'api
+        dispatch(postRegister(data))
     }
 
     return <>   
@@ -68,7 +91,7 @@ const Register = () => {
                     secureTextEntry={false} 
                 />
                 )}
-                name="Email"
+                name="email"
                 rules={{ required: true }}
             />
 
@@ -169,4 +192,20 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Register;
+const mapStateToProps = ( state ) => ({
+    //Connection aux événements du store redux
+    loadingRegister : state.userReducer.userLoadingRegister
+})
+
+const mapActionsToProps = {
+    //Obligatoire pour pouvoir utiliser notre fonction custom du call api
+    postRegister
+}
+
+const RegisterConnected = connect(
+    //La connxion principal au store reduc se fait par ici
+    mapStateToProps,
+    mapActionsToProps
+)(Register);
+
+export default RegisterConnected;
