@@ -16,9 +16,9 @@ export default function App() {
         <NativeRouter>
             <View style={styles.container}>
                 <Routes>
-                    <Route path="/" element={<LoginConnected />} />
+                    <Route exact path="/" element={<LoginConnected />} />
                     <Route exact path="/homepage" element={<HomepageConnected />} />
-                    <Route path="/register" element={<Register />} />
+                    <Route exact path="/register" element={<Register />} />
                     <Route element={<NotFound />} />
                 </Routes>
             </View> 
