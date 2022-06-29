@@ -1,5 +1,7 @@
-import { USER_TOKEN }         from "./userConstants";
-import { USER_LOADING_LOGIN } from "./userConstants";
+import { USER_TOKEN,
+        USER_LOADING_LOGIN,
+        USER_LOADING_REGISTER
+} from "./userConstants";
 
 export const userToken = (token) => {
     return {
@@ -11,6 +13,13 @@ export const userToken = (token) => {
 export const userLoadingLogin = (loading) => {
     return {
         type   : USER_LOADING_LOGIN,
+        payload: loading
+    }
+}
+
+export const userLoadingRegister = (loading) => {
+    return {
+        type   : USER_LOADING_REGISTER,
         payload: loading
     }
 }

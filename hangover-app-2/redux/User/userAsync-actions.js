@@ -1,5 +1,8 @@
-import request              from "../../settings/request";
-import { userLoadingLogin } from "./userActions";
+import request from "../../settings/request";
+import { 
+    userLoadingLogin,
+    userLoadingRegister
+}              from "./userActions";
 
 export const postLogin = ( data ) => {
     return async dispatch => {
@@ -7,9 +10,9 @@ export const postLogin = ( data ) => {
         console.log(data)
         try {
             await request.post(
-                `authentification_token`,
+                `authentication_token`,
                 {
-                    userName: data.userName,
+                    username: data.username,
                     password: data.password
                 }
             )
@@ -17,6 +20,31 @@ export const postLogin = ( data ) => {
             console.dir(e)
         } finally {
             dispatch(userLoadingLogin(false))
+        }
+    }
+}
+
+export const postRegister = ( data ) => {
+    return async dispatch => {
+        dispatch(userLoadingRegister(true))
+        console.log(data)
+        try {
+            await request.post(
+                `users`,
+                {
+                    userName: data.userName,
+                    password: data.password,
+                    email   : data.email,
+                    password: data.password,
+                    phone   : data.phone,
+                    address : data.address,
+                    country : data.country
+                }
+            )
+        } catch(e) {
+            console.dir(e)
+        } finally {
+            dispatch(userLoadingRegister(false))
         }
     }
 }
