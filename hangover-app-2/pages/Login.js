@@ -1,24 +1,26 @@
-import React, {useEffect} from 'react'
+import React         from 'react'
 import { 
     Text, 
     View,
     TextInput,
     StyleSheet
-}                         from 'react-native';
-import SubmitButton       from '../components/customButton';
+}                    from 'react-native';
+import SubmitButton  from '../components/customButton';
 import { 
     useForm, 
     Controller 
-}                         from 'react-hook-form';
-import { postLogin }      from '../redux/User/userAsync-actions';
-import Link               from 'react-router-native'
-import { connect }        from 'react-redux';
-import { useDispatch }    from 'react-redux';
+}                    from 'react-hook-form';
+import { postLogin } from '../redux/User/userAsync-actions';
+import { 
+    connect, 
+    useDispatch 
+}                    from 'react-redux';
+
 
 const Login = () => {
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
         defaultValues: {
-            userName: '',
+            username: '',
             password: ''
           }
     });
@@ -50,7 +52,7 @@ const Login = () => {
                         secureTextEntry={false} 
                     />
                 )}
-                name="userName"
+                name="username"
                 rules={{ required: true }}
             />
 
@@ -79,14 +81,6 @@ const Login = () => {
     </>
 }
 
-const mapStateToProps = ( state ) => ({
-    userLoading : state
-})
-
-const mapActionsToProps = {
-    postLogin
-}
-
 const styles = StyleSheet.create({
     input: {
         height: 40,
@@ -107,6 +101,14 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
 });
+
+const mapStateToProps = ( state ) => ({
+    userLoading : state
+})
+
+const mapActionsToProps = {
+    postLogin
+}
 
 const LoginConnected = connect(
     mapStateToProps,
