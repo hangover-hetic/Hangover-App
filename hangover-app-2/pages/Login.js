@@ -20,7 +20,7 @@ const Login = (props) => {
 
     const onSubmit = (data) => {
         console.log(data);
-        props.login(data)
+        props.postLogin(data)
     }
 
     useEffect(() => {
@@ -72,9 +72,9 @@ const Login = (props) => {
     </>
 }
 
-const mapStateToProps = ( state ) => {
-    userLoading : userReducer.user
-}
+const mapStateToProps = ( state ) => ({
+    userLoading : state
+})
 
 const mapActionsToProps = {
     postLogin
@@ -101,8 +101,9 @@ const styles = StyleSheet.create({
     },
   });
 
-//const LoginConnected = connect(
-    //mapActionsToProps,
-//)(Login);
+const LoginConnected = connect(
+    mapStateToProps,
+    mapActionsToProps
+)(Login);
 
-export default Login;
+export default LoginConnected;
