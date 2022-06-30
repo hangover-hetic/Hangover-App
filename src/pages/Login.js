@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, TextInput, StyleSheet,} from 'react-native';
 import SubmitButton from '../components/CustomButton';
 import {useForm, Controller,} from 'react-hook-form';
-import {postLogin} from '../../redux/User/userAsync-actions';
+import {postLogin} from '../redux/User/userAsync-actions';
 import {connect, useDispatch,} from 'react-redux';
 
 const Login = () => {

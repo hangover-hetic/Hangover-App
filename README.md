@@ -1,8 +1,6 @@
 # HANGOVER-APP-2
 
-Démarrer l'appli :
-
-• cd hangover-app-2
+##Démarrer l'appli :
 
 • yarn install / npm install
 
