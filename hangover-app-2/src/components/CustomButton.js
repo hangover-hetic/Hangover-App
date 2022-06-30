@@ -1,29 +1,24 @@
-import React, { useState } from "react";
-import { 
-    TouchableWithoutFeedback,
-    View, 
-    Text, 
-    StyleSheet 
-}                          from "react-native";
+import React, {useState} from 'react';
+import {TouchableWithoutFeedback, View, Text, StyleSheet} from 'react-native';
 
-const SubmitButton = ({ title, onPress }) => {
+const SubmitButton = ({title, onPress}) => {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
                 <Text style={styles.text}>{title}</Text>
             </View>
         </TouchableWithoutFeedback>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
-        shadowColor: '#000',
+        shadowColor: '#000000',
         shadowOffset: {
-        width: 0,
-        height: 2,
+            width: 0,
+            height: 2,
         },
-        backgroundColor: '#3F5EFB',
+        backgroundColor: '#3f5efb',
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         width: 250,
@@ -39,6 +34,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-  });
+});
 
-  export default SubmitButton;
+export default SubmitButton;

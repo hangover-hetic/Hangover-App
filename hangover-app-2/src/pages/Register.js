@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
-import { 
+import {
     Text,
     View,
     TextInput,
     StyleSheet
 }                       from 'react-native';
-import SubmitButton     from '../components/customButton';
-import { 
-    useForm, 
-    Controller 
+import SubmitButton     from '../components/CustomButton';
+import {
+    useForm,
+    Controller
 }                       from 'react-hook-form';
 import { postRegister } from '../redux/User/userAsync-actions';
-import { 
-    connect, 
-    useDispatch 
+import {
+    connect,
+    useDispatch
 }                       from 'react-redux';
 
 const Register = (props) => {
@@ -42,7 +42,7 @@ const Register = (props) => {
         dispatch(postRegister(data))
     }
 
-    return <>   
+    return <>
         <View style={styles.inputContainer}>
             <Text>First Name</Text>
             <Controller
@@ -54,7 +54,7 @@ const Register = (props) => {
                         onBlur={onBlur}
                         onChangeText={value => onChange(value)}
                         value={value}
-                        secureTextEntry={false} 
+                        secureTextEntry={false}
                     />
                 )}
                 name="firstName"
@@ -71,7 +71,7 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={false} 
+                    secureTextEntry={false}
                 />
                 )}
                 name="lastName"
@@ -88,7 +88,7 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={false} 
+                    secureTextEntry={false}
                 />
                 )}
                 name="email"
@@ -105,7 +105,7 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={true} 
+                    secureTextEntry={true}
                 />
                 )}
                 name="password"
@@ -122,7 +122,7 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={false} 
+                    secureTextEntry={false}
                 />
                 )}
                 name="phone"
@@ -139,7 +139,7 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={false} 
+                    secureTextEntry={false}
                 />
                 )}
                 name="address"
@@ -156,14 +156,14 @@ const Register = (props) => {
                     onBlur={onBlur}
                     onChangeText={value => onChange(value)}
                     value={value}
-                    secureTextEntry={false} 
+                    secureTextEntry={false}
                 />
                 )}
                 name="country"
                 rules={{ required: true }}
             />
 
-            <SubmitButton 
+            <SubmitButton
                 title={"Submit"}
                 onPress={handleSubmit(onSubmit)}
             />

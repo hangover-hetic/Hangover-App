@@ -1,5 +1,5 @@
 import React from 'react';
-import Container from './src/components/Container';
+import Container from './src/components/ui/Container';
 import Login from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
 import Register from './src/pages/Register';
