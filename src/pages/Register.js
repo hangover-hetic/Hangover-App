@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React            from 'react'
 import {
     Text,
     View,
@@ -15,6 +15,7 @@ import {
     connect,
     useDispatch
 }                       from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const Register = (props) => {
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -29,17 +30,20 @@ const Register = (props) => {
         }
     });
 
-    useEffect(() => {
-        //console log de la properties contenu dans le store
-        console.log(props.loadingRegister)
-    })
-
+    const navigation = useNavigation();
     const dispatch = useDispatch();
 
     const onSubmit = (data) => {
-        console.log(data);
+        if (props.loadingRegister) {
+            dispatch(postRegister(data))
+            navigation.navigate("/Login")
+            console.log(data)
+        } else {
+            console.log("Les données ne sont pas bonnes")
+        }
         //appel de l'api
         dispatch(postRegister(data))
+        console.log(data)
     }
 
     return <>

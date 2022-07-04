@@ -4,7 +4,6 @@ import {userLoadingLogin, userLoadingRegister,} from './userActions';
 export const postLogin = (data) => {
     return async dispatch => {
         dispatch(userLoadingLogin(true));
-        console.log(data);
         try {
             await request.post(
                 `authentication_token`,
@@ -24,7 +23,6 @@ export const postLogin = (data) => {
 export const postRegister = (data) => {
     return async dispatch => {
         dispatch(userLoadingRegister(true));
-        console.log(data);
         try {
             await request.post(
                 `users`,

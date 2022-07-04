@@ -5,8 +5,8 @@ import { USER_TOKEN,
 
 const initialState = {
     userToken           : "",
-    userLoadingLogin    : false,
-    userLoadingRegister : false
+    userLoadingLogin    : true,
+    userLoadingRegister : true
 };
 
 const userReducer = (state = initialState, action) => {

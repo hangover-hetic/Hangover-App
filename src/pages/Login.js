@@ -4,8 +4,9 @@ import SubmitButton from '../components/CustomButton';
 import {useForm, Controller,} from 'react-hook-form';
 import {postLogin} from '../redux/User/userAsync-actions';
 import {connect, useDispatch,} from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
-const Login = () => {
+const Login = (props) => {
     const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm({
         defaultValues: {
             username: '',
@@ -14,28 +15,64 @@ const Login = () => {
     });
 
     const dispatch = useDispatch();
+    const navigation = useNavigation();
 
     const onSubmit = (data) => {
-        dispatch(postLogin(data));
+        if (props.userLoading) {
+            dispatch(postLogin(data));
+            navigation.navigate("HomepageConnected")
+        } else {
+            console.log("information pas valide")
+        }
     };
 
-    const onChange = arg => {
-        return {
-            value: arg.nativeEvent.text,
-        };
-    };
+    const goToRegister = () => {
+        navigation.navigate("Register")
+    }
 
     return <>
         <View style={styles.inputContainer}>
             <Text>Username</Text>
-            <Controller control={control} render={({field: {onChange, onBlur, value}}) => (
-                <TextInput style={styles.input} placeholder="Username" onBlur={onBlur} onChangeText={value => onChange(value)} value={value} secureTextEntry={false}/>
-            )} name="username" rules={{required: true}}/>
+            <Controller 
+                control={control} 
+                render={({field: {onChange, onBlur, value}}) => (
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder="Username" 
+                        onBlur={onBlur} 
+                        onChangeText={value => onChange(value)} 
+                        value={value} 
+                        secureTextEntry={false}/>
+            )} 
+            name="username" 
+            rules={{required: true}}
+        />
             <Text>Password</Text>
-            <Controller control={control} render={({field: {onChange, onBlur, value}}) => (
-                <TextInput style={styles.input} placeholder="password" onBlur={onBlur} onChangeText={value => onChange(value)} value={value} secureTextEntry={true}/>
-            )} name="password" rules={{required: true}}/>
-            <SubmitButton title={'Submit'} onPress={handleSubmit(onSubmit)}/>
+            <Controller 
+                control={control} 
+                render={({field: {onChange, onBlur, value}}) => (
+                    <TextInput 
+                        style={styles.input} 
+                        placeholder="password" 
+                        onBlur={onBlur} 
+                        onChangeText={value => onChange(value)} 
+                        value={value} 
+                        secureTextEntry={true}
+                    />
+            )} 
+            name="password" 
+            rules={{required: true}}
+        />
+        {/*Laisse ce style d'intentation stp, sinon c'est illisible pour moi*/}
+
+            <SubmitButton 
+                title={"Submit"} 
+                onPress={handleSubmit(onSubmit)}
+            />
+            <SubmitButton 
+                title={"Not register ?"} 
+                onPress={goToRegister}
+            />
         </View>
     </>;
 };
@@ -62,7 +99,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-    userLoading: state,
+    userLoading: state.userReducer.userLoadingLogin,
 });
 
 const mapActionsToProps = {
