@@ -7,6 +7,8 @@ import NotFound from './src/pages/NotFound';
 import {NativeRouter, Route, Routes,} from 'react-router-native';
 import {useFonts} from 'expo-font';
 import * as Font from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export default class App extends React.Component {
     state = {
@@ -33,19 +35,17 @@ export default class App extends React.Component {
     }
 
     render() {
+        const Stack = createNativeStackNavigator();
         // Use the font with the fontFamily property after loading
         if (this.state.fontsLoaded) {
             return (
-                <NativeRouter>
-                    <Container>
-                        <Routes>
-                            <Route path="/" element={<Login/>}/>
-                            <Route exact path="/homepage" element={<HomepageConnected/>}/>
-                            <Route path="/register" element={<Register/>}/>
-                            <Route element={<NotFound/>}/>
-                        </Routes>
-                    </Container>
-                </NativeRouter>
+                <NavigationContainer>
+                    <Stack.Navigator initialRouteName="Login">
+                        <Stack.Screen name="Login" component={Login} options={{title : "Login"}}/>
+                        <Stack.Screen name="Register" component={Register} options={{title : "Register"}}/>
+                        <Stack.Screen name="HomepageConnected" component={HomepageConnected} options={{title : "Homepage"}}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
             );
         } else {
             return null;
