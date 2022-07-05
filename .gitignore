@@ -56,4 +56,4 @@ dist/
 
 .yarn.lock
 
-.node_modules
+node_modules
