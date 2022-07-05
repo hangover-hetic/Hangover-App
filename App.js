@@ -4,7 +4,6 @@ import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
 import Register from './src/pages/Register';
 import NotFound from './src/pages/NotFound';
-import {NativeRouter, Route, Routes,} from 'react-router-native';
 import {useFonts} from 'expo-font';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -41,9 +40,48 @@ export default class App extends React.Component {
             return (
                 <NavigationContainer>
                     <Stack.Navigator initialRouteName="LoginConnected">
-                        <Stack.Screen name="LoginConnected" component={LoginConnected} options={{title : "Login"}}/>
-                        <Stack.Screen name="Register" component={Register} options={{title : "Register"}}/>
-                        <Stack.Screen name="HomepageConnected" component={HomepageConnected} options={{title : "Homepage"}}/>
+                        <Stack.Screen 
+                            name="LoginConnected" 
+                            component={LoginConnected} 
+                            options={{
+                                title : "Login",
+                                headerStyle: {
+                                    backgroundColor : '#202020'
+                                },
+                                headerTintColor: '#fff',
+                                headerTitleStyle: {
+                                    fontWeight : 'bold'
+                                }
+                            }}
+                        />
+                        <Stack.Screen 
+                            name="Register" 
+                            component={Register} 
+                            options={{
+                                title : "Register",
+                                headerStyle: {
+                                    backgroundColor : '#202020'
+                                },
+                                headerTintColor: '#fff',
+                                headerTitleStyle: {
+                                    fontWeight : 'bold'
+                                }
+                            }}
+                        />
+                        <Stack.Screen 
+                            name="HomepageConnected" 
+                            component={HomepageConnected} 
+                            options={{
+                                title : "Homepage",
+                                headerStyle: {
+                                    backgroundColor : '#202020'
+                                },
+                                headerTintColor: '#fff',
+                                headerTitleStyle: {
+                                    fontWeight : 'bold'
+                                }
+                            }}
+                        />
                     </Stack.Navigator>
                 </NavigationContainer>
             );
