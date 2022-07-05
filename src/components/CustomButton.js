@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {TouchableWithoutFeedback, View, Text, StyleSheet} from 'react-native';
+import BigSpan from './semantics/BigSpan';
 
 const SubmitButton = ({title, onPress}) => {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.container}>
-                <Text style={styles.text}>{title}</Text>
+                <BigSpan content={title} />
             </View>
         </TouchableWithoutFeedback>
     );
@@ -18,7 +19,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 2,
         },
-        backgroundColor: '#3f5efb',
+        backgroundColor: '#EC6A0A',
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         width: 250,
@@ -28,11 +29,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 80,
-    },
-    text: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
     },
 });
 

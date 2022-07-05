@@ -8,8 +8,8 @@ class Homepage extends React.Component {
     }
 
     componentDidUpdate() {
-        if (!this.props.userToken) {
-            return
+        if (this.props.userToken === "") {
+            return;
         }
     }
 
