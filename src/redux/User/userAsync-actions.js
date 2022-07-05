@@ -1,17 +1,22 @@
 import request from '../../../settings/request';
-import {userLoadingLogin, userLoadingRegister,} from './userActions';
+import {
+    userLoadingLogin,
+    userLoadingRegister,
+    userToken
+}              from './userActions';
 
 export const postLogin = (data) => {
     return async dispatch => {
-        dispatch(userLoadingLogin(true));
+            dispatch(userLoadingLogin(true));
         try {
-            await request.post(
+           const tokenAccess =  await request.post(
                 `authentication_token`,
                 {
                     username: data.username,
                     password: data.password,
                 },
             );
+            dispatch(userToken(tokenAccess.data.token))
         } catch (e) {
             console.dir(e);
         } finally {

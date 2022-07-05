@@ -35,15 +35,11 @@ const Register = (props) => {
 
     const onSubmit = (data) => {
         if (props.loadingRegister) {
+            navigation.navigate("LoginConnected")
             dispatch(postRegister(data))
-            navigation.navigate("/Login")
-            console.log(data)
         } else {
             console.log("Les données ne sont pas bonnes")
         }
-        //appel de l'api
-        dispatch(postRegister(data))
-        console.log(data)
     }
 
     return <>

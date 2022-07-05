@@ -7,8 +7,10 @@ class Homepage extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-        console.log(this.props.userToken)
+    componentDidUpdate() {
+        if (!this.props.userToken) {
+            return
+        }
     }
 
     render() {
@@ -19,7 +21,7 @@ class Homepage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userToken : state
+    userToken : state.userReducer.userToken
 })
 
 const HomepageConnected = connect (
@@ -27,4 +29,3 @@ const HomepageConnected = connect (
 )(Homepage);
 
 export default HomepageConnected;
-
