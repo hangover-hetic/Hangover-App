@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from './src/components/ui/Container';
-import Login from './src/pages/Login';
+import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
 import Register from './src/pages/Register';
 import NotFound from './src/pages/NotFound';
@@ -40,8 +40,8 @@ export default class App extends React.Component {
         if (this.state.fontsLoaded) {
             return (
                 <NavigationContainer>
-                    <Stack.Navigator initialRouteName="Login">
-                        <Stack.Screen name="Login" component={Login} options={{title : "Login"}}/>
+                    <Stack.Navigator initialRouteName="LoginConnected">
+                        <Stack.Screen name="LoginConnected" component={LoginConnected} options={{title : "Login"}}/>
                         <Stack.Screen name="Register" component={Register} options={{title : "Register"}}/>
                         <Stack.Screen name="HomepageConnected" component={HomepageConnected} options={{title : "Homepage"}}/>
                     </Stack.Navigator>
