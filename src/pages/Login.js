@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, TextInput, StyleSheet,} from 'react-native';
 import SubmitButton from '../components/CustomButton';
 import {useForm, Controller,} from 'react-hook-form';
@@ -20,7 +20,7 @@ const Login = (props) => {
     const navigation = useNavigation();
 
     const onSubmit = (data) => {
-        if (props.userLoading) {
+        if (props.userErrorLogin) {
             dispatch(postLogin(data));
             navigation.navigate("HomepageConnected")
         } else {
@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-    userLoading: state.userReducer.userLoadingLogin,
+    userLoading   : state.userReducer.userLoadingLogin,
+    userErrorLogin: state.userReducer.userError
 });
 
 const mapActionsToProps = {

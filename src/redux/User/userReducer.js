@@ -1,11 +1,13 @@
 import { 
     USER_TOKEN,
     USER_LOADING_LOGIN,
-    USER_LOADING_REGISTER
+    USER_LOADING_REGISTER,
+    USER_LOGIN_ERROR
 } from "./userConstants";
 
 const initialState = {
     userToken           : "",
+    userError           : "",
     userLoadingLogin    : true,
     userLoadingRegister : true
 };
@@ -26,6 +28,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userLoadingRegister: action.payload
+            };
+        case USER_LOGIN_ERROR:
+            return {
+                ...state,
+                userError: action.payload
             };
         default:
         return state;

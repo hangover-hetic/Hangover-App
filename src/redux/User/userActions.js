@@ -1,7 +1,8 @@
 import { 
     USER_TOKEN,
     USER_LOADING_LOGIN,
-    USER_LOADING_REGISTER
+    USER_LOADING_REGISTER,
+    USER_LOGIN_ERROR
 } from "./userConstants";
 
 export const userToken = (token) => {
@@ -22,5 +23,12 @@ export const userLoadingRegister = (loading) => {
     return {
         type   : USER_LOADING_REGISTER,
         payload: loading
+    }
+}
+
+export const userLogingError = (error) => {
+    return {
+        type   : USER_LOGIN_ERROR,
+        payload: error
     }
 }

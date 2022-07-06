@@ -1,6 +1,10 @@
 import React       from 'react'
-import { Text }    from 'react-native'
+import { 
+    Text 
+}    from 'react-native'
 import { connect } from 'react-redux'
+import Navbar      from '../components/Navbar'
+import { NavigationContainer } from '@react-navigation/native';
 
 class Homepage extends React.Component {
     constructor (props) {

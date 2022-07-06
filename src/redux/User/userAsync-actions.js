@@ -2,7 +2,8 @@ import request from '../../../settings/request';
 import {
     userLoadingLogin,
     userLoadingRegister,
-    userToken
+    userToken,
+    userLogingError
 }              from './userActions';
 
 export const postLogin = (data) => {
@@ -17,10 +18,10 @@ export const postLogin = (data) => {
                 },
             );
             dispatch(userToken(tokenAccess.data.token))
-        } catch (e) {
-            console.dir(e);
-        } finally {
             dispatch(userLoadingLogin(false));
+        } catch (e) {
+           let errorMessage = e?.response?.data;
+           dispatch(userLogingError(errorMessage))
         }
     };
 };
