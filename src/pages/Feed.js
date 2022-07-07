@@ -5,6 +5,7 @@ import { fetchFestival, fetchFestivalPosts } from '../redux/Festival/festival-as
 import Title from '../components/semantics/Title';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Container from '../components/ui/Container';
+import PostContainer from '../components/feed/PostContainer';
 
 class Feed extends React.Component {
   constructor(props) {
@@ -19,10 +20,23 @@ class Feed extends React.Component {
   }
 
   render() {
+    const {posts, actualUser} = this.props
     return (
-      <Container>
+      <Container scroll>
         <Title content="Feed" />
         <SectionTitle content="Fil d'actualités" />
+        {
+          posts.map(post => (
+            <PostContainer
+              userName={`${actualUser.firstName} ${actualUser.lastName}`}
+              festivalName={post.festival.name}
+              userProfilePicture={actualUser.profilePicture.contentUrl}
+              key={"post-" + post.id}
+              postImage={post.media.contentUrl}
+              postCreatedAt={post.createdAt}
+            />
+          ))
+        }
       </Container>
     );
   }
@@ -31,6 +45,8 @@ class Feed extends React.Component {
 const mapStateToProps = (state) => ({
   userToken: state.userReducer.userToken,
   mercureToken: state.userReducer.mercureToken,
+  posts: state.festivalReducer.actualFeed,
+  actualUser: state.userReducer.actualUser,
 });
 
 const FeedConnected = connect(mapStateToProps)(Feed);

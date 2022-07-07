@@ -1,5 +1,5 @@
-import request from '../../../settings/request';
 import { setActualFestival, setActualFestivalPosts } from './festival-actions';
+import request from '../../services/request';
 
 export const fetchFestival = (id) => {
   return async (dispatch) => {

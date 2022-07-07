@@ -12,6 +12,7 @@ import SectionTitle from "../components/semantics/SectionTitle";
 import Title from "../components/semantics/Title";
 
 const Login = (props) => {
+<<<<<<< Updated upstream
     const {
         register,
         setValue,
@@ -25,6 +26,21 @@ const Login = (props) => {
             password: '',
         },
     });
+=======
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: 'admin@hangover.com',
+      password: 'password',
+    },
+  });
+>>>>>>> Stashed changes
 
     const dispatch = useDispatch();
     const navigation = useNavigation();

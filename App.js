@@ -49,14 +49,15 @@ class App extends React.Component {
               {userToken !== null ? (
                 <>
                   <Stack.Screen
+                    name='Feed'
+                    component={Feed}
+                  />
+                  <Stack.Screen
                     name='HomepageConnected'
                     component={HomepageConnected}
 
                   />
-                  <Stack.Screen
-                    name='Feed'
-                    component={Feed}
-                  />
+
 
                   <Stack.Screen
                     name='Map'
@@ -68,7 +69,6 @@ class App extends React.Component {
                   <Stack.Screen
                     name='LoginConnected'
                     component={LoginConnected}
-
                   />
                   <Stack.Screen
                     name='Register'
