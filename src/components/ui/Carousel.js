@@ -54,7 +54,6 @@ class Carousel extends React.Component {
                 width: this.props.items.length * (this.state.width * 0.8),
                 flexDirection: 'row',
                 transform: [{translateX: this.state.translate}],
-
             },
         };
     }
