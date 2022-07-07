@@ -1,9 +1,9 @@
-import { 
-    USER_TOKEN,
-    USER_LOADING_LOGIN,
-    USER_LOADING_REGISTER,
-    USER_LOGIN_ERROR
-} from "./userConstants";
+import {
+  USER_TOKEN,
+  USER_LOADING_LOGIN,
+  USER_LOADING_REGISTER,
+  USER_LOGIN_ERROR,
+} from './userConstants';
 
 const INITIAL_STATE = {
     userToken           : "",

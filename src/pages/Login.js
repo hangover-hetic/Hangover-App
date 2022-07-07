@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View, TextInput, StyleSheet} from 'react-native';
 import SubmitButton from '../components/CustomButton';
@@ -86,16 +87,15 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     inputContainer: {
-        backgroundColor : '#202020',
+        backgroundColor: '#202020',
         flex: 1,
         justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     buttonSettings: {
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
 });
-
 
 const LoginHookForm = (props) => {
     const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm({
@@ -122,7 +122,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapActionsToProps = {
-    postLogin,
+  postLogin,
 };
 
 const LoginConnected = connect(

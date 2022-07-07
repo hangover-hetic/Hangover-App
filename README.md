@@ -1,7 +1,17 @@
-# HANGOVER-APP-2
+# Hangover App
 
-##Démarrer l'appli :
+## Démarrer l'appli :
 
-• yarn install / npm install
+```
+yarn install
+```
 
-• expo start
+```
+yarn start
+```
+
+## Formater :
+
+```
+yarn format
+```

@@ -1,12 +1,15 @@
-import React    from 'react'
+import React from 'react';
 import { Text } from 'react-native';
+import Container from '../components/ui/Container';
 
 class NotFound extends React.Component {
-    render() {
-        return <>
-            <Text>Not Found</Text>
-        </>
-    }
+  render() {
+    return (
+      <Container>
+        <Text>Not Found</Text>
+      </Container>
+    );
+  }
 }
 
 export default NotFound;

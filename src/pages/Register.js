@@ -1,25 +1,14 @@
-import React             from 'react'
-import {
-    Text,
-    View,
-    TextInput,
-    StyleSheet
-}                        from 'react-native';
-import SubmitButton      from '../components/CustomButton';
-import {
-    useForm,
-    Controller
-}                        from 'react-hook-form';
-import { postRegister }  from '../redux/User/userAsync-actions';
-import {
-    connect,
-    useDispatch
-}                        from 'react-redux';
+import React from 'react';
+import { Text, View, TextInput, StyleSheet } from 'react-native';
+import SubmitButton from '../components/CustomButton';
+import { useForm, Controller } from 'react-hook-form';
+import { postRegister } from '../redux/User/userAsync-actions';
+import { connect, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import Span              from '../components/semantics/Span';
-import Container         from '../components/ui/Container';
+import Span from '../components/semantics/Span';
+import Container from '../components/ui/Container';
 
-class Register extends React.Component{
+class Register extends React.Component {
     constructor (props) {
         super(props)
     }
@@ -31,7 +20,7 @@ class Register extends React.Component{
         } else {
             console.log("Les données ne sont pas bonnes")
         }
-    }
+   }
 
     render() {
         return <>
@@ -165,26 +154,27 @@ class Register extends React.Component{
             </Container>
         </>
     }
-}
+};
 
 const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        width: 300,
-        paddingHorizontal: 5,
-        backgroundColor: 'white',
-        marginBottom: 5,
-    },
-    inputContainer: {
-        backgroundColor : '#202020',
-        flex: 1,
-        justifyContent: 'center',
-        alignSelf: 'center'
-    },
-    buttonSettings: {
-        alignItems: 'center'
-    }
+  input: {
+    height: 40,
+    width: 300,
+    paddingHorizontal: 5,
+    backgroundColor: 'white',
+    marginBottom: 5,
+  },
+  inputContainer: {
+    backgroundColor: '#202020',
+    flex: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  buttonSettings: {
+    alignItems: 'center',
+  },
 });
+
 
 const RegisterHookForm = (props) => {
     const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
@@ -216,11 +206,12 @@ const mapStateToProps = ( state ) => ({
 })
 
 const mapActionsToProps = {
-    //Obligatoire pour pouvoir utiliser notre fonction custom du call api
-    postRegister
-}
+  //Obligatoire pour pouvoir utiliser notre fonction custom du call api
+  postRegister,
+};
 
 const RegisterConnected = connect(
+
     //La connxion principal au store reduc se fait par ici
     mapStateToProps,
     mapActionsToProps
