@@ -1,14 +1,20 @@
 import React       from 'react'
-import { Text }    from 'react-native'
+import { 
+    Text 
+}    from 'react-native'
 import { connect } from 'react-redux'
+import Navbar      from '../components/Navbar'
+import { NavigationContainer } from '@react-navigation/native';
 
 class Homepage extends React.Component {
     constructor (props) {
         super(props)
     }
 
-    componentDidMount() {
-        console.log(this.props.userToken)
+    componentDidUpdate() {
+        if (this.props.userToken === "") {
+            return;
+        }
     }
 
     render() {
@@ -19,7 +25,7 @@ class Homepage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userToken : state
+    userToken : state.userReducer.userToken
 })
 
 const HomepageConnected = connect (
@@ -27,4 +33,3 @@ const HomepageConnected = connect (
 )(Homepage);
 
 export default HomepageConnected;
-

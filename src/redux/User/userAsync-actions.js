@@ -1,22 +1,27 @@
 import request from '../../../settings/request';
-import {userLoadingLogin, userLoadingRegister,} from './userActions';
+import {
+    userLoadingLogin,
+    userLoadingRegister,
+    userToken,
+    userLogingError
+}              from './userActions';
 
 export const postLogin = (data) => {
     return async dispatch => {
-        dispatch(userLoadingLogin(true));
-        console.log(data);
+            dispatch(userLoadingLogin(true));
         try {
-            await request.post(
+           const tokenAccess =  await request.post(
                 `authentication_token`,
                 {
                     username: data.username,
                     password: data.password,
                 },
             );
-        } catch (e) {
-            console.dir(e);
-        } finally {
+            dispatch(userToken(tokenAccess.datatoken))
             dispatch(userLoadingLogin(false));
+        } catch (e) {
+           let errorMessage = e?.response?.data;
+           dispatch(userLogingError(errorMessage))
         }
     };
 };
@@ -24,7 +29,6 @@ export const postLogin = (data) => {
 export const postRegister = (data) => {
     return async dispatch => {
         dispatch(userLoadingRegister(true));
-        console.log(data);
         try {
             await request.post(
                 `users`,
