@@ -44,12 +44,9 @@ class Homepage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userToken : state
-})
+  userToken: state.userReducer.userToken,
+});
 
-const HomepageConnected = connect (
-    mapStateToProps
-)(Homepage);
+const HomepageConnected = connect(mapStateToProps)(Homepage);
 
 export default HomepageConnected;
-
