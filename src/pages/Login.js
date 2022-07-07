@@ -27,11 +27,10 @@ const Login = (props) => {
   const navigation = useNavigation();
 
   const onSubmit = (data) => {
-    if (props.userErrorLogin) {
+    if (!props.userErrorLogin) {
       dispatch(postLogin(data));
-      navigation.navigate('HomepageConnected');
     } else {
-      console.log('information pas valide');
+      console.log('erreur login');
     }
   };
 
@@ -40,7 +39,6 @@ const Login = (props) => {
   };
 
   return (
-    <>
       <Container>
         <View style={styles.inputContainer}>
           <Span content="Username" />
@@ -81,7 +79,6 @@ const Login = (props) => {
           </View>
         </View>
       </Container>
-    </>
   );
 };
 

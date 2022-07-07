@@ -1,23 +1,18 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { SafeAreaView, Text } from 'react-native';
 import { connect } from 'react-redux';
+import Container from '../components/ui/Container';
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidUpdate() {
-    if (this.props.userToken === '') {
-      return;
-    }
-  }
-
   render() {
     return (
-      <>
-        <Text>Je suis la page d'index de jessy</Text>
-      </>
+      <Container>
+        <Text style={{color:"white"}}>Je suis la page d'index de jessy</Text>
+      </Container>
     );
   }
 }
