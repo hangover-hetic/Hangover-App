@@ -1,6 +1,6 @@
 # HANGOVER-APP-2
 
-##Démarrer l'appli :
+## Démarrer l'appli :
 
 • yarn install / npm install
 

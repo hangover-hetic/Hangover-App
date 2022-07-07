@@ -5,8 +5,9 @@ import {
     userToken,
     userLogingError
 }              from './userActions';
+import mercureRequest from "../../../settings/mercure-request";
 
-export const postLogin = (data) => {
+export const postLogin = ({username, password}) => {
     return async dispatch => {
             dispatch(userLoadingLogin(true));
         try {
@@ -19,6 +20,8 @@ export const postLogin = (data) => {
             );
             dispatch(userToken(tokenAccess.datatoken))
             dispatch(userLoadingLogin(false));
+            request.defaults.headers["Authorization"] = `BEARER ${data.token}`
+            mercureRequest.defaults.headers["Authorization"] = `Bearer ${data.token}`
         } catch (e) {
            let errorMessage = e?.response?.data;
            dispatch(userLogingError(errorMessage))
