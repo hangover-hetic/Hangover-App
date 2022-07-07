@@ -19,161 +19,152 @@ import { useNavigation } from '@react-navigation/native';
 import Span              from '../components/semantics/Span';
 import Container         from '../components/ui/Container';
 
-const Register = (props) => {
-    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
-        defaultValues : {
-            firstName : '',
-            lastName  : '',
-            email     : '',
-            password  : '',
-            phone     : '',
-            address   : '',
-            country   : '',
-        }
-    });
+class Register extends React.Component{
+    constructor (props) {
+        super(props)
+    }
 
-    const navigation = useNavigation();
-    const dispatch = useDispatch();
-
-    const onSubmit = (data) => {
-        if (props.loadingRegister) {
-            navigation.navigate("LoginConnected")
-            dispatch(postRegister(data))
+   onSubmit = (data) => {
+        if (this.props.loadingRegister) {
+            this.props.navigation.navigate("LoginConnected")
+            this.props.postRegister(data)
         } else {
             console.log("Les données ne sont pas bonnes")
         }
     }
 
-    return <>
-        <Container>
-            <View style={styles.inputContainer}>
-                <Span content='First Name' />
-                <Controller
-                    control={control}
-                    render={({field: { onChange, onBlur, value }}) => (
+    render() {
+        return <>
+            <Container>
+                <View style={styles.inputContainer}>
+                    <Span content='First Name' />
+                    <Controller
+                        control={this.props.control}
+                        render={({field: { onChange, onBlur, value }}) => (
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Username"
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                secureTextEntry={false}
+                            />
+                        )}
+                        name="firstName"
+                        rules={{ required: true }}
+                    />
+
+                    <Span content='Last Name'/>
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
                         <TextInput
                             style={styles.input}
-                            placeholder="Username"
+                            placeholder="password"
                             onBlur={onBlur}
                             onChangeText={value => onChange(value)}
                             value={value}
                             secureTextEntry={false}
                         />
-                    )}
-                    name="firstName"
-                    rules={{ required: true }}
-                />
+                        )}
+                        name="lastName"
+                        rules={{ required: true }}
+                    />
 
-                <Span content='Last Name'/>
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="password"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={false}
+                    <Span content='Email' />
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="password"
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            secureTextEntry={false}
+                        />
+                        )}
+                        name="email"
+                        rules={{ required: true }}
                     />
-                    )}
-                    name="lastName"
-                    rules={{ required: true }}
-                />
 
-                <Span content='Email' />
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="password"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={false}
+                    <Span content='Password'/>
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="password"
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            secureTextEntry={true}
+                        />
+                        )}
+                        name="password"
+                        rules={{ required: true }}
                     />
-                    )}
-                    name="email"
-                    rules={{ required: true }}
-                />
 
-                <Span content='Password'/>
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="password"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={true}
+                    <Span content='Phone' />
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="phone"
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            secureTextEntry={false}
+                        />
+                        )}
+                        name="phone"
+                        rules={{ required: true }}
                     />
-                    )}
-                    name="password"
-                    rules={{ required: true }}
-                />
 
-                <Span content='Phone' />
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="phone"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={false}
+                    <Span content='address' />
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Address"
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            secureTextEntry={false}
+                        />
+                        )}
+                        name="address"
+                        rules={{ required: true }}
                     />
-                    )}
-                    name="phone"
-                    rules={{ required: true }}
-                />
 
-                <Span content='address' />
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Address"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={false}
+                    <Span content='Country'/>
+                    <Controller
+                        control={this.props.control}
+                        render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Country"
+                            onBlur={onBlur}
+                            onChangeText={value => onChange(value)}
+                            value={value}
+                            secureTextEntry={false}
+                        />
+                        )}
+                        name="country"
+                        rules={{ required: true }}
                     />
-                    )}
-                    name="address"
-                    rules={{ required: true }}
-                />
-
-                <Span content='Country'/>
-                <Controller
-                    control={control}
-                    render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Country"
-                        onBlur={onBlur}
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                        secureTextEntry={false}
-                    />
-                    )}
-                    name="country"
-                    rules={{ required: true }}
-                />
-                <View style={styles.buttonSettings}>
-                    <SubmitButton
-                        title={"Submit"}
-                        onPress={handleSubmit(onSubmit)}
-                    />
+                    <View style={styles.buttonSettings}>
+                        <SubmitButton
+                            title={"Submit"}
+                            onPress={this.props.handleSubmit(this.onSubmit)}
+                        />
+                    </View>
                 </View>
-            </View>
-        </Container>
-    </>
+            </Container>
+        </>
+    }
 }
 
 const styles = StyleSheet.create({
@@ -195,9 +186,33 @@ const styles = StyleSheet.create({
     }
 });
 
+const RegisterHookForm = (props) => {
+    const { register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+        defaultValues : {
+            firstName : '',
+            lastName  : '',
+            email     : '',
+            password  : '',
+            phone     : '',
+            address   : '',
+            country   : '',
+        }
+    });
+
+    const navigation = useNavigation();
+
+    return <Register 
+        {...props}
+        handleSubmit={handleSubmit}
+        control={control}
+        navigation={navigation}
+        register={register}
+    />
+}
+
 const mapStateToProps = ( state ) => ({
     //Connection aux événements du store redux
-    loadingRegister : state.userReducer.userLoadingRegister
+    loadingRegister : state.user.userLoadingRegister
 })
 
 const mapActionsToProps = {
@@ -209,6 +224,6 @@ const RegisterConnected = connect(
     //La connxion principal au store reduc se fait par ici
     mapStateToProps,
     mapActionsToProps
-)(Register);
+)(RegisterHookForm);
 
 export default RegisterConnected;

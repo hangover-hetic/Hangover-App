@@ -5,14 +5,14 @@ import {
     USER_LOGIN_ERROR
 } from "./userConstants";
 
-const initialState = {
+const INITIAL_STATE = {
     userToken           : "",
     userError           : "",
-    userLoadingLogin    : true,
-    userLoadingRegister : true
+    userLoadingLogin    : false,
+    userLoadingRegister : false
 };
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case USER_TOKEN:
             return {
@@ -35,7 +35,7 @@ const userReducer = (state = initialState, action) => {
                 userError: action.payload
             };
         default:
-        return state;
+            return state;
     }
 }
 

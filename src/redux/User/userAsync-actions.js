@@ -8,7 +8,7 @@ import {
 
 export const postLogin = (data) => {
     return async dispatch => {
-            dispatch(userLoadingLogin(true));
+            console.log(dispatch(userLoadingLogin(true)));
         try {
            const tokenAccess =  await request.post(
                 `authentication_token`,
@@ -17,11 +17,13 @@ export const postLogin = (data) => {
                     password: data.password,
                 },
             );
-            dispatch(userToken(tokenAccess.datatoken))
-            dispatch(userLoadingLogin(false));
+            dispatch(userToken(tokenAccess.data.token))
+            dispatch(userLoadingLogin(true));
         } catch (e) {
            let errorMessage = e?.response?.data;
+           console.log(e)
            dispatch(userLogingError(errorMessage))
+           dispatch(userLoadingLogin(true));
         }
     };
 };

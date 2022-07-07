@@ -1,84 +1,80 @@
-import React, {useEffect} from 'react';
-import { View, TextInput, StyleSheet,} from 'react-native';
+import React from 'react';
+import { View, TextInput, StyleSheet} from 'react-native';
 import SubmitButton from '../components/CustomButton';
 import {useForm, Controller,} from 'react-hook-form';
 import {postLogin} from '../redux/User/userAsync-actions';
-import {connect, useDispatch,} from 'react-redux';
+import {connect} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Span from '../components/semantics/Span';
 import Container from '../components/ui/Container';
 
-const Login = (props) => {
-    const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm({
-        defaultValues: {
-            username: '',
-            password: '',
-        },
-    });
+class Login extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
-    const dispatch = useDispatch();
-    const navigation = useNavigation();
-
-    const onSubmit = (data) => {
-        if (props.userErrorLogin) {
-            dispatch(postLogin(data));
-            navigation.navigate("HomepageConnected")
+     onSubmit(data){
+        if (this.props.userError) {
+            this.props.postLogin(data);
+            this.props.navigation.navigate("Homepage")
         } else {
             console.log("information pas valide")
         }
     };
 
-    const goToRegister = () => {
-        navigation.navigate("Register")
+    goToRegister = () => {
+        this.props.navigation.navigate("Register") 
     }
 
-    return <>
-        <Container>
-            <View style={styles.inputContainer}>
-                <Span content='Username'/>
-                <Controller 
-                    control={control} 
-                    render={({field: {onChange, onBlur, value}}) => (
-                        <TextInput 
-                            style={styles.input} 
-                            placeholder="Username" 
-                            onBlur={onBlur} 
-                            onChangeText={value => onChange(value)} 
-                            value={value} 
-                            secureTextEntry={false}/>
-                    )}
-                    name="username" 
-                    rules={{required: true}}
-                />
-                <Span content='Password'/>
-                <Controller 
-                    control={control} 
-                    render={({field: {onChange, onBlur, value}}) => (
-                        <TextInput 
-                            style={styles.input} 
-                            placeholder="password" 
-                            onBlur={onBlur} 
-                            onChangeText={value => onChange(value)} 
-                            value={value} 
-                            secureTextEntry={true}
-                        />
-                )} 
-                    name="password" 
-                    rules={{required: true}}
-                />
-                <View style={styles.buttonSettings}>
-                    <SubmitButton 
-                        title={"Submit"} 
-                        onPress={handleSubmit(onSubmit)}
+    render() {
+        return <>
+            <Container>
+                <View style={styles.inputContainer}>
+                    <Span content='Username'/>
+                    <Controller 
+                        control={this.props.control} 
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <TextInput 
+                                style={styles.input} 
+                                placeholder="Username" 
+                                onBlur={onBlur} 
+                                onChangeText={value => onChange(value)} 
+                                value={value} 
+                                secureTextEntry={false}/>
+                        )}
+                        name="username" 
+                        rules={{required: true}}
                     />
-                    <SubmitButton 
-                        title={"Create an account"} 
-                        onPress={goToRegister}
-                    /> 
+                    <Span content='Password'/>
+                    <Controller 
+                        control={this.props.control} 
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <TextInput 
+                                style={styles.input} 
+                                placeholder="password" 
+                                onBlur={onBlur} 
+                                onChangeText={value => onChange(value)} 
+                                value={value} 
+                                secureTextEntry={true}
+                            />
+                    )} 
+                        name="password" 
+                        rules={{required: true}}
+                    />
+                    <View style={styles.buttonSettings}>
+                        <SubmitButton 
+                            title={"Submit"} 
+                            onPress={this.props.handleSubmit(this.onSubmit)}
+                        />
+                        <SubmitButton 
+                            title={"Create an account"} 
+                            onPress={this.goToRegister}
+                        /> 
+                    </View>
                 </View>
-            </View>
-        </Container>
-    </>;
+            </Container>
+        </>;
+    }
 };
 
 const styles = StyleSheet.create({
@@ -100,9 +96,29 @@ const styles = StyleSheet.create({
     }
 });
 
+
+const LoginHookForm = (props) => {
+    const {register, setValue, handleSubmit, control, reset, formState: {errors}} = useForm({
+        defaultValues: {
+            username: '',
+            password: '',
+        },
+    });
+
+    const  navigation = useNavigation();
+
+    return <Login
+        {...props}
+        register={register}
+        handleSubmit={handleSubmit}
+        control={control}
+        navigation={navigation}
+    />
+}
+
 const mapStateToProps = (state) => ({
-    userLoading   : state.userReducer.userLoadingLogin,
-    userErrorLogin: state.userReducer.userError
+    userLoading : state.user.userLoadingLogin,
+    userError   : state.user.userError
 });
 
 const mapActionsToProps = {
@@ -112,6 +128,6 @@ const mapActionsToProps = {
 const LoginConnected = connect(
     mapStateToProps,
     mapActionsToProps,
-)(Login);
+)(LoginHookForm);
 
 export default LoginConnected;

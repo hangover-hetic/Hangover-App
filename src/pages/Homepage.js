@@ -3,8 +3,6 @@ import {
     Text 
 }    from 'react-native'
 import { connect } from 'react-redux'
-import Navbar      from '../components/Navbar'
-import { NavigationContainer } from '@react-navigation/native';
 
 class Homepage extends React.Component {
     constructor (props) {
@@ -25,7 +23,7 @@ class Homepage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    userToken : state.userReducer.userToken
+    userToken : state.user.userToken
 })
 
 const HomepageConnected = connect (
