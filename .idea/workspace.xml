@@ -5,22 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e5a8b15-402c-4e27-be24-2cb4f0b52503" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/settings/config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings/mercure-request.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/feed/PostContainer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/Feed.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/Festival/festival-actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/Festival/festival-constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/Festival/festival-reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.prettierrc.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/settings/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CustomButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CustomButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/feed/PostContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed/PostContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/BigSpan.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/BigSpan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/Paragraph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/Paragraph.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/SectionTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/SectionTitle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/Span.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/Span.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/Title.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/Title.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Separator.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Separator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Feed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Feed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Homepage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Homepage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/NotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/NotFound.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/User/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/User/userActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/User/userAsync-actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/User/userAsync-actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/User/userConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/User/userConstants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/User/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/User/userReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/rootReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,17 +64,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/timot/CODE_PROJECTS/COURS/HANGOVER-APP-2/settings",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/timot/CODE_PROJECTS/COURS/HANGOVER-APP-2/settings&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\timot\CODE_PROJECTS\COURS\HANGOVER-APP-2\settings" />
@@ -112,7 +127,7 @@
       <workItem from="1656589598652" duration="24000" />
       <workItem from="1656589637235" duration="51000" />
       <workItem from="1656591549426" duration="326000" />
-      <workItem from="1657180883392" duration="1840000" />
+      <workItem from="1657180883392" duration="2769000" />
     </task>
     <servers />
   </component>

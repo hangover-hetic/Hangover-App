@@ -1,28 +1,28 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 class Container extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    render() {
-        return <>
-            <View style={styles.container}>
-                {this.props.children}
-            </View>
-        </>
-    }
+  render() {
+    return (
+      <>
+        <View style={styles.container}>{this.props.children}</View>
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#202020',
-        minHeight: '100%',
-        color: '#fff',
-        padding: 20,
-        paddingTop: 50
-    }
-})
+  container: {
+    backgroundColor: '#202020',
+    minHeight: '100%',
+    color: '#fff',
+    padding: 20,
+    paddingTop: 50,
+  },
+});
 
-export default Container
+export default Container;
