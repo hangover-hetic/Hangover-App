@@ -6,16 +6,18 @@ export const postLogin = ({ username, password }) => {
   return async (dispatch) => {
     dispatch(userLoadingLogin(true));
     try {
-      const tokenAccess = await request.post(`authentication_token`, {
-        username: data.username,
-        password: data.password,
+      const { data } = await request.post(`authentication_token`, {
+        username: username,
+        password: password,
       });
-      dispatch(userToken(tokenAccess.datatoken));
+      console.log(data);
+      dispatch(userToken(data.token));
       dispatch(userLoadingLogin(false));
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercureRequest.defaults.headers['Authorization'] = `Bearer ${data.token}`;
     } catch (e) {
       let errorMessage = e?.response?.data;
+      console.log(errorMessage);
       dispatch(userLogingError(errorMessage));
     }
   };

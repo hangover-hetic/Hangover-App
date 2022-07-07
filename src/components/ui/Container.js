@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 class Container extends React.Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class Container extends React.Component {
   render() {
     return (
       <>
-        <View style={styles.container}>{this.props.children}</View>
+        <SafeAreaView style={styles.container}>{this.props.children}</SafeAreaView>
       </>
     );
   }

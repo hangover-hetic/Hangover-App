@@ -6,7 +6,7 @@ import {
 } from './userConstants';
 
 const initialState = {
-  userToken: '',
+  userToken: null,
   userError: '',
   userLoadingLogin: true,
   userLoadingRegister: true,
