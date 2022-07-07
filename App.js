@@ -39,7 +39,7 @@ export default class App extends React.Component {
                 <NativeRouter>
                     <Container>
                         <Routes>
-                            <Route path="/" element={<Login/>}/>
+                            <Route path="/" element={<HomepageConnected/>}/>
                             <Route exact path="/homepage" element={<HomepageConnected/>}/>
                             <Route path="/register" element={<Register/>}/>
                             <Route element={<NotFound/>}/>

@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Text} from 'react-native';
 
-class Container extends React.Component {
+class SectionTitle extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     text: {
         color: '#ffffff',
         fontSize: 20,
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Poppins-SemiBold',
+        marginVertical: 15
     },
 });
 
-export default Container;
+export default SectionTitle;
