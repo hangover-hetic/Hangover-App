@@ -47,7 +47,7 @@ class App extends React.Component {
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
             >
-              {userToken == null ? (
+              {userToken !== null ? (
                 <>
                   <Stack.Screen
                     name='FriendsConnected'

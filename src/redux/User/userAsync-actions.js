@@ -1,12 +1,5 @@
-import {
-  userLoadingLogin,
-  userLoadingRegister,
-  userToken,
-  userLogingError,
-  actualUser,
-  mercureToken,
-} from './userActions';
 import request from '../../services/request';
+import { userLoadingLogin, userLoadingRegister, userToken, userLogingError, userFriends, actualUser } from './userActions';
 import mercureRequest from '../../services/mercure-request';
 
 export const postLogin = ({ username, password }) => {
@@ -17,14 +10,12 @@ export const postLogin = ({ username, password }) => {
         username: username,
         password: password,
       });
-
+      console.log(data);
       dispatch(userToken(data.token));
-      dispatch(mercureToken(data.mercureToken));
       dispatch(actualUser(data.user));
-      dispatch(userLoadingLogin(false));
-
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercureRequest.defaults.headers['Authorization'] = `Bearer ${data.token}`;
+      dispatch(userLoadingLogin(false));
     } catch (e) {
       let errorMessage = e?.response?.data;
       console.log(errorMessage);
@@ -49,6 +40,20 @@ export const postRegister = (data) => {
       console.dir(e);
     } finally {
       dispatch(userLoadingRegister(false));
+    }
+  };
+};
+
+export const fetchFriends = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: `friendships/user/${id}`,
+      });
+      dispatch(userFriends(data));
+    } catch (e) {
+      console.dir(e);
     }
   };
 };

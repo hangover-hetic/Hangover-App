@@ -14,7 +14,7 @@ const initialState = {
   userError: '',
   userLoadingLogin: true,
   userLoadingRegister: true,
-  userFriends: []
+  userFriends: [],
   actualUser: null,
 };
 

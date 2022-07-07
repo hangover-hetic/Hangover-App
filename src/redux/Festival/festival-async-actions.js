@@ -1,4 +1,4 @@
-import request from '../../../settings/request';
+import request from '../../services/request';
 import { setActualFestival, setActualFestivalPosts } from './festival-actions';
 
 export const fetchFestival = (id) => {
