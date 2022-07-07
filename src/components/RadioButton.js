@@ -35,8 +35,7 @@ export default function RadioButton({ data, onSelect }) {
 }
 
 const styles = StyleSheet.create({
-    view:{
-        flex: 1,  
+    view:{  
         flexDirection: 'row',
     },
     circleGradient: {
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins',
     },
     radioButton: {
-        flex: 0.3,
         alignSelf: "flex-start",
         marginHorizontal: 4,
         

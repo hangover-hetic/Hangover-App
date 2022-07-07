@@ -1,6 +1,7 @@
 import React from 'react';
 import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
+import FriendsConnected from './src/pages/Friends';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -46,8 +47,13 @@ class App extends React.Component {
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
             >
-              {userToken !== null ? (
+              {userToken == null ? (
                 <>
+                  <Stack.Screen
+                    name='FriendsConnected'
+                    component={FriendsConnected}
+
+                  />
                   <Stack.Screen
                     name='HomepageConnected'
                     component={HomepageConnected}

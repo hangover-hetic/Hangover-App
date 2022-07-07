@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 20,
         fontFamily: 'Poppins-SemiBold',
-        marginVertical: 15
+        marginTop: 15
     },
 });
 

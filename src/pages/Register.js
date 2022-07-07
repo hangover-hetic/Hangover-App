@@ -32,7 +32,7 @@ const Register = (props) => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    if (props.loadingRegister) {
+    if (!props.loadingRegister) {
       navigation.navigate('LoginConnected');
       dispatch(postRegister(data));
     } else {

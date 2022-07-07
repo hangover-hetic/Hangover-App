@@ -19,7 +19,7 @@ class Title extends React.Component {
           <LinearGradient
             colors={['#feac5e', '#c779d0', '#4bc0c8']}
             start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
+            end={{ x: 0.4, y: 0.5 }}
             locations={[0, 0.5, 1]}
             style={{ flex: 1 }}
           />

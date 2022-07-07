@@ -18,8 +18,8 @@ const Login = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: '',
-      password: '',
+      username: 'admin@hangover.com',
+      password: 'password',
     },
   });
 
@@ -48,6 +48,7 @@ const Login = (props) => {
               <TextInput
                 style={styles.input}
                 placeholder="Username"
+                autoCapitalize = "none"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -64,6 +65,7 @@ const Login = (props) => {
               <TextInput
                 style={styles.input}
                 placeholder="password"
+                autoCapitalize = "none"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
