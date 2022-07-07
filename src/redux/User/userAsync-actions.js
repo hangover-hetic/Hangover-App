@@ -17,7 +17,7 @@ export const postLogin = (data) => {
                     password: data.password,
                 },
             );
-            dispatch(userToken(tokenAccess.data.token))
+            dispatch(userToken(tokenAccess.datatoken))
             dispatch(userLoadingLogin(false));
         } catch (e) {
            let errorMessage = e?.response?.data;
