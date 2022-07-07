@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Text} from 'react-native';
 
-class SectionTitle extends React.Component {
+class InterTitle extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -19,10 +19,9 @@ class SectionTitle extends React.Component {
 const styles = StyleSheet.create({
     text: {
         color: '#ffffff',
-        fontSize: 20,
+        fontSize: 18,
         fontFamily: 'Poppins-SemiBold',
-        marginVertical: 15
     },
 });
 
-export default SectionTitle;
+export default InterTitle;

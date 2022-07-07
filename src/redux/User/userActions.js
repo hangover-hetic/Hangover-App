@@ -3,12 +3,28 @@ import {
   USER_LOADING_LOGIN,
   USER_LOADING_REGISTER,
   USER_LOGIN_ERROR,
+  ACTUAL_USER,
+  MERCURE_TOKEN,
 } from './userConstants';
 
 export const userToken = (token) => {
   return {
     type: USER_TOKEN,
     payload: token,
+  };
+};
+
+export const mercureToken = (token) => {
+  return {
+    type: MERCURE_TOKEN,
+    payload: token,
+  };
+};
+
+export const actualUser = (user) => {
+  return {
+    type: ACTUAL_USER,
+    payload: user,
   };
 };
 

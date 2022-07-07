@@ -1,6 +1,13 @@
-import request from '../../../settings/request';
-import { userLoadingLogin, userLoadingRegister, userToken, userLogingError } from './userActions';
-import mercureRequest from '../../../settings/mercure-request';
+import {
+  userLoadingLogin,
+  userLoadingRegister,
+  userToken,
+  userLogingError,
+  actualUser,
+  mercureToken,
+} from './userActions';
+import request from '../../services/request';
+import mercureRequest from '../../services/mercure-request';
 
 export const postLogin = ({ username, password }) => {
   return async (dispatch) => {
@@ -10,9 +17,12 @@ export const postLogin = ({ username, password }) => {
         username: username,
         password: password,
       });
-      console.log(data);
+
       dispatch(userToken(data.token));
+      dispatch(mercureToken(data.mercureToken));
+      dispatch(actualUser(data.user));
       dispatch(userLoadingLogin(false));
+
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercureRequest.defaults.headers['Authorization'] = `Bearer ${data.token}`;
     } catch (e) {

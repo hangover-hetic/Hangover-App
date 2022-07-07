@@ -3,13 +3,17 @@ import {
   USER_LOADING_LOGIN,
   USER_LOADING_REGISTER,
   USER_LOGIN_ERROR,
+  ACTUAL_USER,
+  MERCURE_TOKEN,
 } from './userConstants';
 
 const initialState = {
   userToken: null,
+  mercureToken: null,
   userError: '',
   userLoadingLogin: true,
   userLoadingRegister: true,
+  actualUser: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -18,6 +22,16 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userToken: action.payload,
+      };
+    case MERCURE_TOKEN:
+      return {
+        ...state,
+        mercureToken: action.payload,
+      };
+    case ACTUAL_USER:
+      return {
+        ...state,
+        actualUser: action.payload,
       };
     case USER_LOADING_LOGIN:
       return {
