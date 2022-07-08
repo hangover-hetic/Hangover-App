@@ -4,6 +4,7 @@ import {
   userToken,
   userLogingError,
   actualUser,
+  userFriends,
   mercureToken,
 } from './userActions';
 import request from '../../services/request';
@@ -49,6 +50,20 @@ export const postRegister = (data) => {
       console.dir(e);
     } finally {
       dispatch(userLoadingRegister(false));
+    }
+  };
+};
+
+export const fetchFriends = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: `friendships/user/${id}`,
+      });
+      dispatch(userFriends(data));
+    } catch (e) {
+      console.dir(e);
     }
   };
 };

@@ -4,6 +4,7 @@ import {
   USER_LOADING_REGISTER,
   USER_LOGIN_ERROR,
   ACTUAL_USER,
+  USER_FRIENDS,
   MERCURE_TOKEN,
 } from './userConstants';
 
@@ -25,6 +26,13 @@ export const actualUser = (user) => {
   return {
     type: ACTUAL_USER,
     payload: user,
+  };
+};
+
+export const userFriends = (error) => {
+  return {
+    type: USER_FRIENDS,
+    payload: error,
   };
 };
 
