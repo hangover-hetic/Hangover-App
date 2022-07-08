@@ -1,7 +1,6 @@
 import React from 'react';
 import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
-import FriendsConnected from './src/pages/Friends';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,6 +10,10 @@ import { connect } from 'react-redux';
 import Feed from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+const Tab = createBottomTabNavigator();
 
 class App extends React.Component {
   state = {
@@ -38,7 +41,6 @@ class App extends React.Component {
 
   render() {
     const { userToken } = this.props;
-    const Stack = createNativeStackNavigator();
 
     // Use the font with the fontFamily property after loading
     if (this.state.fontsLoaded) {
@@ -46,47 +48,76 @@ class App extends React.Component {
         <SafeAreaProvider>
           <StatusBar/>
           <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{ headerShown: false }}
+            <Tab.Navigator
+              screenOptions={({ route }) => ({
+                headerShown : false,
+                tabBarStyle:{
+                  position : 'absolute',
+                  left: 30,
+                  backgroundColor:'#3D3D3D',
+                  height:60,
+                  width: 300,
+                  alignSelf: "center",
+                  marginBottom: 30,
+                  flexDirection: "row",
+                  borderRadius: 40,
+                },
+                tabBarIcon: ({ focused, color, size }) => {
+                let iconName;
+
+                switch(route.name) {
+                  case "Connexion" : 
+                    iconName = "person";
+                    break;
+                  case "Inscription" : 
+                    iconName = "person-add";
+                    break;
+                  case "Feed" : 
+                    iconName = "albums";
+                    break;
+                  case "Homepage" : 
+                    iconName = "home";
+                    break;
+                  case "Map" : 
+                    iconName = "map";
+                    break;
+                }
+
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+        })}
             >
               {userToken !== null ? (
                 <>
-                  <Stack.Screen
-                    name='FriendsConnected'
-                    component={FriendsConnected}
-
-                  />
-                  <Stack.Screen
+                  <Tab.Screen
                     name='Feed'
                     component={Feed}
                   />
-                  
-                  <Stack.Screen
-                    name='HomepageConnected'
+                  <Tab.Screen
+                    name="Homepage"
                     component={HomepageConnected}
-
                   />
-
-
-                  <Stack.Screen
+                  <Tab.Screen
                     name='Map'
                     component={Map}
                   />
                 </>
               ) : (
                 <>
-                  <Stack.Screen
-                    name='LoginConnected'
+                  <Tab.Screen
+                    name='Connexion'
                     component={LoginConnected}
                   />
-                  <Stack.Screen
-                    name='Register'
+                  <Tab.Screen
+                    name='Inscription'
                     component={Register}
-
                   />
                 </>
               )}
-            </Stack.Navigator>
+            </Tab.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
 
