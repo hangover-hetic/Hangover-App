@@ -19,9 +19,7 @@ class Container extends React.Component {
     const { scroll } = this.props;
     return (
       <SafeAreaView style={styles.container}>
-        {
-          scroll ? <ScrollView>{this.props.children}</ScrollView> : this.props.children
-        }
+        {scroll ? <ScrollView>{this.props.children}</ScrollView> : this.props.children}
       </SafeAreaView>
     );
   }

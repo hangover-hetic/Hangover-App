@@ -11,7 +11,7 @@ class PostContainer extends React.Component {
     userName: PropTypes.string,
     festivalName: PropTypes.string,
     postImage: PropTypes.string.isRequired,
-    postCreatedAt : PropTypes.string.isRequired
+    postCreatedAt: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -23,13 +23,17 @@ class PostContainer extends React.Component {
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image source={{ uri: getAbsoluteMediaPath(userProfilePicture) }}
-                 style={{ width: 30, height: 30, marginRight: 10, borderRadius: 20 }} />
+          <Image
+            source={{ uri: getAbsoluteMediaPath(userProfilePicture) }}
+            style={{ width: 30, height: 30, marginRight: 10, borderRadius: 20, marginBottom: 10 }}
+          />
           <Paragraph content={`${userName} - ${festivalName}`} />
         </View>
-        <Image source={{ uri: getAbsoluteMediaPath(postImage) }}
-               style={{ width: 300, height: 300, marginTop: 10 }} />
-        <Paragraph content={dayjs(postCreatedAt).toNow()}/>
+        <Image
+          source={{ uri: getAbsoluteMediaPath(postImage) }}
+          style={{ width: 400, height: 300, marginTop: 10, marginBottom: 10 }}
+        />
+        <Paragraph content={dayjs(postCreatedAt).fromNow()} />
       </View>
     );
   }
@@ -39,8 +43,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#202020',
     color: '#fff',
-    padding: 20,
-    paddingTop: 50,
+    paddingTop: 20,
+    paddingBottom: 20,
+    borderBottomColor: '#3D3D3D',
+    borderBottomWidth: 1,
   },
 });
 

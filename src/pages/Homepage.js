@@ -11,7 +11,7 @@ class Homepage extends React.Component {
   render() {
     return (
       <Container>
-        <Text style={{color:"white"}}>Je suis la page d'index de jessy</Text>
+        <Text style={{ color: 'white' }}>Je suis la page d'index de jessy</Text>
       </Container>
     );
   }

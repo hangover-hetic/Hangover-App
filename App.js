@@ -9,6 +9,7 @@ import Map from './src/pages/Map';
 import { connect } from 'react-redux';
 import Feed from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 class App extends React.Component {
   state = {
@@ -42,6 +43,7 @@ class App extends React.Component {
     if (this.state.fontsLoaded) {
       return (
         <SafeAreaProvider>
+          <StatusBar/>
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
