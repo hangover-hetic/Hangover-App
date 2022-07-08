@@ -7,7 +7,7 @@ import {
   mercureToken,
 } from './userActions';
 import request from '../../services/request';
-import mercureRequest from '../../services/mercure-request';
+import { mercure } from '../../services/mercure';
 
 export const postLogin = ({ username, password }) => {
   return async (dispatch) => {
@@ -18,13 +18,13 @@ export const postLogin = ({ username, password }) => {
         password: password,
       });
 
+      request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
+      mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
+
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
       dispatch(actualUser(data.user));
       dispatch(userLoadingLogin(false));
-
-      request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
-      mercureRequest.defaults.headers['Authorization'] = `Bearer ${data.token}`;
     } catch (e) {
       let errorMessage = e?.response?.data;
       console.log(errorMessage);

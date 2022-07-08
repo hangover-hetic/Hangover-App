@@ -1,17 +1,26 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import PropTypes from 'prop-types';
 
 class Container extends React.Component {
+  static propTypes = {
+    scroll: PropTypes.bool,
+  };
+  static defaultProps = {
+    scroll: false,
+  };
+
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { scroll } = this.props;
     return (
-      <>
-        <SafeAreaView style={styles.container}>{this.props.children}</SafeAreaView>
-      </>
+      <SafeAreaView style={styles.container}>
+        {scroll ? <ScrollView>{this.props.children}</ScrollView> : this.props.children}
+      </SafeAreaView>
     );
   }
 }
