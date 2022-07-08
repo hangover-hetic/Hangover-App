@@ -7,6 +7,9 @@ import { connect, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Span from '../components/semantics/Span';
 import Container from '../components/ui/Container';
+import FormContainer from '../components/ui/FormContainer';
+import SectionTitle from '../components/semantics/SectionTitle';
+import Title from '../components/semantics/Title';
 
 const Login = (props) => {
   const {
@@ -39,48 +42,47 @@ const Login = (props) => {
   };
 
   return (
-      <Container>
-        <View style={styles.inputContainer}>
-          <Span content="Username" />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Username"
-                autoCapitalize = "none"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
-              />
-            )}
-            name="username"
-            rules={{ required: true }}
-          />
-          <Span content="Password" />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="password"
-                autoCapitalize = "none"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={true}
-              />
-            )}
-            name="password"
-            rules={{ required: true }}
-          />
-          <View style={styles.buttonSettings}>
-            <SubmitButton title={'Submit'} onPress={handleSubmit(onSubmit)} />
-            <SubmitButton title={'Create an account'} onPress={goToRegister} />
-          </View>
+    <Container>
+      <FormContainer>
+        <Title content={'Bienvenue!'} />
+        <Span content="Utilisateur" />
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Utilisateur"
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              secureTextEntry={false}
+            />
+          )}
+          name="username"
+          rules={{ required: true }}
+        />
+        <Span content="Mot de passe" />
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.input}
+              placeholder="Mot de passe"
+              onBlur={onBlur}
+              onChangeText={(value) => onChange(value)}
+              value={value}
+              secureTextEntry={true}
+            />
+          )}
+          name="password"
+          rules={{ required: true }}
+        />
+        <View style={styles.buttonSettings}>
+          <SubmitButton title={'Se connecter'} onPress={handleSubmit(onSubmit)} />
+          <SubmitButton title={"S'inscrire"} onPress={goToRegister} />
         </View>
-      </Container>
+      </FormContainer>
+    </Container>
   );
 };
 
@@ -91,12 +93,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     backgroundColor: 'white',
     marginBottom: 5,
-  },
-  inputContainer: {
-    backgroundColor: '#202020',
-    flex: 1,
-    justifyContent: 'center',
-    alignSelf: 'center',
   },
   buttonSettings: {
     alignItems: 'center',

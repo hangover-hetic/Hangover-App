@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e5a8b15-402c-4e27-be24-2cb4f0b52503" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/services/dayjs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/client.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CardFestival.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardFestival.js" afterDir="false" />
@@ -17,6 +19,16 @@
       <change beforePath="$PROJECT_DIR$/src/pages/Events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Events.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/Program.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Program.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/feed/PostContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed/PostContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Feed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Feed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/media.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/media.js" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -53,9 +65,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent">
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/timot/CODE_PROJECTS/COURS/HANGOVER-APP-2/settings&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\timot\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\221.5921.27\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+>>>>>>> Stashed changes
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\timot\CODE_PROJECTS\COURS\HANGOVER-APP-2\settings" />
@@ -130,5 +157,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="work" />
     <option name="LAST_COMMIT_MESSAGE" value="work" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

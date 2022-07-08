@@ -10,6 +10,7 @@ import Map from './src/pages/Map';
 import { connect } from 'react-redux';
 import Feed from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 class App extends React.Component {
   state = {
@@ -43,6 +44,7 @@ class App extends React.Component {
     if (this.state.fontsLoaded) {
       return (
         <SafeAreaProvider>
+          <StatusBar/>
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
@@ -56,6 +58,10 @@ class App extends React.Component {
                   />
                   
                   <Stack.Screen
+                    name='Feed'
+                    component={Feed}
+                  />
+                  <Stack.Screen
                     name='HomepageConnected'
                     component={HomepageConnected}
 
@@ -65,6 +71,7 @@ class App extends React.Component {
                     name='Feed'
                     component={Feed}
                   />
+
 
                   <Stack.Screen
                     name='Map'
@@ -76,7 +83,6 @@ class App extends React.Component {
                   <Stack.Screen
                     name='LoginConnected'
                     component={LoginConnected}
-
                   />
                   <Stack.Screen
                     name='Register'
