@@ -10,12 +10,14 @@ export const postLogin = ({ username, password }) => {
         username: username,
         password: password,
       });
-      console.log(data);
+      console.log(data.user);
       dispatch(userToken(data.token));
-      dispatch(actualUser(data.user));
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercureRequest.defaults.headers['Authorization'] = `Bearer ${data.token}`;
       dispatch(userLoadingLogin(false));
+      dispatch(actualUser(data.user));
+      
+      
     } catch (e) {
       let errorMessage = e?.response?.data;
       console.log(errorMessage);

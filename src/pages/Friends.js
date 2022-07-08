@@ -22,6 +22,7 @@ class Friends extends React.Component {
      async componentDidMount() {
         const { dispatch } = this.props;
         this.state.friends = this.props.userFriends;
+        /* this.state.email = this.props.user.email; */
         await dispatch(fetchFriends(this.props.user.id));
         
       }
@@ -32,7 +33,7 @@ class Friends extends React.Component {
         <Title content='Mes amis'/>
         <View>
             <SectionTitle content='Mon pseudonyme'/>
-            <Span content={this.props.user.email}/>
+            {/* <Span content={this.state.email}/> */}
         </View>
         <View>
             <SectionTitle content='Ajouter un ami'/>
