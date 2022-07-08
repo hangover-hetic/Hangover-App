@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchFriends } from '../redux/User/userAsync-actions';
 import Container from '../components/ui/ScrollContainer';
 import Title from '../components/semantics/Title';
+import Paragraph from '../components/semantics/Paragraph';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Span from '../components/semantics/Span';
 import WhiteSpan from '../components/semantics/WhiteSpan';
@@ -12,28 +13,44 @@ import CustomButton from '../components/CustomButton';
 
 
 class Friends extends React.Component {
-    state = {
-        email: '',
-        friends: []
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            friends: []
+        }
+    
+    
+      }
+    
     handleEmail = (text) => {
         this.setState({ email: text })
      }
      async componentDidMount() {
-        const { dispatch } = this.props;
-        this.state.friends = this.props.userFriends;
-        /* this.state.email = this.props.user.email; */
-        await dispatch(fetchFriends(this.props.user.id));
+        await this.loadData(); 
+        console.log(this.props);
+      }
+
+      async loadData() {
+        const { fetchFriends } = this.props;
+        try {
+            await fetchFriends(this.props.actualUser.id);
+          } catch (e) {
+            console.error(e);
+          }
         
       }
   render() {
-    
+    const { actualUser, userFriends } = this.props;
     return (
       <Container>
         <Title content='Mes amis'/>
         <View>
             <SectionTitle content='Mon pseudonyme'/>
-            {/* <Span content={this.state.email}/> */}
+            { actualUser === null  ? (
+            <Paragraph content="loading" />
+        ) : (actualUser.email)}
+            
         </View>
         <View>
             <SectionTitle content='Ajouter un ami'/>
@@ -53,6 +70,9 @@ class Friends extends React.Component {
         <View>
             <SectionTitle content="Liste d'amis"/>
             <SafeAreaView style={styles.container}>
+            { actualUser === null  ? (
+            <Paragraph content="loading" />
+        ) : (
                 <FlatList data={this.state.friends} keyExtractor={(item, index) => String(index)} renderItem={({item}) => {
                       return (
                         
@@ -68,6 +88,7 @@ class Friends extends React.Component {
                           </View>
                       )
                   }}/>
+                  )}
             </SafeAreaView>
         </View>
         
@@ -125,11 +146,14 @@ const styles = StyleSheet.create({
  })
 
  const mapStateToProps = (state) => ({
-    user: state.userReducer.actualUser,
+    actualUser: state.userReducer.actualUser,
     userFriends: state.userReducer.userFriends
   });
+  const mapActionsToProps = {
+    fetchFriends,
+  };
 
 
- const FriendsConnected = connect(mapStateToProps)(Friends);
+ const FriendsConnected = connect(mapStateToProps, mapActionsToProps)(Friends);
 
 export default FriendsConnected;

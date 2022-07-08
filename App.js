@@ -52,25 +52,23 @@ class App extends React.Component {
               {userToken !== null ? (
                 <>
                 <Stack.Screen
+                    name='Feed'
+                    component={Feed}
+                  />
+                <Stack.Screen
                     name='FriendsConnected'
                     component={FriendsConnected}
 
                   />
                   
-                  <Stack.Screen
-                    name='Feed'
-                    component={Feed}
-                  />
+                  
                   <Stack.Screen
                     name='HomepageConnected'
                     component={HomepageConnected}
 
                   />
                   
-                  <Stack.Screen
-                    name='Feed'
-                    component={Feed}
-                  />
+                  
 
 
                   <Stack.Screen

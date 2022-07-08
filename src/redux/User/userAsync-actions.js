@@ -1,4 +1,5 @@
 import request from '../../services/request';
+import { userLoadingLogin, userLoadingRegister, userToken, userLogingError, userFriends, actualUser } from './userActions';
 import { mercure } from '../../services/mercure';
 
 export const postLogin = ({ username, password }) => {
@@ -12,7 +13,7 @@ export const postLogin = ({ username, password }) => {
 
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
-
+      console.log(data);
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
       dispatch(actualUser(data.user));

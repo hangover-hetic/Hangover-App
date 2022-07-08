@@ -23,6 +23,7 @@ export const mercureToken = (token) => {
 };
 
 export const actualUser = (user) => {
+  
   return {
     type: ACTUAL_USER,
     payload: user,

@@ -30,7 +30,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         mercureToken: action.payload,
       };
-    case ACTUAL_USER:
+    case ACTUAL_USER:   
       return {
         ...state,
         actualUser: action.payload,
