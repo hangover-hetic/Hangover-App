@@ -12,6 +12,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Dimensions } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,37 +42,34 @@ class App extends React.Component {
 
   render() {
     const { userToken } = this.props;
+    const windowWidth = Dimensions.get('window').width;
+    const centerNavbarCalcul = (windowWidth - 300) / 2
 
     // Use the font with the fontFamily property after loading
     if (this.state.fontsLoaded) {
       return (
         <SafeAreaProvider>
           <StatusBar/>
-          <NavigationContainer>
+          <NavigationContainer
+            style = {{ backgroundColor: '#202020'}}
+          >
             <Tab.Navigator
               screenOptions={({ route }) => ({
                 headerShown : false,
                 tabBarStyle:{
                   position : 'absolute',
-                  left: 30,
+                  left : centerNavbarCalcul,
+                  justifyContent: "center",
                   backgroundColor:'#3D3D3D',
                   height:60,
                   width: 300,
-                  alignSelf: "center",
-                  marginBottom: 30,
-                  flexDirection: "row",
-                  borderRadius: 40,
+                  marginBottom: 50,
+                  borderRadius: 60,
                 },
                 tabBarIcon: ({ focused, color, size }) => {
                 let iconName;
 
                 switch(route.name) {
-                  case "Connexion" : 
-                    iconName = "person";
-                    break;
-                  case "Inscription" : 
-                    iconName = "person-add";
-                    break;
                   case "Feed" : 
                     iconName = "albums";
                     break;
@@ -80,6 +78,12 @@ class App extends React.Component {
                     break;
                   case "Map" : 
                     iconName = "map";
+                    break;
+                  case "Connexion" : 
+                    iconName = "person-outline";
+                    break;
+                  case "Inscription" : 
+                    iconName = "person-add-outline";
                     break;
                 }
 
