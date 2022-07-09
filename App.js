@@ -2,6 +2,7 @@ import React from 'react';
 import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
 import FriendsConnected from './src/pages/Friends';
+import FestivalConnected from './src/pages/Festival';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -51,6 +52,18 @@ class App extends React.Component {
             >
               {userToken !== null ? (
                 <>
+                  
+                  
+                  <Stack.Screen
+                    name='FestivalConnected'
+                    component={FestivalConnected}
+
+                  />
+                  <Stack.Screen
+                    name='HomepageConnected'
+                    component={HomepageConnected}
+
+                  />
                   <Stack.Screen
                     name='FriendsConnected'
                     component={FriendsConnected}
@@ -59,12 +72,6 @@ class App extends React.Component {
                   <Stack.Screen
                     name='Feed'
                     component={Feed}
-                  />
-                  
-                  <Stack.Screen
-                    name='HomepageConnected'
-                    component={HomepageConnected}
-
                   />
 
 

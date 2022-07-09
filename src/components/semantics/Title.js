@@ -12,18 +12,21 @@ class Title extends React.Component {
   render() {
     return (
       <>
-        <MaskedView
-          style={styles.view}
-          maskElement={<Text style={styles.text}>{this.props.content}</Text>}
-        >
-          <LinearGradient
-            colors={['#feac5e', '#c779d0', '#4bc0c8']}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            locations={[0, 0.5, 1]}
-            style={{ flex: 1 }}
-          />
-        </MaskedView>
+      {this.props.white ? 
+      <Text style={[styles.text, {color: 'white'}]}>{this.props.content}</Text>
+       : <MaskedView
+       style={styles.view}
+       maskElement={<Text style={styles.text}>{this.props.content}</Text>}
+     >
+       <LinearGradient
+         colors={['#feac5e', '#c779d0', '#4bc0c8']}
+         start={{ x: 0, y: 0.5 }}
+         end={{ x: 1, y: 0.5 }}
+         locations={[0, 0.5, 1]}
+         style={{ flex: 1 }}
+       />
+     </MaskedView> }
+        
       </>
     );
   }
