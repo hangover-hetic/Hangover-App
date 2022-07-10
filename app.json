@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "hangover-app-2",
+    "name": "Hangover",
     "slug": "hangover-app-2",
     "version": "1.0.0",
+    "icon": "./assets/logo.png",
     "assetBundlePatterns": [
       "**/*"
     ],

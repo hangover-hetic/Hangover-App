@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from './config';
-import { Platform } from 'react-native';
 
 const request = axios.create({
   baseURL: config.request.baseApiUrl,
