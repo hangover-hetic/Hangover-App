@@ -175,7 +175,7 @@ class Festival extends React.Component {
                 <View>
                   <SectionTitle content="Save the date !"/>
                   <Modal
-                    animationType="slide"
+                    animationType="fade"
                     transparent={true}
                     visible={this.state.modalVisible}
                     onRequestClose={() => {               
