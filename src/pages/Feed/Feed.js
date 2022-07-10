@@ -47,7 +47,7 @@ class Feed extends React.Component {
       await fetchFestival(1);
       await fetchFestivalPosts(1);
     } catch (e) {
-      console.error(e);
+      console.error(e.response.data);
     }
   }
 

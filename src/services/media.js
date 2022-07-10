@@ -24,3 +24,7 @@ export const uploadMedia = (file) => {
 export const getMediaIri = (mediaId) => {
   return '/api/media/' + mediaId;
 };
+
+export const getProfilePicture = (profilePicture) => {
+  return profilePicture?.contentUrl ? getAbsoluteMediaPath(profilePicture.contentUrl) : config.fallbackProfilePicture
+}

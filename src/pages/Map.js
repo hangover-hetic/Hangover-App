@@ -10,7 +10,8 @@ import Toast from 'react-native-root-toast';
 import { buildFormBody, listenMercureTopics, mercure, postMercure } from '../services/mercure';
 import Container from '../components/ui/Container';
 import Paragraph from '../components/semantics/Paragraph';
-import { getAbsoluteMediaPath } from '../services/media';
+import { getAbsoluteMediaPath, getProfilePicture } from '../services/media';
+import config from '../services/config';
 
 const TASK_NAME = 'BACKGROUND_LOC';
 
@@ -47,20 +48,22 @@ class Map extends React.Component {
           }
         }
       });
-
       const topics = [];
-
+      const friends = [];
       for (let friend of friendships) {
         topics.push(`https://hangoverapp.fr/loc/api/friend/user/${friend.id}`);
-        this.state.friends.push({
+        friends.push({
           id: friend.id,
           firstname: friend.firstName,
           lastname: friend.lastName,
-          profilePicture:
-            'https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-ic%C3%B4ne-d-utilisateur-homme-isol%C3%A9-sur-un-fond-blanc-compte-avatar-pour-le-web-utilisateur-photo-de-pro.jpg?ver=6',
+          profilePicture: getProfilePicture(friend.profilePicture),
         });
       }
       topics.push(`https://hangoverapp.fr/loc/api/friend/user/${currentUser.id}`);
+
+      this.setState({
+        friends,
+      });
 
       listenMercureTopics(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
       await this.initMap(currentUser);
@@ -92,27 +95,35 @@ class Map extends React.Component {
       lastName: userData.lastName,
       latitude: location.lat,
       longitude: location.long,
+      profilePicture: getProfilePicture(userData.profilePicture),
     };
     this.setState({ friendsLocations });
   }
 
   async sendMyLocation(currentUser) {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      this.setState({ errorMsg: 'Permission to access location was denied' });
-      return;
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        this.setState({ errorMsg: 'Permission to access location was denied' });
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      this.createMessagePosition(location, currentUser);
+      this.setLocation(location);
+      return location;
+    } catch (e) {
+      Toast.show(e);
+      console.log(e);
     }
 
-    let location = await Location.getCurrentPositionAsync({});
-    this.createMessagePosition(location, currentUser);
-    this.setLocation(location);
-    return location;
+
   }
 
   async initMap() {
     const { currentUser } = this.props;
 
     try {
+      console.log('here');
       await this.sendMyLocation(currentUser);
 
       this.getAllFriendLocation(currentUser);
@@ -177,12 +188,7 @@ class Map extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.props;
     const { location, friendsLocations } = this.state;
-
-    console.log(friendsLocations);
-    const userMarker = currentUser?.profilePicture?.contentUrl ? getAbsoluteMediaPath(currentUser.profilePicture.contentUrl) : 'https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-ic%C3%B4ne-d-utilisateur-homme-isol%C3%A9-sur-un-fond-blanc-compte-avatar-pour-le-web-utilisateur-photo-de-pro.jpg?ver=6';
-
     return (
       <Container>
         <MapView
@@ -194,30 +200,21 @@ class Map extends React.Component {
             latitudeDelta: 0.09,
             longitudeDelta: 0.035,
           }}
-          followsUserLocation
           showsMyLocationButton
           minZoomLevel={10}
           maxZoomLevel={20}
         >
-          {location?.latitude && (
-            <Marker
-              coordinate={{ latitude: location.latitude, longitude: location.longitude }}
-            >
-              <Image source={{ uri: userMarker }} style={{ width: 30, height: 30, borderRadius: 50 }} />
-            </Marker>
-          )}
           {
             Object.keys(friendsLocations).map((key) => {
-                if (key === currentUser.id) return;
-                const { latitude, longitude } = friendsLocations[key];
+                const { latitude, longitude, profilePicture } = friendsLocations[key];
+              console.log(key, profilePicture);
                 return (
-                  <Marker coordinate={{ latitude, longitude }}>
-                    <Image source={{ uri: userMarker }} style={{ width: 30, height: 30, borderRadius: 50 }} />
+                  <Marker coordinate={{ latitude, longitude }} key={'friends-marker-' +key }>
+                    <Image source={{ uri: profilePicture }} style={{ width: 30, height: 30, borderRadius: 50 }} />
                   </Marker>
                 );
               },
             )
-
           }
         </MapView>
       </Container>
