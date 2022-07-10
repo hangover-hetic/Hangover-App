@@ -87,15 +87,30 @@ export const fetchInscriptionFriends = () => {
   };
 };
 
-export const inscriptionFestival = (idFestival, idUser) => {
+export const postInscriptionFestival = (idFestival, idUser) => {
   return async (dispatch) => {
     try {
       await request.post(`inscriptions`, {
         festival: `/api/festivals/${idFestival}`,
         relatedUser: `/api/users/${idUser}`,
       });
+      fetchInscriptionFestival();
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
+  };
+};
+export const fetchInscriptionFestival = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: 'inscriptions',
+      });
       
-      dispatch(userInscription());
+      dispatch(userInscription(data));
     } catch (e) {
       console.dir(e);
     }

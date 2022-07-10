@@ -10,7 +10,7 @@ import WhiteSpan from '../components/semantics/WhiteSpan';
 import FriendsInscriptionList from '../components/FriendsInscriptionList';
 import LineUp from '../components/LineUp';
 import { fetchFestival } from '../redux/Festival/festival-async-actions';
-import { fetchInscriptionFriends,inscriptionFestival } from '../redux/User/userAsync-actions';
+import { fetchInscriptionFriends, postInscriptionFestival, fetchInscriptionFestival } from '../redux/User/userAsync-actions';
 import dayjs from '../services/dayjs';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Span from '../components/semantics/Span';
@@ -37,16 +37,29 @@ class Festival extends React.Component {
     }
 
     async loadData() {
-        const { fetchFestival,fetchInscriptionFriends } = this.props;
+        const { fetchFestival,fetchInscriptionFriends, fetchInscriptionFestival } = this.props;
         try {
+          await fetchInscriptionFestival();
           await fetchInscriptionFriends();
-          await fetchFestival(3, false);
+          await fetchFestival(9, false);
+          
         } catch (e) {
           console.error(e);
         }
         
 
       }
+    async inscriptionFestivalUser(idFestival, idUser){
+      const { postInscriptionFestival } = this.props;
+      if(idUser !== null && idFestival !== null){
+        try {
+        await postInscriptionFestival(idFestival,idUser);
+      } catch (e) {
+        console.error(e);
+      }
+        
+      }
+    }
 
     setModalVisible = () => {
       this.setState({ modalVisible: !this.state.modalVisible });
@@ -81,15 +94,16 @@ class Festival extends React.Component {
     }
 
     render() {
-        const { actualUser, friendsInscription ,festival } = this.props;
+        const { actualUser, friendsInscription ,festival, userInscription} = this.props;
         var stylesTags = [];
         var stylesTagsUni = [];
         return (
 
             <ScrollContainer noPadding={true} >
-              { festival === null  ? (
+              { festival === null || userInscription === null ? (
             <Paragraph content="loading" />
             ) : (
+              
               <View>
                 <View>
                 
@@ -174,41 +188,50 @@ class Festival extends React.Component {
                 </View>
                 <View>
                   <SectionTitle content="Save the date !"/>
-                  <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {               
-                      this.setModalVisible();
-                    }}
-                  >
-                    <View style={styles.centeredView}>
-                    <LinearGradient start={[0, 0.5]}
-                            end={[1, 0.5]}
-                            colors={['#feac5e', '#c779d0', '#4bc0c8']}
-                            style={{width: '100%', height:3}}>
-                      </LinearGradient>
-                      <View style={styles.modalView}>
-                      
-                        <Pressable
-                          style={[styles.buttonModal]}
-                          onPress={() => this.setModalVisible()}
-                        >
-                          <Text style={styles.textModal}>Je participe !</Text>
-                        </Pressable>
-                        <Pressable
-                          style={[styles.buttonModal]}
-                          onPress={() => this.setModalVisible()}
-                        >
-                          <Text style={styles.textModal}>Plus tard</Text>
-                        </Pressable>
-                      </View>
-                    </View>
-                  </Modal>
-                  <TouchableOpacity style={styles.inscriptionButton} onPress={() => this.setModalVisible()}>
-                    <Feather name="calendar" size={16} color="#9D9D9D" />
-                    <Span style={styles.spanButton} content="Ajouter cet évènement au calendrier"/>
-                  </TouchableOpacity>
+                  
+                  {actualUser === null ? (<Paragraph content="loading" />) : (
+                    <>
+                      <Modal
+                        animationType="fade"
+                        transparent={true}
+                        visible={this.state.modalVisible}
+                        onRequestClose={() => {               
+                          this.setModalVisible();
+                        }}
+                      >
+                        <View style={styles.centeredView}>
+                        <LinearGradient start={[0, 0.5]}
+                                end={[1, 0.5]}
+                                colors={['#feac5e', '#c779d0', '#4bc0c8']}
+                                style={{width: '100%', height:3}}>
+                          </LinearGradient>
+                          <View style={styles.modalView}>
+                          
+                            <Pressable
+                              style={[styles.buttonModal]}
+                              onPress={() => {this.inscriptionFestivalUser(festival.id,actualUser.id), this.setModalVisible()}}
+                            >
+                              <Text style={styles.textModal}>Je participe !</Text>
+                            </Pressable>
+                            <Pressable
+                              style={[styles.buttonModal]}
+                              onPress={() => this.setModalVisible()}
+                            >
+                              <Text style={styles.textModal}>Plus tard</Text>
+                            </Pressable>
+                          </View>
+                        </View>
+                    </Modal>
+                    {userInscription.filter(inscription => inscription.festival.id === festival.id).length !== 0 ? (<Span content="Vous êtes déjà inscrit"></Span>) : (
+                    <TouchableOpacity style={styles.inscriptionButton} onPress={() => this.setModalVisible()}>
+                      <Feather name="calendar" size={16} color="#9D9D9D" />
+                      <Span style={styles.spanButton} content="Ajouter cet évènement au calendrier"/>
+                    </TouchableOpacity>)}
+                    
+                    </>
+                    
+                  )}
+                  
                   
                 </View>
                 <View>
@@ -312,8 +335,9 @@ const mapStateToProps = (state) => ({
   });
   const mapActionsToProps = {
     fetchFestival,
-    inscriptionFestival,
+    postInscriptionFestival,
     fetchInscriptionFriends,
+    fetchInscriptionFestival
   };
 
 
