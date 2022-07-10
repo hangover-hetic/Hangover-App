@@ -1,3 +1,5 @@
+import mapConfig from "./mapConfig.json"
+
 export default {
   request: {
     baseURL: `https://hangover.timotheedurand.fr/`,
@@ -8,6 +10,6 @@ export default {
       'Content-Type': 'application/json',
     },
   },
-  fallbackProfilePicture : 'https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-ic%C3%B4ne-d-utilisateur-homme-isol%C3%A9-sur-un-fond-blanc-compte-avatar-pour-le-web-utilisateur-photo-de-pro.jpg?ver=6'
-
+  fallbackProfilePicture: 'https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-ic%C3%B4ne-d-utilisateur-homme-isol%C3%A9-sur-un-fond-blanc-compte-avatar-pour-le-web-utilisateur-photo-de-pro.jpg?ver=6',
+  mapConfig
 };

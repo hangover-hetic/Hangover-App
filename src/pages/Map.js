@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, Text, Vibration } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import RNEventSource from 'react-native-event-source';
 import * as Location from 'expo-location';
@@ -90,6 +90,10 @@ class Map extends React.Component {
     }
     const location = JSON.parse(response.data).message.location;
     const { friendsLocations } = this.state;
+    if (!friendsLocations[userData.id]) {
+      Toast.show(`Votre ami ${userData.firstName} ${userData.lastName} vient de se connecter`);
+      Vibration.vibrate();
+    }
     friendsLocations[userData.id] = {
       firstName: userData.firstName,
       lastName: userData.lastName,
@@ -190,41 +194,39 @@ class Map extends React.Component {
   render() {
     const { location, friendsLocations } = this.state;
     return (
-      <Container>
-        <MapView
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          region={{
-            latitude: location?.latitude ? location.latitude : 0,
-            longitude: location?.longitude ? location.longitude : 0,
-            latitudeDelta: 0.09,
-            longitudeDelta: 0.035,
-          }}
-          showsMyLocationButton
-          minZoomLevel={10}
-          maxZoomLevel={20}
-        >
-          {
-            Object.keys(friendsLocations).map((key) => {
-                const { latitude, longitude, profilePicture } = friendsLocations[key];
-              console.log(key, profilePicture);
-                return (
-                  <Marker coordinate={{ latitude, longitude }} key={'friends-marker-' +key }>
-                    <Image source={{ uri: profilePicture }} style={{ width: 30, height: 30, borderRadius: 50 }} />
-                  </Marker>
-                );
-              },
-            )
-          }
-        </MapView>
-      </Container>
+      <MapView
+        style={styles.map}
+        provider={PROVIDER_GOOGLE}
+        region={{
+          latitude: location?.latitude ? location.latitude : 0,
+          longitude: location?.longitude ? location.longitude : 0,
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.035,
+        }}
+        showsMyLocationButton
+        minZoomLevel={10}
+        maxZoomLevel={20}
+        customMapStyle={config.mapConfig}
+      >
+        {
+          Object.keys(friendsLocations).map((key) => {
+              const { latitude, longitude, profilePicture } = friendsLocations[key];
+              return (
+                <Marker coordinate={{ latitude, longitude }} key={'friends-marker-' + key}>
+                  <Image source={{ uri: profilePicture }} style={{ width: 30, height: 30, borderRadius: 50 }} />
+                </Marker>
+              );
+            },
+          )
+        }
+      </MapView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   map: {
-    height: '70%',
+    height: '100%',
   },
 });
 
