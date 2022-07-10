@@ -13,21 +13,20 @@ const SubmitButton = ({ title, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: "center",
+    alignSelf: 'center',
     marginHorizontal: 4,
-    backgroundColor:"white",
+    backgroundColor: 'white',
     borderRadius: 50,
     paddingHorizontal: 25,
     paddingBottom: 6,
     paddingTop: 6,
-    marginVertical: 7
-
+    marginVertical: 7,
   },
   text: {
     fontFamily: 'Poppins',
     color: '#000',
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 });
 
 export default SubmitButton;

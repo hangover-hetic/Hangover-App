@@ -3,28 +3,33 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { LinearTextGradient } from 'react-native-text-gradient';
+import PropTypes from 'prop-types';
 
 class Title extends React.Component {
+  static propTypes = {
+    content: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {};
+
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <>
-        <MaskedView
-          style={styles.view}
-          maskElement={<Text style={styles.text}>{this.props.content}</Text>}
-        >
-          <LinearGradient
-            colors={['#feac5e', '#c779d0', '#4bc0c8']}
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 0.5 }}
-            locations={[0, 0.5, 1]}
-            style={{ flex: 1 }}
-          />
-        </MaskedView>
-      </>
+      <MaskedView
+        style={styles.view}
+        maskElement={<Text style={styles.text}>{this.props.content}</Text>}
+      >
+        <LinearGradient
+          colors={['#feac5e', '#c779d0', '#4bc0c8']}
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 0.5 }}
+          locations={[0, 0.5, 1]}
+          style={{ flex: 1 }}
+        />
+      </MaskedView>
     );
   }
 }
@@ -32,7 +37,7 @@ class Title extends React.Component {
 const styles = StyleSheet.create({
   view: {
     height: 50,
-    width: '100%',
+    width: '70%',
   },
   text: {
     fontSize: 32,

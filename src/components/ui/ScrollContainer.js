@@ -1,16 +1,21 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
 
 class ScrollContainer extends React.Component {
+  static propTypes = {
+    refreshControl: PropTypes.element,
+  };
   constructor(props) {
     super(props);
   }
 
   render() {
+    const { refreshControl, children } = this.props;
     return (
-      <>
-        <ScrollView style={styles.container}>{this.props.children}</ScrollView>
-      </>
+      <ScrollView style={styles.container} refreshControl={refreshControl}>
+        {children}
+      </ScrollView>
     );
   }
 }

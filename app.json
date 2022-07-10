@@ -5,6 +5,14 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Nous avons besoin de votre permission pour utiliser vos photos"
+        }
+      ]
     ]
   }
 }

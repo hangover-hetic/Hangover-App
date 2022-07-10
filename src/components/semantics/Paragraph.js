@@ -1,22 +1,24 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 class Paragraph extends React.Component {
+  static propTypes = {
+    content: PropTypes.string.isRequired,
+    styles: PropTypes.object,
+  };
   constructor(props) {
     super(props);
   }
 
   render() {
-    return (
-      <>
-        <Text style={styles.text}>{this.props.content}</Text>
-      </>
-    );
+    const { content, styles } = this.props;
+    return <Text style={[baseStyles.text, styles]}>{content}</Text>;
   }
 }
 
-const styles = StyleSheet.create({
+const baseStyles = StyleSheet.create({
   text: {
     color: '#fff',
     fontSize: 14,
