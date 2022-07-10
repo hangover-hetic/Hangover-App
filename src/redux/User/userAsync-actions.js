@@ -94,7 +94,6 @@ export const postInscriptionFestival = (idFestival, idUser) => {
         festival: `/api/festivals/${idFestival}`,
         relatedUser: `/api/users/${idUser}`,
       });
-      fetchInscriptionFestival();
     } catch (e) {
       console.dir(e);
     }

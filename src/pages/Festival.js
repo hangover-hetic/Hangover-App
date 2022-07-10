@@ -41,7 +41,7 @@ class Festival extends React.Component {
         try {
           await fetchInscriptionFestival();
           await fetchInscriptionFriends();
-          await fetchFestival(9, false);
+          await fetchFestival(2, false);
           
         } catch (e) {
           console.error(e);
@@ -49,11 +49,12 @@ class Festival extends React.Component {
         
 
       }
-    async inscriptionFestivalUser(idFestival, idUser){
-      const { postInscriptionFestival } = this.props;
-      if(idUser !== null && idFestival !== null){
+    async inscriptionFestivalUser(){
+      const { postInscriptionFestival, fetchInscriptionFestival } = this.props;
+      if(this.props.actualUser.id !== null){
         try {
-        await postInscriptionFestival(idFestival,idUser);
+        await postInscriptionFestival(this.props.festival.id,this.props.actualUser.id);
+        await fetchInscriptionFestival();
       } catch (e) {
         console.error(e);
       }
