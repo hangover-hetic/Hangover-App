@@ -10,7 +10,7 @@ class Span extends React.Component {
   render() {
     return (
       <>
-        <Text style={styles.text}>{this.props.content}</Text>
+        <Text style={[styles.text, this.props.style]}>{this.props.content}</Text>
       </>
     );
   }

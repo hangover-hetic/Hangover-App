@@ -5,6 +5,7 @@ import {
   userLogingError,
   actualUser,
   userFriends,
+  userInscriptionFriends,
   mercureToken,
 } from './userActions';
 import request from '../../services/request';
@@ -65,5 +66,22 @@ export const fetchFriends = (id) => {
     } catch (e) {
       console.dir(e);
     }
+  };
+};
+
+export const fetchInscriptionFriends = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: 'inscriptions/friends',
+      });
+      
+      dispatch(userInscriptionFriends(data));
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
   };
 };

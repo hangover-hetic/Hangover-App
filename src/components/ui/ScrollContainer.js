@@ -8,9 +8,9 @@ class ScrollContainer extends React.Component {
 
   render() {
     return (
-      <>
-        <ScrollView style={[styles.container, this.props.noPadding ? {padding: 0, paddingTop: 0} : {padding: 20, paddingTop: 50} ]}>{this.props.children}</ScrollView>
-      </>
+      
+        <ScrollView style={[styles.container,this.props.style, this.props.noPadding ? {padding: 0, paddingTop: 0} : {padding: 20, paddingTop: 40} ]}>{this.props.children}</ScrollView>
+      
     );
   }
 }

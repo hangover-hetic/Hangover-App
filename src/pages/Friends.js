@@ -35,7 +35,10 @@ class Friends extends React.Component {
       async loadData() {
         const { fetchFriends } = this.props;
         try {
+          if(this.props.actualUser.id !== null){
             await fetchFriends(this.props.actualUser.id);
+          }
+            
             
           } catch (e) {
             console.error(e);

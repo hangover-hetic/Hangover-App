@@ -52,16 +52,9 @@ class App extends React.Component {
             >
               {userToken !== null ? (
                 <>
-                  
-                  
-                  <Stack.Screen
+                <Stack.Screen
                     name='FestivalConnected'
                     component={FestivalConnected}
-
-                  />
-                  <Stack.Screen
-                    name='HomepageConnected'
-                    component={HomepageConnected}
 
                   />
                   <Stack.Screen
@@ -69,6 +62,14 @@ class App extends React.Component {
                     component={FriendsConnected}
 
                   />
+                  
+                  
+                  <Stack.Screen
+                    name='HomepageConnected'
+                    component={HomepageConnected}
+
+                  />
+                  
                   <Stack.Screen
                     name='Feed'
                     component={Feed}

@@ -4,18 +4,19 @@ import {React, useState } from 'react';
 import { ScrollView, View, Text, Pressable, StyleSheet } from 'react-native';
 
 
-export default function RadioButton({ data, onSelect }) {
-    const [userOption, setUserOption] = useState(null);
+export default function RadioButton({ data, onSelect, unSelectable }) {
+    const [userOption, setUserOption] = useState(onSelect ? data[onSelect-1].value : null);
   return (
     <ScrollView style={styles.view}
     contentContainerStyle={{flexDirection:'row'}}
     horizontal={true}
     showsHorizontalScrollIndicator={false} >
     {data.map((item) => {
+        
         return (
             <Pressable
             style={styles.radioButton}
-            onPress={() => setUserOption(item.value)}
+            onPress={unSelectable ? null : () => setUserOption(item.value)}
             >
             {/* add style here */}
             
