@@ -178,7 +178,7 @@ class Map extends React.Component {
 
   render() {
     const { currentUser } = this.props;
-    const { location,friendsLocations } = this.state;
+    const { location, friendsLocations } = this.state;
 
     console.log(friendsLocations);
     const userMarker = currentUser?.profilePicture?.contentUrl ? getAbsoluteMediaPath(currentUser.profilePicture.contentUrl) : 'https://us.123rf.com/450wm/mialima/mialima1603/mialima160300025/55096766-ic%C3%B4ne-d-utilisateur-homme-isol%C3%A9-sur-un-fond-blanc-compte-avatar-pour-le-web-utilisateur-photo-de-pro.jpg?ver=6';
@@ -196,7 +196,7 @@ class Map extends React.Component {
           }}
           followsUserLocation
           showsMyLocationButton
-          minZoomLevel={16}
+          minZoomLevel={10}
           maxZoomLevel={20}
         >
           {location?.latitude && (
@@ -206,6 +206,19 @@ class Map extends React.Component {
               <Image source={{ uri: userMarker }} style={{ width: 30, height: 30, borderRadius: 50 }} />
             </Marker>
           )}
+          {
+            Object.keys(friendsLocations).map((key) => {
+                if (key === currentUser.id) return;
+                const { latitude, longitude } = friendsLocations[key];
+                return (
+                  <Marker coordinate={{ latitude, longitude }}>
+                    <Image source={{ uri: userMarker }} style={{ width: 30, height: 30, borderRadius: 50 }} />
+                  </Marker>
+                );
+              },
+            )
+
+          }
         </MapView>
       </Container>
     );
