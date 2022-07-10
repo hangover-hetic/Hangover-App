@@ -1,32 +1,35 @@
 import {LinearGradient} from 'expo-linear-gradient';
 import {React, useState } from 'react';
-import { ScrollView, View, Text, Pressable, StyleSheet, Image } from 'react-native';
+import { ScrollView, View, Text, Pressable, StyleSheet, Image, StatusBar,  SafeAreaView  } from 'react-native';
 import WhiteSpan from '../components/semantics/WhiteSpan';
 import dayjs from '../services/dayjs';
+import {getAbsoluteMediaPath} from '../services/media';
 
 
-export default function LineUp({ data, direction }) {
+export default function LineUp({ data, direction, selected }) {
+    var prog = data;
     if(direction === 'row'){
         const linup = data.slice(0,3)
         
         return(
             <View style={styles.viewRow}>
-              {linup.map((item) => {
+              {linup.map((item,i) => {
         
                 return (
-                    <View style={{width: '31%'}}>
+                    <View style={{width: '31%'}} key={'lineup-'+i+'-'+item.name+'-row'}>
                         {item.image === null ? (
                             <View>
                             <LinearGradient start={[0, 0.5]}
                                 end={[5, 0.5]}
                                 colors={['#feac5e', '#c779d0', '#4bc0c8']}
                                 style={{width: '100%', aspectRatio: 1}}>
+
                                     <LinearGradient start={[0, 0.6]}
-                            end={[0, 1]}
-                            colors={['#FFFFFF00', '#202020']}
-                            style={{alignSelf: 'stretch', height: 60, zIndex: 3, flex:1,justifyContent:'flex-end'}}>
-                                <WhiteSpan style={styles.username} content={item.name}/>
-                            </LinearGradient>
+                                        end={[0, 1]}
+                                        colors={['#FFFFFF00', '#202020']}
+                                        style={{alignSelf: 'stretch', height: 60, zIndex: 3, flex:1,justifyContent:'flex-end'}}>
+                                        <WhiteSpan style={styles.username} content={item.name}/>
+                                    </LinearGradient>
                             
                             </LinearGradient>
                             
@@ -37,12 +40,13 @@ export default function LineUp({ data, direction }) {
                         :(
                             <View>
                                 <Image style={styles.avatar} source={{
-                                    uri: item.image,
+                                    uri: getAbsoluteMediaPath(item.image.contentUrl),
                                     }}/>
+                                    
                                 <LinearGradient start={[0, 0]}
-                                end={[0, 1.3]}
-                                colors={['#FFFFFF00', '#202020']}
-                                style={{alignSelf: 'stretch', height: 60, zIndex: 3,marginTop:-60, flex:1,justifyContent:'flex-end'}}>
+                                    end={[0, 1.1]}
+                                    colors={['#FFFFFF00', '#202020']}
+                                    style={{alignSelf: 'stretch', height: 60, elevation: 1,marginTop:-60, flex:1,justifyContent:'flex-end'}}>
                                     <WhiteSpan style={styles.username} content={item.name}/>
                                 </LinearGradient>
                                 
@@ -55,12 +59,18 @@ export default function LineUp({ data, direction }) {
             </View>
         )
     } else if(direction === 'column'){
+        if(selected !== 'Tous'){
+            prog = data.filter(lineup => lineup.styles.some(e => e.label === selected));
+        } else{
+            prog = data
+        }
         return(
-            <View style={styles.viewColumn}>
-              {data.map((item) => {
+            
+            <ScrollView style={{}} contentContainerStyle={styles.viewColumn} showsVerticalScrollIndicator={false}>
+              {prog.map((item,i) => {
         
                 return (
-                    <View style={styles.show}>
+                    <View style={styles.show} key={'lineup-'+i+'-'+item.name+'-col'}>
                         {item.image === null ? (
                             <View>
                             <LinearGradient start={[0, 0.5]}
@@ -81,30 +91,33 @@ export default function LineUp({ data, direction }) {
                         ) 
                             
                         :(
-                            <View style={styles.show}>
+                            
+                            <View>
                                 <Image style={styles.avatar} source={{
-                                    uri: item.image,
+                                    uri: getAbsoluteMediaPath(item.image.contentUrl),
                                     }}/>
                                 <LinearGradient start={[0, 0]}
                             end={[0, 0.9]}
                             colors={['#FFFFFF00', '#202020']}
-                            style={{alignSelf: 'stretch', height: 60, zIndex: 3,marginTop:-60}}>
-                    
+                            style={{alignSelf: 'stretch', height: 60, zIndex: 15,justifyContent:'flex-end',marginTop:-60}}>
+                                <WhiteSpan style={styles.usernameColumn} content={item.name + ' ━━ ' + dayjs(item.startTime).format("ddd DD HH:mm")}/>
                             </LinearGradient>
-                                <WhiteSpan style={styles.username} content={item.name + ' ━━━ ' + dayjs(item.startDate).format("DD/MM HHhmm")}/>
+                                
                             </View>
                         )}
                         
                     </View>
                 )
             })}
-            </View>
+            </ScrollView>
+            
         )
     }
    
 }
 
 const styles = StyleSheet.create({
+    
     viewRow: {
         flex:1,
         flexDirection: 'row',

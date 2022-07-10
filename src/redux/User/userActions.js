@@ -6,6 +6,7 @@ import {
   ACTUAL_USER,
   USER_FRIENDS,
   USER_INSCRIPTION_FRIENDS,
+  USER_INSCRIPTION,
   MERCURE_TOKEN,
 } from './userConstants';
 
@@ -39,6 +40,12 @@ export const userFriends = (error) => {
 export const userInscriptionFriends = (error) => {
   return {
     type: USER_INSCRIPTION_FRIENDS,
+    payload: error,
+  };
+};
+export const userInscription = (error) => {
+  return {
+    type: USER_INSCRIPTION,
     payload: error,
   };
 };

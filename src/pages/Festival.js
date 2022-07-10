@@ -1,5 +1,5 @@
 import React       from 'react'
-import { Text, View, Image,StyleSheet, TouchableOpacity,Linking  } from 'react-native';
+import { Text, View, Image,StyleSheet, TouchableOpacity,Linking,SafeAreaView, Modal, Pressable   } from 'react-native';
 import {LinearGradient} from 'expo-linear-gradient';
 import { connect } from 'react-redux'
 import ScrollContainer from '../components/ui/ScrollContainer';
@@ -10,12 +10,13 @@ import WhiteSpan from '../components/semantics/WhiteSpan';
 import FriendsInscriptionList from '../components/FriendsInscriptionList';
 import LineUp from '../components/LineUp';
 import { fetchFestival } from '../redux/Festival/festival-async-actions';
-import { fetchInscriptionFriends } from '../redux/User/userAsync-actions';
+import { fetchInscriptionFriends,inscriptionFestival } from '../redux/User/userAsync-actions';
 import dayjs from '../services/dayjs';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Span from '../components/semantics/Span';
 import MenuDrawer from 'react-native-side-drawer';
 import { Entypo, Feather,FontAwesome5  } from '@expo/vector-icons';
+import TagList from '../components/TagList';
 
 
 
@@ -24,7 +25,9 @@ class Festival extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-          open: false
+          open: false,
+          radioTagSelect: 'Tous',
+          modalVisible: false
         };
     }
     
@@ -45,40 +48,45 @@ class Festival extends React.Component {
 
       }
 
+    setModalVisible = () => {
+      this.setState({ modalVisible: !this.state.modalVisible });
+    }
     toggleOpen = () => {
       this.setState({ open: !this.state.open });
     };
 
-    lineUpDrawer= (festival) => {
+    selectStyleTag = (data) => {
+      this.setState({radioTagSelect: data})
+    }
+
+
+    lineUpDrawer= (festival, styleTags) => {
       
-      const data = [
-        { value: 'Tous les artistes'},
-        { value: 'Rock' },
-        { value: 'Rap' },
-        { value: 'Pop indé' },
-        
-      ];
+
       return (
+        <SafeAreaView style={styles.container}>
         <ScrollContainer style={styles.lineUpDrawer}>
           <TouchableOpacity  style={{marginBottom:10}} onPress={this.toggleOpen}>
             <Entypo name="chevron-left" size={24} color="white" />
           </TouchableOpacity>
           <Title content="Programmation"/>
           <WhiteSpan content={festival.name + ' ━━━━━ ' + dayjs(festival.startDate).format("DD MMM YYYY")+ ' / ' + dayjs(festival.endDate).format("DD MMM YYYY")}/>
-          <RadioButton data={data} onSelect={1} /> 
+          <RadioButton data={styleTags} bindSelected={this.selectStyleTag}/> 
           
-          <LineUp data={festival.shows} direction='column'></LineUp>
+          <LineUp data={festival.shows} selected={this.state.radioTagSelect} direction='column'></LineUp>
 
         </ScrollContainer>
+        </SafeAreaView>
       )
     }
 
     render() {
         const { actualUser, friendsInscription ,festival } = this.props;
         var stylesTags = [];
+        var stylesTagsUni = [];
         return (
 
-            <ScrollContainer noPadding={true}>
+            <ScrollContainer noPadding={true} >
               { festival === null  ? (
             <Paragraph content="loading" />
             ) : (
@@ -96,7 +104,7 @@ class Festival extends React.Component {
             <MenuDrawer
                     open={this.state.open}
                     position={'right'}
-                    drawerContent={this.lineUpDrawer(festival)}
+                    drawerContent={this.lineUpDrawer(festival, stylesTagsUni)}
                     drawerPercentage={100}
                     animationTime={250}
                     overlay={true}
@@ -153,15 +161,51 @@ class Festival extends React.Component {
                   <SectionTitle content="Ambiance"/>
                   { festival.shows.map((item) => {
                     item.styles.map((style) =>{
-                      stylesTags.push({value: style})
+                      stylesTags.push(style.label)
                     })
                     
+                    
                   })}
-                  <RadioButton data={stylesTags} unSelectable /> 
+                  
+                  { [...new Set(stylesTags)].map((item) => {
+                    stylesTagsUni.push({value: item});
+                  })}
+                  <TagList data={stylesTagsUni} /> 
                 </View>
                 <View>
                   <SectionTitle content="Save the date !"/>
-                  <TouchableOpacity style={styles.inscriptionButton}>
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {               
+                      this.setModalVisible();
+                    }}
+                  >
+                    <View style={styles.centeredView}>
+                    <LinearGradient start={[0, 0.5]}
+                            end={[1, 0.5]}
+                            colors={['#feac5e', '#c779d0', '#4bc0c8']}
+                            style={{width: '100%', height:3}}>
+                      </LinearGradient>
+                      <View style={styles.modalView}>
+                      
+                        <Pressable
+                          style={[styles.buttonModal]}
+                          onPress={() => this.setModalVisible()}
+                        >
+                          <Text style={styles.textModal}>Je participe !</Text>
+                        </Pressable>
+                        <Pressable
+                          style={[styles.buttonModal]}
+                          onPress={() => this.setModalVisible()}
+                        >
+                          <Text style={styles.textModal}>Plus tard</Text>
+                        </Pressable>
+                      </View>
+                    </View>
+                  </Modal>
+                  <TouchableOpacity style={styles.inscriptionButton} onPress={() => this.setModalVisible()}>
                     <Feather name="calendar" size={16} color="#9D9D9D" />
                     <Span style={styles.spanButton} content="Ajouter cet évènement au calendrier"/>
                   </TouchableOpacity>
@@ -186,6 +230,8 @@ class Festival extends React.Component {
     }
 }
 const styles = StyleSheet.create({ 
+  container:{
+  },
     cover: {
         alignSelf: 'stretch',
         height: 180,
@@ -197,8 +243,10 @@ const styles = StyleSheet.create({
       marginTop: 20
     },
     lineUpDrawer:{
+      elevation:5,
       position: 'absolute',
-      height: 5000
+      width:'100%',
+      height: 5000,
     },
 
     textButton: {
@@ -221,15 +269,50 @@ const styles = StyleSheet.create({
     spanButton: {
       marginLeft: 8
     },
+    centeredView: {
+      flex: 1,
+      justifyContent: "flex-end",
+      alignItems: "center",
+      marginTop: 22
+    },
+    modalView: {
+      width: '100%',
+      backgroundColor: "#202020",
+      alignItems: "center",
+      alignSelf: 'center',
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5
+    },
+    textModal:{
+      color: '#ffffff',
+      fontSize: 20,
+      fontFamily: 'Poppins-SemiBold',
+      textAlign: 'center',
+    },
+    buttonModal:{
+      width: '100%',
+      height:70,
+      justifyContent: 'center',
+      borderBottomWidth:1,
+      borderColor: '#9D9D9D'
+    }
     
  })
 const mapStateToProps = (state) => ({
     actualUser: state.userReducer.actualUser,
     friendsInscription: state.userReducer.userInscriptionFriends,
+    userInscription: state.userReducer.userInscription,
     festival: state.festivalReducer.festival,
   });
   const mapActionsToProps = {
     fetchFestival,
+    inscriptionFestival,
     fetchInscriptionFriends,
   };
 

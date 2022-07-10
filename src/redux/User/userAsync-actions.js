@@ -6,6 +6,7 @@ import {
   actualUser,
   userFriends,
   userInscriptionFriends,
+  userInscription,
   mercureToken,
 } from './userActions';
 import request from '../../services/request';
@@ -78,6 +79,23 @@ export const fetchInscriptionFriends = () => {
       });
       
       dispatch(userInscriptionFriends(data));
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
+  };
+};
+
+export const inscriptionFestival = (idFestival, idUser) => {
+  return async (dispatch) => {
+    try {
+      await request.post(`inscriptions`, {
+        festival: `/api/festivals/${idFestival}`,
+        relatedUser: `/api/users/${idUser}`,
+      });
+      
+      dispatch(userInscription());
     } catch (e) {
       console.dir(e);
     }
