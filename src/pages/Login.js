@@ -10,6 +10,7 @@ import Container from '../components/ui/Container';
 import FormContainer from '../components/ui/FormContainer';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Title from '../components/semantics/Title';
+import Toast from 'react-native-root-toast';
 
 const Login = (props) => {
   const {
@@ -33,7 +34,7 @@ const Login = (props) => {
     if (!props.userErrorLogin) {
       dispatch(postLogin(data));
     } else {
-      console.log('erreur login');
+      Toast.show(this.props.userErrorLogin);
     }
   };
 
