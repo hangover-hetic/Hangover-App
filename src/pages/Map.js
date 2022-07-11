@@ -136,13 +136,14 @@ class Map extends Component {
     const userData = message.user;
     console.log('message', message);
     if (message.ask) {
-      if (userData.id === currentUser.id) return;
+      // if (userData.id === currentUser.id) return;
       switch (message.ask) {
         case ASK_LOCATION:
           this.sendMyLocation(currentUser);
           return;
           break;
         case ASK_ACTIVATE_GHOST:
+          console.log('hey');
           this.deleteMarker(userData);
           return;
           break;
@@ -241,14 +242,14 @@ class Map extends Component {
 
     if (currentUser.ghostMode) {
       dispatch(setGhostMode(currentUser.id, false));
-      this.sendMyLocation();
-      Toast.show('Vous êtes bien disparus sur les cartes de vos amis');
+      this.sendMyLocation().catch((e) => Toast.show('Erreur' + e));
+      Toast.show('Vous êtes bien réapparus sur les cartes de vos amis');
       return;
     }
 
     dispatch(setGhostMode(currentUser.id, true));
     this.activateGhostMode();
-    Toast.show('Vous êtes bien réapparus sur les cartes de vos amis');
+    Toast.show('Vous êtes bien disparus sur les cartes de vos amis');
   }
 
   onPressAlert() {
@@ -299,7 +300,7 @@ class Map extends Component {
             <Pressable
               style={[
                 styles.ghostButton,
-                { backgroundColor: currentUser.ghostMode ? 'green' : 'red' },
+                { backgroundColor: currentUser.ghostMode ? 'green' : 'grey' },
               ]}
               onPress={this.onPressGhostMode.bind(this)}
             >
