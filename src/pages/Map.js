@@ -26,6 +26,7 @@ class Map extends Component {
       errorMsg: null,
       markers: {},
       friends: [],
+      showMap: false,
     };
     const { currentUser } = this.props;
     TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
@@ -48,6 +49,16 @@ class Map extends Component {
   }
 
   componentDidMount() {
+    Location.requestForegroundPermissionsAsync().then(({ status }) => {
+      if (status !== 'granted') {
+        Toast.show('Permission to access location was denied');
+        return;
+      }
+      this.setState({
+        showMap: true,
+      });
+    });
+
     this.initAll().catch((e) => {
       console.log('Erreur init', e);
     });
@@ -124,6 +135,7 @@ class Map extends Component {
     const { message } = JSON.parse(response.data);
     const userData = message.user;
     if (message.ask) {
+      if (userData.id === currentUser.id) return;
       switch (message.ask) {
         case ASK_LOCATION:
           this.sendMyLocation(currentUser);
@@ -134,7 +146,6 @@ class Map extends Component {
           return;
           break;
         case ASK_ALERT:
-          if (userData.id === currentUser.id) return;
           Toast.show(`Votre ami ${userData.firstName} ${userData.lastName} à un problème`);
           Vibration.vibrate();
         default:
@@ -152,11 +163,6 @@ class Map extends Component {
 
   async sendMyLocation() {
     try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        Toast.show('Permission to access location was denied');
-        return;
-      }
       if (this.props.currentUser.ghostMode) return;
       let location = await Location.getCurrentPositionAsync({});
       this.createMessagePosition(location);
@@ -235,11 +241,13 @@ class Map extends Component {
     if (currentUser.ghostMode) {
       dispatch(setGhostMode(currentUser.id, false));
       this.sendMyLocation();
+      Toast.show('Vous êtes bien disparus sur les cartes de vos amis');
       return;
     }
 
     dispatch(setGhostMode(currentUser.id, true));
     this.activateGhostMode();
+    Toast.show('Vous êtes bien réapparus sur les cartes de vos amis');
   }
 
   onPressAlert() {
@@ -252,38 +260,39 @@ class Map extends Component {
   }
 
   render() {
-    const { location, markers } = this.state;
+    const { location, markers, showMap } = this.state;
     const { currentUser } = this.props;
-    // console.log('currentUser', currentUser.ghostMode);
     return (
       <View>
-        <MapView
-          ref={this.mapViewRef}
-          style={styles.map}
-          provider={PROVIDER_GOOGLE}
-          region={{
-            latitude: location?.latitude ? location.latitude : 0,
-            longitude: location?.longitude ? location.longitude : 0,
-            latitudeDelta: 0.09,
-            longitudeDelta: 0.035,
-          }}
-          showsMyLocationButton
-          minZoomLevel={10}
-          maxZoomLevel={20}
-          customMapStyle={config.mapConfig}
-        >
-          {Object.keys(markers).map((key) => {
-            const { latitude, longitude, profilePicture, markerKey } = markers[key];
-            return (
-              <Marker coordinate={{ latitude, longitude }} key={markerKey}>
-                <Image
-                  source={{ uri: profilePicture }}
-                  style={{ width: 30, height: 30, borderRadius: 50 }}
-                />
-              </Marker>
-            );
-          })}
-        </MapView>
+        {showMap && (
+          <MapView
+            ref={this.mapViewRef}
+            style={styles.map}
+            provider={PROVIDER_GOOGLE}
+            region={{
+              latitude: location?.latitude ? location.latitude : 0,
+              longitude: location?.longitude ? location.longitude : 0,
+              latitudeDelta: 0.09,
+              longitudeDelta: 0.035,
+            }}
+            showsMyLocationButton
+            minZoomLevel={10}
+            maxZoomLevel={20}
+            customMapStyle={config.mapConfig}
+          >
+            {Object.keys(markers).map((key) => {
+              const { latitude, longitude, profilePicture, markerKey } = markers[key];
+              return (
+                <Marker coordinate={{ latitude, longitude }} key={markerKey}>
+                  <Image
+                    source={{ uri: profilePicture }}
+                    style={{ width: 30, height: 30, borderRadius: 50 }}
+                  />
+                </Marker>
+              );
+            })}
+          </MapView>
+        )}
         <Pressable
           style={[styles.ghostButton, { backgroundColor: currentUser.ghostMode ? 'green' : 'red' }]}
           onPress={this.onPressGhostMode.bind(this)}
