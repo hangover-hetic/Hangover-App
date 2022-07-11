@@ -116,6 +116,7 @@ class Map extends Component {
 
   deleteMarker(user) {
     const { markers } = this.state;
+    console.log('delete', markers[user.id]);
     delete markers[user.id];
     this.setState({
       markers,
@@ -133,6 +134,7 @@ class Map extends Component {
     const { currentUser } = this.props;
     const { message } = JSON.parse(response.data);
     const userData = message.user;
+    console.log('message', message);
     if (message.ask) {
       if (userData.id === currentUser.id) return;
       switch (message.ask) {
@@ -292,18 +294,25 @@ class Map extends Component {
             })}
           </MapView>
         )}
-        <Pressable
-          style={[styles.ghostButton, { backgroundColor: currentUser.ghostMode ? 'green' : 'red' }]}
-          onPress={this.onPressGhostMode.bind(this)}
-        >
-          <MaterialCommunityIcons name="ghost" size={30} color="white" />
-        </Pressable>
-        <Pressable
-          style={[styles.ghostButton, { top: 70, backgroundColor: 'orange' }]}
-          onPress={this.onPressAlert.bind(this)}
-        >
-          <Ionicons name="alert" size={30} color="white" />
-        </Pressable>
+        {currentUser && (
+          <>
+            <Pressable
+              style={[
+                styles.ghostButton,
+                { backgroundColor: currentUser.ghostMode ? 'green' : 'red' },
+              ]}
+              onPress={this.onPressGhostMode.bind(this)}
+            >
+              <MaterialCommunityIcons name="ghost" size={30} color="white" />
+            </Pressable>
+            <Pressable
+              style={[styles.ghostButton, { top: 70, backgroundColor: 'orange' }]}
+              onPress={this.onPressAlert.bind(this)}
+            >
+              <Ionicons name="alert" size={30} color="white" />
+            </Pressable>
+          </>
+        )}
       </View>
     );
   }
