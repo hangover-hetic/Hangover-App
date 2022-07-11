@@ -100,6 +100,14 @@ class App extends React.Component {
                 {userToken !== null ? (
                   <>
                     <Tab.Screen
+                      name='Festival'
+                      component={FestivalConnected}
+                    />
+                    <Tab.Screen
+                      name='Friends'
+                      component={FriendsConnected}
+                    />
+                    <Tab.Screen
                       name='Feed'
                       component={FeedNavigator}
                     />

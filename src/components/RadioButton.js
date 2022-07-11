@@ -35,6 +35,10 @@ export default function RadioButton({ data, onSelect, bindSelected }) {
             key={'radio-'+index}
             onPress={() => {bindSelected(item.value), setUserOption(item.value)}}
             >
+              <LinearGradient start={[0, 0.5]}
+                            end={[1, 0.5]}
+                            colors={item.value === userOption ? ['#feac5e', '#c779d0', '#4bc0c8'] : ['#858585', '#858585'] }
+                            style={{borderRadius: 25}}>
               <View style={styles.circleGradient}>
                 <Text
                   style={item.value === userOption ? styles.textSelected : styles.textUnselected}
