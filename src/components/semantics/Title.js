@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 class Title extends React.Component {
   static propTypes = {
     content: PropTypes.string.isRequired,
+    style: PropTypes.object,
   };
 
   static defaultProps = {};
@@ -16,11 +17,27 @@ class Title extends React.Component {
     super(props);
   }
 
+  getStyles(){
+    return {
+      view: {
+        height: 50,
+        width: this.props.width ? this.props.width : '100%',
+      },
+      text: {
+        fontSize: 32,
+        fontFamily: 'Poppins-Bold',
+        alignSelf: 'baseline',
+      },
+    }
+  }
+
   render() {
+    const styles = this.getStyles()
+
     return (
       <MaskedView
         style={styles.view}
-        maskElement={<Text style={styles.text}>{this.props.content}</Text>}
+        maskElement={<Text style={[this.props.style, styles.text]}>{this.props.content}</Text>}
       >
         <LinearGradient
           colors={['#feac5e', '#c779d0', '#4bc0c8']}

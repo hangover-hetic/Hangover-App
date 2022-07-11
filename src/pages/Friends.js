@@ -163,8 +163,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  actualUser: state.userReducer.actualUser,
-  userFriends: state.userReducer.userFriends,
+  actualUser: state.user.actualUser,
+  userFriends: state.user.userFriends,
 });
 const mapActionsToProps = {
   fetchFriends,

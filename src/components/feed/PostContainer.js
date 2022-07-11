@@ -33,7 +33,7 @@ class PostContainer extends React.Component {
         </View>
         <Image
           source={{ uri: getAbsoluteMediaPath(postImage) }}
-          style={{ width: 400, height: 300, marginTop: 10, marginBottom: 10 }}
+          style={{ width: '100%', height: 300, marginTop: 10, marginBottom: 10 }}
         />
         <Paragraph content={dayjs(postCreatedAt).fromNow()} />
       </View>

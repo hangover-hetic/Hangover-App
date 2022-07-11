@@ -8,11 +8,11 @@ import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import Map from './src/pages/Map';
 import { connect } from 'react-redux';
-import {  FeedNavigator } from './src/pages/Feed';
+import { FeedNavigator } from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import AccountConnected from './src/pages/Account';
@@ -54,9 +54,7 @@ class App extends React.Component {
         <SafeAreaProvider>
           <StatusBar />
           <RootSiblingParent>
-            <NavigationContainer
-              style={{ backgroundColor: '#202020' }}
-            >
+            <NavigationContainer style={{ backgroundColor: '#202020' }}>
               <Tab.Navigator
                 screenOptions={({ route }) => ({
                   headerShown: false,
@@ -70,30 +68,30 @@ class App extends React.Component {
                     marginBottom: 50,
                     borderRadius: 60,
                   },
-                  tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-
-                    switch (route.name) {
-                      case 'Feed' :
-                        iconName = 'albums';
-                        break;
-                      case 'Homepage' :
-                        iconName = 'home';
-                        break;
-                      case 'Map' :
-                        iconName = 'map';
-                        break;
-                      case 'Connexion' :
-                        iconName = 'person-outline';
-                        break;
-                      case 'Inscription' :
-                        iconName = 'person-add-outline';
-                        break;
-                    }
-
-                    // You can return any component that you like here!
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                  },
+                  // tabBarIcon: ({ focused, color, size }) => {
+                  //   let iconName;
+                  //
+                  //   switch (route.name) {
+                  //     case 'Feed':
+                  //       iconName = 'albums';
+                  //       break;
+                  //     case 'Homepage':
+                  //       iconName = 'home';
+                  //       break;
+                  //     case 'Map':
+                  //       iconName = 'map';
+                  //       break;
+                  //     case 'Connexion':
+                  //       iconName = 'person-outline';
+                  //       break;
+                  //     case 'Inscription':
+                  //       iconName = 'person-add-outline';
+                  //       break;
+                  //   }
+                  //
+                  //   // You can return any component that you like here!
+                  //   return <Ionicons name={iconName} size={size} color={color} />;
+                  // },
                   tabBarActiveTintColor: 'tomato',
                   tabBarInactiveTintColor: 'gray',
                 })}
@@ -107,33 +105,68 @@ class App extends React.Component {
                     <Tab.Screen
                       name='Festival'
                       component={FestivalConnected}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialIcons name="event" color={color} size={size} />
+                        ),
+                      }}
                     />
                     <Tab.Screen
-                      name='Friends'
+                      name="Friends"
                       component={FriendsConnected}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialIcons name="group" color={color} size={size} />
+                        ),
+                      }}
                     />
                     <Tab.Screen
-                      name='Feed'
+                      name="Feed"
                       component={FeedNavigator}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialIcons name="image" color={color} size={size} />
+                        ),
+                      }}
                     />
                     <Tab.Screen
-                      name='Homepage'
+                      name="Homepage"
                       component={HomepageConnected}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialIcons name="home" color={color} size={size} />
+                        ),
+                      }}
                     />
                     <Tab.Screen
-                      name='Map'
+                      name="Map"
                       component={Map}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <MaterialIcons name="map" color={color} size={size} />
+                        ),
+                      }}
                     />
                   </>
                 ) : (
                   <>
                     <Tab.Screen
-                      name='Connexion'
+                      name="Connexion"
                       component={LoginConnected}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <Ionicons name="person" color={color} size={size} />
+                        ),
+                      }}
                     />
                     <Tab.Screen
-                      name='Inscription'
+                      name="Inscription"
                       component={Register}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <Ionicons name="person-add-outline" color={color} size={size} />
+                        ),
+                      }}
                     />
                   </>
                 )}
@@ -141,7 +174,6 @@ class App extends React.Component {
             </NavigationContainer>
           </RootSiblingParent>
         </SafeAreaProvider>
-
       );
     } else {
       return null;
@@ -150,7 +182,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userToken: state.userReducer.userToken,
+  userToken: state.user.userToken,
 });
 
 const AppConnected = connect(mapStateToProps)(App);
