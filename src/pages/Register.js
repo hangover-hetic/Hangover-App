@@ -9,6 +9,7 @@ import Span from '../components/semantics/Span';
 import Container from '../components/ui/Container';
 import FormContainer from '../components/ui/FormContainer';
 import Title from '../components/semantics/Title';
+import ErrorText from '../components/semantics/ErrorText';
 
 class Register extends React.Component {
   constructor(props) {
@@ -16,11 +17,10 @@ class Register extends React.Component {
   }
 
   onSubmit = (data) => {
-    if (this.props.loadingRegister) {
-      this.props.navigation.navigate('LoginConnected');
+    if (!this.props.userErrorRegister) {
       this.props.postRegister(data);
     } else {
-      console.log('Les données ne sont pas bonnes');
+      console.log('erreur login')
     }
   };
 
@@ -29,6 +29,9 @@ class Register extends React.Component {
       <Container>
         <FormContainer>
           <Title content={'Inscription'} />
+
+          {this.props.userFailRegister && <ErrorText content="Données mauvaises, réessayer"/>}
+
           <Span content="Nom" />
           <Controller
             control={this.props.control}
@@ -42,10 +45,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="firstName"
             rules={{ required: true }}
+            name="firstName"
           />
-          {this.props.errors.firstName && <Text>Ce champ est requis</Text>}
+          {this.props.errors.firstName && <Text style={styles.errorText} >Ce champ est requis</Text>}
 
           <Span content="Prénom" />
           <Controller
@@ -60,10 +63,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="lastName"
             rules={{ required: true }}
+            name="lastName"
           />
-          {this.props.errors.lastName && <Text>Ce champ est requis</Text>}
+          {this.props.errors.lastName && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Email" />
           <Controller
@@ -78,10 +81,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="email"
             rules={{ required: true }}
+            name="email"
           />
-          {this.props.errors.email && <Text>Ce champ est requis</Text>}
+          {this.props.errors.email && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Mot de passe" />
           <Controller
@@ -96,10 +99,10 @@ class Register extends React.Component {
                 secureTextEntry={true}
               />
             )}
-            name="password"
             rules={{ required: true }}
+            name="password"
           />
-          {this.props.errors.password && <Text>Ce champ est requis</Text>}
+          {this.props.errors.password && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Téléphone" />
           <Controller
@@ -114,10 +117,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="phone"
             rules={{ required: true }}
+            name="phone"
           />
-          {this.props.errors.phone && <Text>Ce champ est requis</Text>}
+          {this.props.errors.phone && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Adresse" />
           <Controller
@@ -132,10 +135,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="address"
             rules={{ required: true }}
+            name="address"
           />
-          {this.props.errors.address && <Text>Ce champ est requis</Text>}
+          {this.props.errors.address && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Pays" />
           <Controller
@@ -150,10 +153,10 @@ class Register extends React.Component {
                 secureTextEntry={false}
               />
             )}
-            name="country"
             rules={{ required: true }}
+            name="country"
           />
-          {this.props.errors.country && <Text>Ce champ est requis</Text>}
+          {this.props.errors.country && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <View style={styles.buttonSettings}>
             <SubmitButton title={"S'inscrire"} onPress={this.props.handleSubmit(this.onSubmit)} />
@@ -181,6 +184,9 @@ const styles = StyleSheet.create({
   buttonSettings: {
     alignItems: 'center',
   },
+  errorText: {
+    color: 'red'
+  }
 });
 
 const RegisterHookForm = (props) => {
@@ -210,6 +216,7 @@ const RegisterHookForm = (props) => {
 const mapStateToProps = (state) => ({
   //Connection aux événements du store redux
   loadingRegister: state.user.userLoadingRegister,
+  userErrorRegister : state.user.userRegisterError
 });
 
 const mapActionsToProps = {

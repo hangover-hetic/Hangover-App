@@ -10,6 +10,7 @@ import Container from '../components/ui/Container';
 import FormContainer from '../components/ui/FormContainer';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Title from '../components/semantics/Title';
+import ErrorText from '../components/semantics/ErrorText';
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,14 +26,17 @@ class Login extends React.Component {
   };
 
   goToRegister = () => {
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate('Inscription');
   };
 
-    render() {
+  render() {
     return (
       <Container>
         <FormContainer>
           <Title content={'Bienvenue!'} />
+
+          {this.props.userErrorLogin && <ErrorText content="Données mauvaises, réessayer"/>}
+
           <Span content="Utilisateur" />
           <Controller
             control={this.props.control}
@@ -47,9 +51,9 @@ class Login extends React.Component {
               />
             )}
             name="username"
-            rules={true}
+            rules={{ required: true }}
           />
-          {this.props.errors.username && <Text>Ce champ est requis</Text>}
+          {this.props.errors.username && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Mot de passe" />
           <Controller
@@ -65,9 +69,9 @@ class Login extends React.Component {
               />
             )}
             name="password"
-            rules={true}
+            rules={{ required: true }}
           />
-          {this.props.errors.password && <Text>Ce champ est requis</Text>}
+          {this.props.errors.password && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <View style={styles.buttonSettings}>
             <SubmitButton title={'Se connecter'} onPress={this.props.handleSubmit(this.onSubmit)} />
@@ -90,8 +94,8 @@ const styles = StyleSheet.create({
   buttonSettings: {
     alignItems: 'center',
   },
-  errorsAlert: {
-    color: 'red',
+  errorText: {
+    color: 'red'
   }
 });
 
@@ -117,7 +121,7 @@ const LoginHookForm = (props) => {
 const mapStateToProps = (state) => ({
   userLoading: state.user.userLoadingLogin,
   userErrorLogin: state.user.userLoginError,
-  userSuccessLogin: state
+  userSuccessLogin: state.user.userLoginSuccess
 });
 
 const mapActionsToProps = {

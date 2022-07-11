@@ -12,6 +12,7 @@ import Paragraph from '~/components/semantics/Paragraph';
 import { addActualFestivalPosts } from '~/redux/Festival/festival-actions';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import { ADD_POST_ROUTE } from './routes';
+import SuccessText from '../../components/semantics/SuccessText';
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -20,6 +21,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       isRefreshing: false,
+      successConnexionMessage : false
     };
   }
 
@@ -37,8 +39,15 @@ class Feed extends React.Component {
     }
   }
 
+  setSuccessMessage = () => (
+    this.setState({successConnexionMessage: true})
+  )
+
   componentDidMount() {
     this.loadData();
+    setTimeout( () => {
+      this.setSuccessMessage();
+   },3000);
   }
 
   async loadData() {
@@ -85,6 +94,7 @@ class Feed extends React.Component {
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <Title content="Feed" />
+          
           <Ionicons
             name="add-circle"
             color="white"
@@ -92,7 +102,7 @@ class Feed extends React.Component {
             onPress={this.navigateToAddPost.bind(this)}
           />
         </View>
-
+        {!this.state.successConnexionMessage && <SuccessText content="Succés"/>}
         {actualFestival === null || actualUser === null ? (
           <Paragraph content="loading" />
         ) : (
@@ -121,6 +131,7 @@ const mapStateToProps = (state) => ({
   posts: state.festival.actualFeed,
   actualUser: state.user.actualUser,
   actualFestival: state.festival.actualFestival,
+  successConnexion : state.user.userLoginSuccess
 });
 
 const mapActionsToProps = {
