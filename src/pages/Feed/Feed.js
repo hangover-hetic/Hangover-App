@@ -88,10 +88,9 @@ class Feed extends React.Component {
         }
       >
         <View
-          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+          style={{display :'flex', flexDirection: 'row', alignItems: 'center' }}
         >
-
-          <Title content="Feed" style={{ width: 100 }} />
+          <Title width={'90%'} content="Feed" />
           <Ionicons
             name="add-circle"
             color="white"
