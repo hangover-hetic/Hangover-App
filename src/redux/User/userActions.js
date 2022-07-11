@@ -5,7 +5,12 @@ import {
   USER_LOGIN_ERROR,
   ACTUAL_USER,
   USER_FRIENDS,
+  USER_INSCRIPTION_FRIENDS,
+  USER_INSCRIPTION,
   MERCURE_TOKEN,
+  USER_LOGIN_SUCCESS,
+  USER_REGISTER_ERROR,
+  USER_REGISTER_SUCCESS
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -35,6 +40,18 @@ export const userFriends = (error) => {
     payload: error,
   };
 };
+export const userInscriptionFriends = (error) => {
+  return {
+    type: USER_INSCRIPTION_FRIENDS,
+    payload: error,
+  };
+};
+export const userInscription = (error) => {
+  return {
+    type: USER_INSCRIPTION,
+    payload: error,
+  };
+};
 
 export const userLoadingLogin = (loading) => {
   return {
@@ -50,9 +67,30 @@ export const userLoadingRegister = (loading) => {
   };
 };
 
-export const userLogingError = (error) => {
+export const userLoginError = (error) => {
   return {
     type: USER_LOGIN_ERROR,
     payload: error,
   };
 };
+
+export const userLoginSuccess = (success) => {
+  return {
+    type: USER_REGISTER_ERROR,
+    payload: success
+  }
+}
+
+export const userRegisterError = (error) => {
+  return {
+    type: USER_LOGIN_SUCCESS,
+    payload: error
+  }
+}
+
+export const userRegisterSuccess = (success) => {
+  return {
+    type: USER_REGISTER_SUCCESS,
+    payload: success
+  }
+}

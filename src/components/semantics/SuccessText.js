@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text } from 'react-native';
 
-class Span extends React.Component {
+class SuccessText extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -10,7 +10,7 @@ class Span extends React.Component {
   render() {
     return (
       <>
-        <Text style={[styles.text, this.props.style]}>{this.props.content}</Text>
+        <Text style={styles.text}>{this.props.content}</Text>
       </>
     );
   }
@@ -18,12 +18,10 @@ class Span extends React.Component {
 
 const styles = StyleSheet.create({
   text: {
-    color: '#9D9D9D',
-    fontSize: 12,
-    lineHeight: 21,
-    letterSpacing: 0.5,
-    fontFamily: 'Poppins',
+    color: '#270',
+    backgroundColor: '#DFF2BF',
+    alignSelf: 'center'
   },
 });
 
-export default Span;
+export default SuccessText;

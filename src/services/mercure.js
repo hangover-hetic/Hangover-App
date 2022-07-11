@@ -19,7 +19,19 @@ const buildMercureUrl = (baseUrl, topics) => {
   return result;
 };
 
-const listenMercureTopics = (topics, token, callback) => {
+const buildFormBody = (details) => {
+  // création du body de la requete post
+  let formBody = [];
+  for (let property in details) {
+    let encodedKey = encodeURIComponent(property);
+    let encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + '=' + encodedValue);
+  }
+
+  return formBody.join('&');
+};
+
+const listenMercure = (topics, token, callback) => {
   const url = buildMercureUrl(config.request.baseMercureUrl, topics);
   const options = {
     headers: {
@@ -30,4 +42,15 @@ const listenMercureTopics = (topics, token, callback) => {
   eventSource.addEventListener('message', callback);
 };
 
-export { mercure, buildMercureUrl, listenMercureTopics };
+const postMercure = (data) => {
+  const formBody = buildFormBody(data);
+
+  // envoi de la requete avec l'url du hub mercure, la methode, le header avec le token d'envoi
+  return mercure.post('', formBody, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  });
+};
+
+export { mercure, buildMercureUrl, listenMercure, buildFormBody, postMercure };

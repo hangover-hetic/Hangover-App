@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#202020',
     minHeight: '100%',
     color: '#fff',
-    padding: 20,
-    paddingTop: 50,
   },
 });
 
