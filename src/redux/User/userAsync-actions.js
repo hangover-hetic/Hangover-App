@@ -69,6 +69,19 @@ export const fetchFriends = (id) => {
     }
   };
 };
+export const deleteFriend = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: `friendships/user/${id}`,
+      });
+      dispatch(userFriends(data));
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
 
 export const fetchInscriptionFriends = () => {
   return async (dispatch) => {

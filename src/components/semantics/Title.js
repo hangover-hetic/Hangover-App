@@ -37,7 +37,7 @@ class Title extends React.Component {
 const styles = StyleSheet.create({
   view: {
     height: 50,
-    width: '100%',
+    width:'70%'
   },
   text: {
     fontSize: 32,

@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Dimensions } from 'react-native';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import AccountConnected from './src/pages/Account';
 
 const Tab = createBottomTabNavigator();
 
@@ -99,6 +100,10 @@ class App extends React.Component {
               >
                 {userToken !== null ? (
                   <>
+                    <Tab.Screen
+                      name='Account'
+                      component={AccountConnected}
+                    />
                     <Tab.Screen
                       name='Festival'
                       component={FestivalConnected}
