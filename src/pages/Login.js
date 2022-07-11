@@ -11,83 +11,72 @@ import FormContainer from '../components/ui/FormContainer';
 import SectionTitle from '../components/semantics/SectionTitle';
 import Title from '../components/semantics/Title';
 
-const Login = (props) => {
-  const {
-    register,
-    setValue,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      username: 'admin@hangover.com',
-      password: 'password',
-    },
-  });
+class Login extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const onSubmit = (data) => {
-    if (!props.userErrorLogin) {
-      dispatch(postLogin(data));
+  onSubmit = (data) => {
+    if (!this.props.userErrorLogin) {
+      this.props.postLogin(data);
     } else {
       console.log('erreur login');
     }
   };
 
-  const goToRegister = () => {
-    navigation.navigate('Register');
+  goToRegister = () => {
+    this.props.navigation.navigate('Register');
   };
 
-  return (
-    <Container>
-      <FormContainer>
-        <Title content={'Bienvenue!'} />
-        <Span content="Utilisateur" />
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Utilisateur"
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              secureTextEntry={false}
-            />
-          )}
-          name="username"
-          rules={true}
-        />
-        {errors.username && <Text>Ce champ est requis</Text>}
+    render() {
+    return (
+      <Container>
+        <FormContainer>
+          <Title content={'Bienvenue!'} />
+          <Span content="Utilisateur" />
+          <Controller
+            control={this.props.control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Utilisateur"
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                secureTextEntry={false}
+              />
+            )}
+            name="username"
+            rules={true}
+          />
+          {this.props.errors.username && <Text>Ce champ est requis</Text>}
 
-        <Span content="Mot de passe" />
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.input}
-              placeholder="Mot de passe"
-              onBlur={onBlur}
-              onChangeText={(value) => onChange(value)}
-              value={value}
-              secureTextEntry
-            />
-          )}
-          name="password"
-          rules={true}
-        />
-        {errors.password && <Text>Ce champ est requis</Text>}
+          <Span content="Mot de passe" />
+          <Controller
+            control={this.props.control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={styles.input}
+                placeholder="Mot de passe"
+                onBlur={onBlur}
+                onChangeText={(value) => onChange(value)}
+                value={value}
+                secureTextEntry
+              />
+            )}
+            name="password"
+            rules={true}
+          />
+          {this.props.errors.password && <Text>Ce champ est requis</Text>}
 
-        <View style={styles.buttonSettings}>
-          <SubmitButton title={'Se connecter'} onPress={handleSubmit(onSubmit)} />
-          <SubmitButton title={"S'inscrire"} onPress={goToRegister} />
-        </View>
-      </FormContainer>
-    </Container>
-  );
+          <View style={styles.buttonSettings}>
+            <SubmitButton title={'Se connecter'} onPress={this.props.handleSubmit(this.onSubmit)} />
+            <SubmitButton title={"S'inscrire"} onPress={this.goToRegister} />
+          </View>
+        </FormContainer>
+      </Container>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -106,6 +95,25 @@ const styles = StyleSheet.create({
   }
 });
 
+const LoginHookForm = (props) => {
+  const {register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+    defaultValues: {
+      username: 'admin@hangover.com',
+      password: 'password',
+    },
+  })
+
+  const navigation = useNavigation();
+
+  return <Login 
+    {...props}
+    handleSubmit={handleSubmit}
+    control={control}
+    errors={errors}
+    navigation={navigation}
+  />
+}
+
 const mapStateToProps = (state) => ({
   userLoading: state.user.userLoadingLogin,
   userErrorLogin: state.user.userLoginError,
@@ -116,6 +124,9 @@ const mapActionsToProps = {
   postLogin,
 };
 
-const LoginConnected = connect(mapStateToProps, mapActionsToProps)(Login);
+const LoginConnected = connect(
+  mapStateToProps, 
+  mapActionsToProps
+)(LoginHookForm);
 
 export default LoginConnected;
