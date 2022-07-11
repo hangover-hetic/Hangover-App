@@ -8,19 +8,25 @@ import {
   USER_INSCRIPTION,
   USER_INSCRIPTION_FRIENDS,
   MERCURE_TOKEN,
+  USER_LOGIN_SUCCESS,
+  USER_REGISTER_ERROR,
+  USER_REGISTER_SUCCESS
 } from './userConstants';
 
 const initialState = {
   userToken: null,
   mercureToken: null,
-  userError: '',
+  userLoginError: false,
   userLoadingLogin: true,
   userLoadingRegister: true,
   actualUser: null,
-  userFriends: [],
+  userLoginSuccess: false,
+  userRegisterError: false,
+  useRegisterSuccess: false
+
   userInscription: [],
   userInscriptionFriends: [],
-  
+
 };
 
 const userReducer = (state = initialState, action) => {
@@ -68,7 +74,22 @@ const userReducer = (state = initialState, action) => {
     case USER_LOGIN_ERROR:
       return {
         ...state,
-        userError: action.payload,
+        userLoginError: action.payload,
+      };
+    case USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        userLoginSuccess: action.payload,
+      };
+    case USER_REGISTER_ERROR:
+      return {
+        ...state,
+        userRegisterError: action.payload,
+      };
+    case USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        userRegisterSuccess: action.payload,
       };
     default:
       return state;

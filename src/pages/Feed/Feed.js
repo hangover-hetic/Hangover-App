@@ -11,7 +11,9 @@ import Paragraph from '~/components/semantics/Paragraph';
 import { addActualFestivalPosts } from '~/redux/Festival/festival-actions';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import { ADD_POST_ROUTE } from './routes';
+import SuccessText from '../../components/semantics/SuccessText';
 import { listenMercure } from '../../services/mercure';
+
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -20,6 +22,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       isRefreshing: false,
+      successConnexionMessage : false
     };
   }
 
@@ -33,8 +36,15 @@ class Feed extends React.Component {
     }
   }
 
+  setSuccessMessage = () => (
+    this.setState({successConnexionMessage: true})
+  )
+
   componentDidMount() {
     this.loadData();
+    setTimeout( () => {
+      this.setSuccessMessage();
+   },3000);
   }
 
   async loadData() {
@@ -80,6 +90,7 @@ class Feed extends React.Component {
         <View
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
         >
+
           <Title content="Feed" style={{ width: 100 }} />
           <Ionicons
             name="add-circle"
@@ -93,7 +104,7 @@ class Feed extends React.Component {
             }}
           />
         </View>
-
+        {!this.state.successConnexionMessage && <SuccessText content="Succés"/>}
         {actualFestival === null || actualUser === null ? (
           <Paragraph content="loading" />
         ) : (
@@ -118,10 +129,11 @@ class Feed extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  mercureToken: state.userReducer.mercureToken,
-  posts: state.festivalReducer.actualFeed,
-  actualUser: state.userReducer.actualUser,
-  actualFestival: state.festivalReducer.actualFestival,
+  mercureToken: state.user.mercureToken,
+  posts: state.festival.actualFeed,
+  actualUser: state.user.actualUser,
+  actualFestival: state.festival.actualFestival,
+  successConnexion : state.user.userLoginSuccess
 });
 
 const mapActionsToProps = {

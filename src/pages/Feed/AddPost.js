@@ -112,7 +112,7 @@ class AddPost extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  actualFestivalId: state.festivalReducer.actualFestival.id,
+  actualFestivalId: state.festival.actualFestival.id,
 });
 
 export default connect(mapStateToProps)(AddPost);

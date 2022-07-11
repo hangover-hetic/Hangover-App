@@ -2,20 +2,24 @@ import {
   userLoadingLogin,
   userLoadingRegister,
   userToken,
-  userLogingError,
   actualUser,
   userFriends,
   userInscriptionFriends,
   userInscription,
   mercureToken,
+  userLoginSuccess,
+  userLoginError,
+  userRegisterError,
+  userRegisterSuccess
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
 import Toast from 'react-native-root-toast';
 
 export const postLogin = ({ username, password }) => {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(userLoadingLogin(true));
+    dispatch(userLoginSuccess(false))
     try {
       const { data } = await request.post(`authentication_token`, {
         username: username,
@@ -28,18 +32,18 @@ export const postLogin = ({ username, password }) => {
       dispatch(actualUser(data.user));
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
+
+      dispatch(userLoginSuccess(true))
+
       dispatch(userLoadingLogin(false));
     } catch (e) {
-      let errorMessage = e?.response?.data;
-      console.log(errorMessage);
-      dispatch(userLogingError(errorMessage));
+      dispatch(userLoginError(true))
     }
   };
 };
 
-export const postRegister = (data) => {
-  return async (dispatch) => {
-    dispatch(userLoadingRegister(true));
+export const postRegister = ({ data }) => {
+  return async dispatch => {
     try {
       await request.post(`users`, {
         userName: data.userName,
@@ -49,11 +53,11 @@ export const postRegister = (data) => {
         address: data.address,
         country: data.country,
       });
+    
     } catch (e) {
       console.dir(e);
-    } finally {
-      dispatch(userLoadingRegister(false));
-    }
+      dispatch(userRegisterError(true))
+    } 
   };
 };
 

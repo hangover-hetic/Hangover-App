@@ -121,7 +121,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  userToken: state.userReducer.userToken,
+  userToken: state.user.userToken,
 });
 
 const AppConnected = connect(mapStateToProps)(App);
