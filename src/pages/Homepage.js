@@ -43,7 +43,6 @@ class Homepage extends React.Component {
                 renderItem={CardCarouselFestival}
             />
           </View>
-
           <View>
             <SectionTitle content="Tes amis sont intéressés" />
             <Span content="Aucune suggestion de tes amis" />
