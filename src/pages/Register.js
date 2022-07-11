@@ -3,34 +3,35 @@ import { Text, View, TextInput, StyleSheet } from 'react-native';
 import SubmitButton from '../components/CustomButton';
 import { useForm, Controller } from 'react-hook-form';
 import { postRegister } from '../redux/User/userAsync-actions';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Span from '../components/semantics/Span';
-import Container from '../components/ui/Container';
 import FormContainer from '../components/ui/FormContainer';
 import Title from '../components/semantics/Title';
 import ErrorText from '../components/semantics/ErrorText';
+import ScrollContainer from '../components/ui/ScrollContainer';
 
 class Register extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   onSubmit = (data) => {
     if (!this.props.userErrorRegister) {
+      console.log(data);
       this.props.postRegister(data);
     } else {
-      console.log('erreur login')
+      console.log('erreur login');
     }
   };
 
   render() {
     return (
-      <Container>
+      <ScrollContainer>
         <FormContainer>
           <Title content={'Inscription'} />
 
-          {this.props.userFailRegister && <ErrorText content="Données mauvaises, réessayer"/>}
+          {this.props.userFailRegister && <ErrorText content="Données mauvaises, réessayer" />}
 
           <Span content="Nom" />
           <Controller
@@ -38,7 +39,7 @@ class Register extends React.Component {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.input}
-                placeholder="Username"
+                placeholder="Dupont"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -48,7 +49,7 @@ class Register extends React.Component {
             rules={{ required: true }}
             name="firstName"
           />
-          {this.props.errors.firstName && <Text style={styles.errorText} >Ce champ est requis</Text>}
+          {this.props.errors.firstName && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
           <Span content="Prénom" />
           <Controller
@@ -56,7 +57,7 @@ class Register extends React.Component {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.input}
-                placeholder="password"
+                placeholder="Catherine"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
@@ -74,10 +75,11 @@ class Register extends React.Component {
             render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
                 style={styles.input}
-                placeholder="password"
+                placeholder="catherine.dupont@gmail.com"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
                 value={value}
+                keyboardType="email-address"
                 secureTextEntry={false}
               />
             )}
@@ -104,68 +106,14 @@ class Register extends React.Component {
           />
           {this.props.errors.password && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
-          <Span content="Téléphone" />
-          <Controller
-            control={this.props.control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="phone"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
-              />
-            )}
-            rules={{ required: true }}
-            name="phone"
-          />
-          {this.props.errors.phone && <Text style={styles.errorText}>Ce champ est requis</Text>}
-
-          <Span content="Adresse" />
-          <Controller
-            control={this.props.control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Address"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
-              />
-            )}
-            rules={{ required: true }}
-            name="address"
-          />
-          {this.props.errors.address && <Text style={styles.errorText}>Ce champ est requis</Text>}
-
-          <Span content="Pays" />
-          <Controller
-            control={this.props.control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
-                style={styles.input}
-                placeholder="Country"
-                onBlur={onBlur}
-                onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
-              />
-            )}
-            rules={{ required: true }}
-            name="country"
-          />
-          {this.props.errors.country && <Text style={styles.errorText}>Ce champ est requis</Text>}
-
           <View style={styles.buttonSettings}>
             <SubmitButton title={"S'inscrire"} onPress={this.props.handleSubmit(this.onSubmit)} />
           </View>
         </FormContainer>
-      </Container>
+      </ScrollContainer>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   input: {
@@ -185,38 +133,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   errorText: {
-    color: 'red'
-  }
+    color: 'red',
+  },
 });
 
 const RegisterHookForm = (props) => {
-  const { register, setValue, handleSubmit, control, reset, formState: { errors }} = useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      phone: '',
-      address: '',
-      country: '',
+      firstName: 'Catherine',
+      lastName: 'Mougin',
+      email: 'test@test.com',
+      password: 'pwdret',
+      // phone: '',
+      // address: '',
+      // country: '',
     },
-  })
+  });
 
   const navigation = useNavigation();
 
-  return <Register
-    {...props}
-    handleSubmit={handleSubmit}
-    control={control}
-    errors={errors}
-    navigation={navigation}
-  />
-}
+  return (
+    <Register
+      {...props}
+      handleSubmit={handleSubmit}
+      control={control}
+      errors={errors}
+      navigation={navigation}
+    />
+  );
+};
 
 const mapStateToProps = (state) => ({
   //Connection aux événements du store redux
   loadingRegister: state.user.userLoadingRegister,
-  userErrorRegister : state.user.userRegisterError
+  userErrorRegister: state.user.userRegisterError,
 });
 
 const mapActionsToProps = {

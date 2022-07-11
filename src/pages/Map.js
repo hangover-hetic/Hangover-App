@@ -9,7 +9,7 @@ import Toast from 'react-native-root-toast';
 import { listenMercure, postMercure } from '../services/mercure';
 import { getProfilePicture } from '../services/media';
 import config from '../services/config';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setGhostMode } from '../redux/User/userAsync-actions';
 
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  currentUser: state.userReducer.actualUser,
-  mercureToken: state.userReducer.mercureToken,
+  currentUser: state.user.actualUser,
+  mercureToken: state.user.mercureToken,
 });
 export default connect(mapStateToProps)(Map);
