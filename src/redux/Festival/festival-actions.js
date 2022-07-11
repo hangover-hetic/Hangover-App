@@ -1,12 +1,14 @@
-import {
-  ADD_ACTUAL_FESTIVAL_POSTS,
-  SET_ACTUAL_FESTIVAL,
-  SET_ACTUAL_FESTIVAL_POSTS,
-} from './festival-constants';
+import { ADD_ACTUAL_FESTIVAL_POSTS, SET_ACTUAL_FESTIVAL, SET_ACTUAL_FESTIVAL_POSTS, GET_FESTIVAL } from './festival-constants';
 
 export const setActualFestival = (payload) => {
   return {
     type: SET_ACTUAL_FESTIVAL,
+    payload,
+  };
+};
+export const getFestival = (payload) => {
+  return {
+    type: GET_FESTIVAL,
     payload,
   };
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
+import FriendsConnected from './src/pages/Friends';
+import FestivalConnected from './src/pages/Festival';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
@@ -97,6 +99,14 @@ class App extends React.Component {
               >
                 {userToken !== null ? (
                   <>
+                    <Tab.Screen
+                      name='Festival'
+                      component={FestivalConnected}
+                    />
+                    <Tab.Screen
+                      name='Friends'
+                      component={FriendsConnected}
+                    />
                     <Tab.Screen
                       name='Feed'
                       component={FeedNavigator}

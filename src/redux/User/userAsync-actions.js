@@ -5,6 +5,8 @@ import {
   userLogingError,
   actualUser,
   userFriends,
+  userInscriptionFriends,
+  userInscription,
   mercureToken,
 } from './userActions';
 import request from '../../services/request';
@@ -65,5 +67,53 @@ export const fetchFriends = (id) => {
     } catch (e) {
       console.dir(e);
     }
+  };
+};
+
+export const fetchInscriptionFriends = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: 'inscriptions/friends',
+      });
+      
+      dispatch(userInscriptionFriends(data));
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
+  };
+};
+
+export const postInscriptionFestival = (idFestival, idUser) => {
+  return async (dispatch) => {
+    try {
+      await request.post(`inscriptions`, {
+        festival: `/api/festivals/${idFestival}`,
+        relatedUser: `/api/users/${idUser}`,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
+  };
+};
+export const fetchInscriptionFestival = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: 'inscriptions',
+      });
+      
+      dispatch(userInscription(data));
+    } catch (e) {
+      console.dir(e);
+    }
+    
+    
   };
 };
