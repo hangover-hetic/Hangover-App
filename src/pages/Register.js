@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   //Connection aux événements du store redux
-  loadingRegister: state.userReducer.userLoadingRegister,
+  loadingRegister: state.user.userLoadingRegister,
 });
 
 const mapActionsToProps = {

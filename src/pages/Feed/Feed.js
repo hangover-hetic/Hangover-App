@@ -117,10 +117,10 @@ class Feed extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  mercureToken: state.userReducer.mercureToken,
-  posts: state.festivalReducer.actualFeed,
-  actualUser: state.userReducer.actualUser,
-  actualFestival: state.festivalReducer.actualFestival,
+  mercureToken: state.user.mercureToken,
+  posts: state.festival.actualFeed,
+  actualUser: state.user.actualUser,
+  actualFestival: state.festival.actualFestival,
 });
 
 const mapActionsToProps = {

@@ -107,8 +107,9 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  userLoading: state.userReducer.userLoadingLogin,
-  userErrorLogin: state.userReducer.userError,
+  userLoading: state.user.userLoadingLogin,
+  userErrorLogin: state.user.userLoginError,
+  userSuccessLogin: state
 });
 
 const mapActionsToProps = {
