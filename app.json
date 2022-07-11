@@ -4,6 +4,7 @@
     "slug": "hangover-app-2",
     "version": "1.0.0",
     "icon": "./assets/logo.png",
+    "orientation": "portrait",
     "assetBundlePatterns": [
       "**/*"
     ],

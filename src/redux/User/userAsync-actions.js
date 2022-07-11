@@ -9,6 +9,7 @@ import {
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
+import Toast from 'react-native-root-toast';
 
 export const postLogin = ({ username, password }) => {
   return async (dispatch) => {
@@ -22,9 +23,9 @@ export const postLogin = ({ username, password }) => {
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
 
+      dispatch(actualUser(data.user));
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
-      dispatch(actualUser(data.user));
       dispatch(userLoadingLogin(false));
     } catch (e) {
       let errorMessage = e?.response?.data;
@@ -64,6 +65,19 @@ export const fetchFriends = (id) => {
       dispatch(userFriends(data));
     } catch (e) {
       console.dir(e);
+    }
+  };
+};
+
+export const setGhostMode = (id, value) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request.put(`users/${id}`, {
+        ghostMode: value,
+      });
+      dispatch(actualUser(data));
+    } catch (e) {
+      Toast.show('Erreur requete :' + e);
     }
   };
 };

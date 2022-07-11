@@ -29,7 +29,7 @@ const buildFormBody = (details) => {
   }
 
   return formBody.join('&');
-}
+};
 
 const listenMercureTopics = (topics, token, callback) => {
   const url = buildMercureUrl(config.request.baseMercureUrl, topics);
@@ -43,14 +43,14 @@ const listenMercureTopics = (topics, token, callback) => {
 };
 
 const postMercure = (data) => {
-  const formBody = buildFormBody(data)
+  const formBody = buildFormBody(data);
 
   // envoi de la requete avec l'url du hub mercure, la methode, le header avec le token d'envoi
-  mercure.post('', formBody, {
+  return mercure.post('', formBody, {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
-}
+};
 
 export { mercure, buildMercureUrl, listenMercureTopics, buildFormBody, postMercure };
