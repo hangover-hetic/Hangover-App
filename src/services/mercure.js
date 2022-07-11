@@ -31,7 +31,7 @@ const buildFormBody = (details) => {
   return formBody.join('&');
 };
 
-const listenMercureTopics = (topics, token, callback) => {
+const listenMercure = (topics, token, callback) => {
   const url = buildMercureUrl(config.request.baseMercureUrl, topics);
   const options = {
     headers: {
@@ -53,4 +53,4 @@ const postMercure = (data) => {
   });
 };
 
-export { mercure, buildMercureUrl, listenMercureTopics, buildFormBody, postMercure };
+export { mercure, buildMercureUrl, listenMercure, buildFormBody, postMercure };

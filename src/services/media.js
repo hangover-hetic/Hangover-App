@@ -26,5 +26,7 @@ export const getMediaIri = (mediaId) => {
 };
 
 export const getProfilePicture = (profilePicture) => {
-  return profilePicture?.contentUrl ? getAbsoluteMediaPath(profilePicture.contentUrl) : config.fallbackProfilePicture
-}
+  return profilePicture?.contentUrl
+    ? getAbsoluteMediaPath(profilePicture.contentUrl)
+    : config.fallbackProfilePicture;
+};

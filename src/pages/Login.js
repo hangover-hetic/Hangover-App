@@ -34,7 +34,7 @@ const Login = (props) => {
     if (!props.userErrorLogin) {
       dispatch(postLogin(data));
     } else {
-      Toast.show(this.props.userErrorLogin)
+      Toast.show(this.props.userErrorLogin);
     }
   };
 

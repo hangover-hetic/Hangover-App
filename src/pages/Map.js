@@ -1,12 +1,12 @@
 import { Component, createRef } from 'react';
-import { Image, Pressable, StyleSheet, Text, Vibration, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Vibration, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
 import request from '../services/request';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
-import { listenMercureTopics, mercure, postMercure } from '../services/mercure';
+import { listenMercure, postMercure } from '../services/mercure';
 import { getProfilePicture } from '../services/media';
 import config from '../services/config';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,7 +14,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { setGhostMode } from '../redux/User/userAsync-actions';
 
 const TASK_NAME = 'BACKGROUND_LOC';
-
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
@@ -85,7 +84,7 @@ class Map extends Component {
       this.setState({
         friends,
       });
-      listenMercureTopics(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
+      listenMercure(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
 
       await this.initMap(currentUser);
     } catch (e) {
