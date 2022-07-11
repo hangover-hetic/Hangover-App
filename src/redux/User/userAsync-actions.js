@@ -6,6 +6,8 @@ import {
   actualUser,
   userFriends,
   mercureToken,
+  userLoginSuccess,
+  userLoginError
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
@@ -25,10 +27,11 @@ export const postLogin = ({ username, password }) => {
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
       dispatch(actualUser(data.user));
+      dispatch(userLoginSuccess(true))
       dispatch(userLoadingLogin(false));
     } catch (e) {
+      dispatch(userLoginError(true))
       let errorMessage = e?.response?.data;
-      console.log(errorMessage);
       dispatch(userLogingError(errorMessage));
     }
   };

@@ -6,16 +6,18 @@ import {
   ACTUAL_USER,
   USER_FRIENDS,
   MERCURE_TOKEN,
+  USER_LOGIN_SUCCESS
 } from './userConstants';
 
 const initialState = {
   userToken: null,
   mercureToken: null,
-  userError: '',
+  userLoginError: false,
   userLoadingLogin: true,
   userLoadingRegister: true,
   actualUser: null,
   userFriends: [],
+  userLoginSuccess: false
 };
 
 const userReducer = (state = initialState, action) => {
@@ -53,7 +55,12 @@ const userReducer = (state = initialState, action) => {
     case USER_LOGIN_ERROR:
       return {
         ...state,
-        userError: action.payload,
+        userLoginError: action.payload,
+      };
+    case USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        userLoginSuccess: action.payload,
       };
     default:
       return state;
