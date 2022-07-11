@@ -163,9 +163,9 @@ class Map extends Component {
     this.setMarker(userData, location);
   }
 
-  async sendMyLocation() {
+  async sendMyLocation(force) {
     try {
-      if (this.props.currentUser.ghostMode) return;
+      if (this.props.currentUser.ghostMode && !force) return;
       let location = await Location.getCurrentPositionAsync({});
       this.createMessagePosition(location);
     } catch (e) {
@@ -242,7 +242,7 @@ class Map extends Component {
 
     if (currentUser.ghostMode) {
       dispatch(setGhostMode(currentUser.id, false));
-      this.sendMyLocation().catch((e) => Toast.show('Erreur' + e));
+      this.sendMyLocation(true).catch((e) => Toast.show('Erreur' + e));
       Toast.show('Vous êtes bien réapparus sur les cartes de vos amis');
       return;
     }
