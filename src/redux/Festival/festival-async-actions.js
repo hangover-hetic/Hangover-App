@@ -1,6 +1,12 @@
-import { setActualFestival, setActualFestivalPosts, getFestival } from './festival-actions';
+import {
+  setActualFestival,
+  setActualFestivalPosts,
+  getFestival,
+  getFestivals,
+  setFestivals,
+  setFestival
+} from './festival-actions';
 import request from '../../services/request';
-import dayjs from '../../services/dayjs';
 
 export const fetchFestival = (id, isActual = true) => {
   return async (dispatch) => {
@@ -12,9 +18,22 @@ export const fetchFestival = (id, isActual = true) => {
       if(isActual){
         dispatch(setActualFestival(data));
       } else if(!isActual) {
-        dispatch(getFestival(data));
+        dispatch(setFestival(data));
       }
-      
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const fetchAllFestivals = () => {
+  return async (dispatch) => {
+    try {
+      const {data} = await request({
+        method: 'GET',
+        url: `festivals`,
+      });
+      dispatch(setFestivals(data));
     } catch (e) {
       console.log(e);
     }

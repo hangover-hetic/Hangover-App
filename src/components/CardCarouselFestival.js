@@ -3,9 +3,11 @@ import TextDate from "./semantics/TextDate";
 import InterTitle from "./semantics/InterTitle";
 import Paragraph from "./semantics/Paragraph";
 import React from "react";
-import {appUrl} from "../api/client";
+import config from "../services/config";
+
 
 const CardCarouselFestival= ({item, index}) => {
+    const appUrl = config.request.baseURL
     const imageUrl = item.cover
         ? appUrl.concat(item.cover.contentUrl)
         : 'https://renonvstakeinfo.org/wp-content/uploads/2019/07/nocontentyet.jpg';

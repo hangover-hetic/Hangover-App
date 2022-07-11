@@ -46,7 +46,7 @@ class Festival extends React.Component {
         this.loadData();
     }
 
-    async loadData() {
+    async  loadData() {
         const {fetchFestival, fetchInscriptionFriends, fetchInscriptionFestival} = this.props;
         try {
             await fetchInscriptionFestival();
