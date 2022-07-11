@@ -12,19 +12,13 @@ import SectionTitle from '../components/semantics/SectionTitle';
 import Title from '../components/semantics/Title';
 import ErrorText from '../components/semantics/ErrorText';
 
-
-
 class Login extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   onSubmit = (data) => {
-    if (!this.props.userErrorLogin) {
-      this.props.postLogin(data);
-    } else {
-      Toast.show(this.props.userErrorLogin);
-    }
+    this.props.postLogin(data);
   };
 
   goToRegister = () => {
@@ -37,7 +31,7 @@ class Login extends React.Component {
         <FormContainer>
           <Title content={'Bienvenue!'} />
 
-          {this.props.userErrorLogin && <ErrorText content="Données mauvaises, réessayer"/>}
+          {this.props.userErrorLogin && <ErrorText content="Données mauvaises, réessayer" />}
 
           <Span content="Utilisateur" />
           <Controller
@@ -77,13 +71,12 @@ class Login extends React.Component {
 
           <View style={styles.buttonSettings}>
             <SubmitButton title={'Se connecter'} onPress={this.props.handleSubmit(this.onSubmit)} />
-            <SubmitButton title={"S'inscrire"} onPress={this.goToRegister} />
           </View>
         </FormContainer>
       </Container>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   input: {
@@ -97,42 +90,48 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   errorText: {
-    color: 'red'
-  }
+    color: 'red',
+  },
 });
 
 const LoginHookForm = (props) => {
-  const {register, setValue, handleSubmit, control, reset, formState: { errors } } = useForm({
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       username: 'admin@hangover.com',
       password: 'password',
     },
-  })
+  });
 
   const navigation = useNavigation();
 
-  return <Login 
-    {...props}
-    handleSubmit={handleSubmit}
-    control={control}
-    errors={errors}
-    navigation={navigation}
-  />
-}
+  return (
+    <Login
+      {...props}
+      handleSubmit={handleSubmit}
+      control={control}
+      errors={errors}
+      navigation={navigation}
+    />
+  );
+};
 
 const mapStateToProps = (state) => ({
   userLoading: state.user.userLoadingLogin,
   userErrorLogin: state.user.userLoginError,
-  userSuccessLogin: state.user.userLoginSuccess
+  userSuccessLogin: state.user.userLoginSuccess,
 });
 
 const mapActionsToProps = {
   postLogin,
 };
 
-const LoginConnected = connect(
-  mapStateToProps, 
-  mapActionsToProps
-)(LoginHookForm);
+const LoginConnected = connect(mapStateToProps, mapActionsToProps)(LoginHookForm);
 
 export default LoginConnected;

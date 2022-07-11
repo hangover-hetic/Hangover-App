@@ -10,7 +10,7 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS
+  USER_REGISTER_SUCCESS,
 } from './userConstants';
 
 const initialState = {
@@ -22,11 +22,9 @@ const initialState = {
   actualUser: null,
   userLoginSuccess: false,
   userRegisterError: false,
-  useRegisterSuccess: false
-
+  useRegisterSuccess: false,
   userInscription: [],
   userInscriptionFriends: [],
-
 };
 
 const userReducer = (state = initialState, action) => {

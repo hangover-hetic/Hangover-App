@@ -5,7 +5,7 @@ import ExpoFileSystemStorage from 'redux-persist-expo-filesystem';
 import { persistReducer } from 'redux-persist';
 
 const persistConfig = {
-  key: 'root',
+  key: 'user',
   storage: ExpoFileSystemStorage,
 };
 

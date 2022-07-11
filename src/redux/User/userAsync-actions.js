@@ -10,16 +10,16 @@ import {
   userLoginSuccess,
   userLoginError,
   userRegisterError,
-  userRegisterSuccess
+  userRegisterSuccess,
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
 import Toast from 'react-native-root-toast';
 
 export const postLogin = ({ username, password }) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(userLoadingLogin(true));
-    dispatch(userLoginSuccess(false))
+    dispatch(userLoginSuccess(false));
     try {
       const { data } = await request.post(`authentication_token`, {
         username: username,
@@ -32,32 +32,33 @@ export const postLogin = ({ username, password }) => {
       dispatch(actualUser(data.user));
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
-
-      dispatch(userLoginSuccess(true))
-
+      dispatch(userLoginSuccess(true));
       dispatch(userLoadingLogin(false));
     } catch (e) {
-      dispatch(userLoginError(true))
+      Toast.show('Erreur : ' + e.response.data.detail);
+      console.log(e.response.detail);
+      dispatch(userLoginError(true));
     }
   };
 };
 
-export const postRegister = ({ data }) => {
-  return async dispatch => {
+export const postRegister = ({ firstName, lastName, password, email }) => {
+  return async (dispatch) => {
     try {
-      await request.post(`users`, {
-        userName: data.userName,
-        password: data.password,
-        email: data.email,
-        phone: data.phone,
-        address: data.address,
-        country: data.country,
+      console.log('ci', firstName);
+      console.log(dispatch);
+      const { data } = await request.post(`users`, {
+        firstName: firstName,
+        lastName: lastName,
+        password: password,
+        email: email,
       });
-    
+      Toast.show(`L'utilisateur ${data.firstName}  ${data.lastName} a bien été crée`);
     } catch (e) {
-      console.dir(e);
-      dispatch(userRegisterError(true))
-    } 
+      Toast.show('Erreur inscription : ' + e.response.data.detail);
+      console.log(e.response.data.detail);
+      dispatch(userRegisterError(true));
+    }
   };
 };
 
