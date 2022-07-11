@@ -7,12 +7,13 @@ import { fetchFestival, fetchFestivalPosts } from '~/redux/Festival/festival-asy
 import Title from '~/components/semantics/Title';
 import SectionTitle from '~/components/semantics/SectionTitle';
 import PostContainer from '~/components/feed/PostContainer';
-import { listenMercureTopics } from '~/services/mercure';
 import Paragraph from '~/components/semantics/Paragraph';
 import { addActualFestivalPosts } from '~/redux/Festival/festival-actions';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import { ADD_POST_ROUTE } from './routes';
 import SuccessText from '../../components/semantics/SuccessText';
+import { listenMercure } from '../../services/mercure';
+
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -29,11 +30,7 @@ class Feed extends React.Component {
     if (this.props.actualFestival !== null && !this.mercureInit) {
       const { actualFestival, mercureToken } = this.props;
 
-      listenMercureTopics(
-        [actualFestival.mercureFeedTopics],
-        mercureToken,
-        this.onNewPost.bind(this)
-      );
+      listenMercure([actualFestival.mercureFeedTopics], mercureToken, this.onNewPost.bind(this));
       this.mercureInit = true;
       console.log('mercure init');
     }
@@ -56,7 +53,7 @@ class Feed extends React.Component {
       await fetchFestival(1);
       await fetchFestivalPosts(1);
     } catch (e) {
-      console.error(e);
+      console.error(e.response.data);
     }
   }
 
@@ -93,13 +90,18 @@ class Feed extends React.Component {
         <View
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
         >
-          <Title content="Feed" />
-          
+
+          <Title content="Feed" style={{ width: 100 }} />
           <Ionicons
             name="add-circle"
             color="white"
-            size={30}
+            size={40}
             onPress={this.navigateToAddPost.bind(this)}
+            style={{
+              position: 'absolute',
+              right: 10,
+              top: 10,
+            }}
           />
         </View>
         {!this.state.successConnexionMessage && <SuccessText content="Succés"/>}

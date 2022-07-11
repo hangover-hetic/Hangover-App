@@ -12,6 +12,8 @@ import SectionTitle from '../components/semantics/SectionTitle';
 import Title from '../components/semantics/Title';
 import ErrorText from '../components/semantics/ErrorText';
 
+
+
 class Login extends React.Component {
   constructor(props) {
     super(props)
@@ -21,7 +23,7 @@ class Login extends React.Component {
     if (!this.props.userErrorLogin) {
       this.props.postLogin(data);
     } else {
-      console.log('erreur login');
+      Toast.show(this.props.userErrorLogin);
     }
   };
 

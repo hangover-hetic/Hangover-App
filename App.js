@@ -1,12 +1,14 @@
 import React from 'react';
 import LoginConnected from './src/pages/Login';
 import HomepageConnected from './src/pages/Homepage';
+import FriendsConnected from './src/pages/Friends';
+import FestivalConnected from './src/pages/Festival';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import Map from './src/pages/Map';
 import { connect } from 'react-redux';
-import {  FeedNavigator } from './src/pages/Feed';
+import { FeedNavigator } from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -51,9 +53,7 @@ class App extends React.Component {
         <SafeAreaProvider>
           <StatusBar />
           <RootSiblingParent>
-            <NavigationContainer
-              style={{ backgroundColor: '#202020' }}
-            >
+            <NavigationContainer style={{ backgroundColor: '#202020' }}>
               <Tab.Navigator
                 screenOptions={({ route }) => ({
                   headerShown: false,
@@ -71,19 +71,19 @@ class App extends React.Component {
                     let iconName;
 
                     switch (route.name) {
-                      case 'Feed' :
+                      case 'Feed':
                         iconName = 'albums';
                         break;
-                      case 'Homepage' :
+                      case 'Homepage':
                         iconName = 'home';
                         break;
-                      case 'Map' :
+                      case 'Map':
                         iconName = 'map';
                         break;
-                      case 'Connexion' :
+                      case 'Connexion':
                         iconName = 'person-outline';
                         break;
-                      case 'Inscription' :
+                      case 'Inscription':
                         iconName = 'person-add-outline';
                         break;
                     }
@@ -97,36 +97,22 @@ class App extends React.Component {
               >
                 {userToken !== null ? (
                   <>
-                    <Tab.Screen
-                      name='Feed'
-                      component={FeedNavigator}
-                    />
-                    <Tab.Screen
-                      name='Homepage'
-                      component={HomepageConnected}
-                    />
-                    <Tab.Screen
-                      name='Map'
-                      component={Map}
-                    />
+                    <Tab.Screen name="Festival" component={FestivalConnected} />
+                    <Tab.Screen name="Friends" component={FriendsConnected} />
+                    <Tab.Screen name="Feed" component={FeedNavigator} />
+                    <Tab.Screen name="Homepage" component={HomepageConnected} />
+                    <Tab.Screen name="Map" component={Map} />
                   </>
                 ) : (
                   <>
-                    <Tab.Screen
-                      name='Connexion'
-                      component={LoginConnected}
-                    />
-                    <Tab.Screen
-                      name='Inscription'
-                      component={Register}
-                    />
+                    <Tab.Screen name="Connexion" component={LoginConnected} />
+                    <Tab.Screen name="Inscription" component={Register} />
                   </>
                 )}
               </Tab.Navigator>
             </NavigationContainer>
           </RootSiblingParent>
         </SafeAreaProvider>
-
       );
     } else {
       return null;

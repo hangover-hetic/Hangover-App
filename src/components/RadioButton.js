@@ -3,34 +3,42 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { React, useState } from 'react';
 import { ScrollView, View, Text, Pressable, StyleSheet } from 'react-native';
 
-export default function RadioButton({ data, onSelect }) {
-  const [userOption, setUserOption] = useState(null);
+
+export default function RadioButton({ data, onSelect, bindSelected }) {
+    const [userOption, setUserOption] = useState(onSelect ? data[onSelect-1].value : 'Tous');
+
   return (
-    <ScrollView
-      style={styles.view}
-      contentContainerStyle={{ flexDirection: 'row' }}
-      horizontal={true}
-      showsHorizontalScrollIndicator={false}
-    >
-      {data.map((item, i) => {
+    <ScrollView style={styles.view}
+    contentContainerStyle={{flexDirection:'row'}}
+    horizontal={true}
+    showsHorizontalScrollIndicator={false} >
+        <Pressable
+            style={styles.radioButton}
+            onPress={() => {bindSelected('Tous'), setUserOption('Tous')}}
+            >
+            {/* add style here */}
+            
+            <LinearGradient start={[0, 0.5]}
+                            end={[1, 0.5]}
+                            colors={'Tous' === userOption ? ['#feac5e', '#c779d0', '#4bc0c8'] : ['#858585', '#858585'] }
+                            style={{borderRadius: 25}}>
+                <View style={styles.circleGradient}>
+                <Text style={'Tous' === userOption ? styles.textSelected : styles.textUnselected}>Tous</Text>
+                </View>
+            </LinearGradient>
+            </Pressable>
+    {data.map((item,index) => {
+        
         return (
           <Pressable
             style={styles.radioButton}
-            onPress={() => setUserOption(item.value)}
-            key={'radio-' + i}
-          >
-            {/* add style here */}
-
-            <LinearGradient
-              start={[0, 0.5]}
-              end={[1, 0.5]}
-              colors={
-                item.value === userOption
-                  ? ['#feac5e', '#c779d0', '#4bc0c8']
-                  : ['#858585', '#858585']
-              }
-              style={{ borderRadius: 25 }}
+            key={'radio-'+index}
+            onPress={() => {bindSelected(item.value), setUserOption(item.value)}}
             >
+              <LinearGradient start={[0, 0.5]}
+                            end={[1, 0.5]}
+                            colors={item.value === userOption ? ['#feac5e', '#c779d0', '#4bc0c8'] : ['#858585', '#858585'] }
+                            style={{borderRadius: 25}}>
               <View style={styles.circleGradient}>
                 <Text
                   style={item.value === userOption ? styles.textSelected : styles.textUnselected}

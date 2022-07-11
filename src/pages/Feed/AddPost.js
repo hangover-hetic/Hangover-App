@@ -49,23 +49,22 @@ class AddPost extends Component {
     const { image } = this.state;
     if (!image) return;
     try {
-      const manipResult = await manipulateAsync(
-        image.uri,
-        [],
-        { compress: 0.5, format: SaveFormat.JPEG }
-      );
+      const manipResult = await manipulateAsync(image.uri, [], {
+        compress: 0.5,
+        format: SaveFormat.JPEG,
+      });
       console.log(manipResult);
       const { data: media } = await uploadMedia(manipResult);
       console.log(media);
       if (!media.contentUrl) return;
-      const {actualFestivalId, navigation} = this.props
+      const { actualFestivalId, navigation } = this.props;
       const mediaIri = getMediaIri(media.id);
       await request.post(`/festivals/${actualFestivalId}/posts`, {
-        media : mediaIri
-      })
-      navigation.navigate(FEED_HOME_ROUTE)
+        media: mediaIri,
+      });
+      navigation.navigate(FEED_HOME_ROUTE);
     } catch (e) {
-      Toast.show("Error : " +e.response.data )
+      Toast.show('Error : ' + e.response.data);
     }
   }
 
@@ -73,21 +72,21 @@ class AddPost extends Component {
     const { image } = this.state;
     return (
       <Container>
-        <Title content='Poster' />
+        <Title content="Poster" />
         <View style={{ justifyContent: 'center' }}>
           <Pressable
             onPress={this.pickImage.bind(this)}
             style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
           >
-            <Paragraph content='Pick from gallery' styles={{ marginRight: 10 }} />
-            <Ionicons name='folder' size={50} color='white' />
+            <Paragraph content="Pick from gallery" styles={{ marginRight: 10 }} />
+            <Ionicons name="folder" size={50} color="white" />
           </Pressable>
           <Pressable
             onPress={this.takePicture.bind(this)}
             style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
           >
-            <Paragraph content='Take a picture' styles={{ marginRight: 10 }} />
-            <Ionicons name='camera' size={50} color='white' />
+            <Paragraph content="Take a picture" styles={{ marginRight: 10 }} />
+            <Ionicons name="camera" size={50} color="white" />
           </Pressable>
           {image ? (
             <Image source={{ uri: image.uri }} style={{ width: 300, height: 300 }} />
@@ -104,7 +103,7 @@ class AddPost extends Component {
             }}
             onPress={this.postImage.bind(this)}
           >
-            <Paragraph content='Poster' styles={{ textAlign: 'center' }} />
+            <Paragraph content="Poster" styles={{ textAlign: 'center' }} />
           </Pressable>
         </View>
       </Container>

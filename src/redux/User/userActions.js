@@ -5,6 +5,8 @@ import {
   USER_LOGIN_ERROR,
   ACTUAL_USER,
   USER_FRIENDS,
+  USER_INSCRIPTION_FRIENDS,
+  USER_INSCRIPTION,
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
@@ -35,6 +37,18 @@ export const actualUser = (user) => {
 export const userFriends = (error) => {
   return {
     type: USER_FRIENDS,
+    payload: error,
+  };
+};
+export const userInscriptionFriends = (error) => {
+  return {
+    type: USER_INSCRIPTION_FRIENDS,
+    payload: error,
+  };
+};
+export const userInscription = (error) => {
+  return {
+    type: USER_INSCRIPTION,
     payload: error,
   };
 };
