@@ -6,12 +6,17 @@ import FestivalConnected from './src/pages/Festival';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Map from './src/pages/Map';
 import { connect } from 'react-redux';
-import Feed from './src/pages/Feed';
+import {  FeedNavigator } from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Dimensions } from 'react-native';
+import { RootSiblingParent } from 'react-native-root-siblings';
+
+const Tab = createBottomTabNavigator();
 
 class App extends React.Component {
   state = {
@@ -39,63 +44,89 @@ class App extends React.Component {
 
   render() {
     const { userToken } = this.props;
-    const Stack = createNativeStackNavigator();
+    const windowWidth = Dimensions.get('window').width;
+    const centerNavbarCalcul = (windowWidth - 300) / 2;
 
     // Use the font with the fontFamily property after loading
     if (this.state.fontsLoaded) {
       return (
         <SafeAreaProvider>
-          <StatusBar/>
-          <NavigationContainer>
-            <Stack.Navigator
-              screenOptions={{ headerShown: false }}
+          <StatusBar />
+          <RootSiblingParent>
+            <NavigationContainer
+              style={{ backgroundColor: '#202020' }}
             >
-              {userToken !== null ? (
-                <>
-                <Stack.Screen
-                    name='FestivalConnected'
-                    component={FestivalConnected}
+              <Tab.Navigator
+                screenOptions={({ route }) => ({
+                  headerShown: false,
+                  tabBarStyle: {
+                    position: 'absolute',
+                    left: centerNavbarCalcul,
+                    justifyContent: 'center',
+                    backgroundColor: '#3D3D3D',
+                    height: 60,
+                    width: 300,
+                    marginBottom: 50,
+                    borderRadius: 60,
+                  },
+                  tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
 
-                  />
-                  <Stack.Screen
-                    name='FriendsConnected'
-                    component={FriendsConnected}
+                    switch (route.name) {
+                      case 'Feed' :
+                        iconName = 'albums';
+                        break;
+                      case 'Homepage' :
+                        iconName = 'home';
+                        break;
+                      case 'Map' :
+                        iconName = 'map';
+                        break;
+                      case 'Connexion' :
+                        iconName = 'person-outline';
+                        break;
+                      case 'Inscription' :
+                        iconName = 'person-add-outline';
+                        break;
+                    }
 
-                  />
-                  
-                  
-                  <Stack.Screen
-                    name='HomepageConnected'
-                    component={HomepageConnected}
-
-                  />
-                  
-                  <Stack.Screen
-                    name='Feed'
-                    component={Feed}
-                  />
-
-
-                  <Stack.Screen
-                    name='Map'
-                    component={Map}
-                  />
-                </>
-              ) : (
-                <>
-                  <Stack.Screen
-                    name='LoginConnected'
-                    component={LoginConnected}
-                  />
-                  <Stack.Screen
-                    name='Register'
-                    component={Register}
-
-                  />
-                </>
-              )}
-            </Stack.Navigator>
-          </NavigationContainer>
+                    // You can return any component that you like here!
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                  },
+                  tabBarActiveTintColor: 'tomato',
+                  tabBarInactiveTintColor: 'gray',
+                })}
+              >
+                {userToken !== null ? (
+                  <>
+                    <Tab.Screen
+                      name='Feed'
+                      component={FeedNavigator}
+                    />
+                    <Tab.Screen
+                      name='Homepage'
+                      component={HomepageConnected}
+                    />
+                    <Tab.Screen
+                      name='Map'
+                      component={Map}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Tab.Screen
+                      name='Connexion'
+                      component={LoginConnected}
+                    />
+                    <Tab.Screen
+                      name='Inscription'
+                      component={Register}
+                    />
+                  </>
+                )}
+              </Tab.Navigator>
+            </NavigationContainer>
+          </RootSiblingParent>
         </SafeAreaProvider>
 
       );

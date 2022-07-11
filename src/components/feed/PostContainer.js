@@ -9,7 +9,6 @@ class PostContainer extends React.Component {
   static propTypes = {
     userProfilePicture: PropTypes.string,
     userName: PropTypes.string,
-    festivalName: PropTypes.string,
     postImage: PropTypes.string.isRequired,
     postCreatedAt: PropTypes.string.isRequired,
   };
@@ -19,15 +18,18 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    const { userName, festivalName, userProfilePicture, postImage, postCreatedAt } = this.props;
+    const { userName, userProfilePicture, postImage, postCreatedAt } = this.props;
+    const profilePicture = userProfilePicture
+      ? getAbsoluteMediaPath(userProfilePicture)
+      : 'https://doodleipsum.com/500/avatar-5?bg=ceebff&shape=circle';
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image
-            source={{ uri: getAbsoluteMediaPath(userProfilePicture) }}
+            source={{ uri: profilePicture }}
             style={{ width: 30, height: 30, marginRight: 10, borderRadius: 20, marginBottom: 10 }}
           />
-          <Paragraph content={`${userName} - ${festivalName}`} />
+          <Paragraph content={`${userName}`} />
         </View>
         <Image
           source={{ uri: getAbsoluteMediaPath(postImage) }}

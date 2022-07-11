@@ -28,11 +28,6 @@ export const fetchFestivalPosts = (id) => {
         method: 'GET',
         url: `festivals/${id}/posts`,
       });
-      data = data.sort((a, b) => {
-        if (dayjs(a.createdAt).isAfter(b.createdAt)) return 1;
-        if (dayjs(a.createdAt).isBefore(b.createdAt)) return -1;
-        return 0;
-      });
       dispatch(setActualFestivalPosts(data));
     } catch (e) {
       console.dir(e);

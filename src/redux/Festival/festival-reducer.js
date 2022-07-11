@@ -26,7 +26,7 @@ const festivalReducer = (state = initialState, action) => {
     case ADD_ACTUAL_FESTIVAL_POSTS:
       return {
         ...state,
-        actualFeed:  [...state.actualFeed, action.payload],
+        actualFeed: [action.payload, ...state.actualFeed],
       };
     default:
       return state;
