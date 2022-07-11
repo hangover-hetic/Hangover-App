@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
-import {LocaleConfig, Calendar} from 'react-native-calendars';
+import {LocaleConfig, CalendarList} from 'react-native-calendars';
 import { AntDesign   } from '@expo/vector-icons';
 import dayjs from '../services/dayjs';
+import { Route } from 'react-router-native';
+import FestivalConnected from '../pages/Festival';
 
 export default function CalendarInscription({data}) {
 
@@ -26,45 +28,56 @@ export default function CalendarInscription({data}) {
         today: "Aujourd'hui"
       };
     LocaleConfig.defaultLocale = 'fr';
+
+
+
+
     const colors = ['#feac5e', '#c779d0', '#4bc0c8']
     
-    var dateInscription = {}
+    let dateInscription = {}
     dateInscription[dayjs().format("YYYY-MM-DD")] =  {
         startingDay: true,
         endingDay: true,
         color: '#ff9531'
     };
+    console.log(data);
     data.map((item) => {
         var color = colors[Math.floor(Math.random() * colors.length)]
         dateInscription[dayjs(item.startDate).format("YYYY-MM-DD")] = {
             startingDay: true,
-            color: color
+            color: color,
+            idFestival: item.festival.id
         };
         dateInscription[dayjs(item.endDate).format("YYYY-MM-DD")] = {
             endingDay: true,
-            color: color
+            color: color,
+            idFestival: item.festival.id
         };
         if (item.startDate && item.endDate) {
             let start = dayjs(item.startDate).startOf('day').add(1, 'day');
             const end = dayjs(item.endDate).startOf('day');
             while (end.isAfter(start)) {
-              Object.assign(dateInscription, { [start.format('YYYY-MM-DD')]: { selected: true, color: color } });
+              Object.assign(dateInscription, { [start.format('YYYY-MM-DD')]: { selected: true, color: color, idFestival: item.festival.id } });
               start = start.add(1, 'days');
             }
           }
-        
-        /* dateInscription[`${dayjs(item.startDate).format("YYYY-MM-DD")}`] = {
-            startingDay: true,
-            color:'green'
-        }
-        dateInscription.dayjs(item.endDate).format("YYYY-MM-DD") = {
-            endingDay: true,
-            color:'green'
-        } */
     })
-    console.log(dateInscription);
+    const festivalRedirection = (dayString) => {
+        if(Object.keys(dateInscription).indexOf(dayString) !== -1){
+            console.log(dateInscription[dayString].idFestival);
+        }
+        
+    }
+    
   return (
-    <Calendar
+    <CalendarList
+        horizontal={true}
+        pastScrollRange={50}
+        // Max amount of months allowed to scroll to the future. Default = 50
+        futureScrollRange={50}
+        // Enable or disable scrolling of calendar list
+        pagingEnabled={true}
+        showScrollIndicator={true}
         style={{
             backgroundColor:'#202020'
         }}
@@ -85,15 +98,9 @@ export default function CalendarInscription({data}) {
         markingType={'period'}
         markedDates={dateInscription}
         onDayPress={day => {
-            day.selected =  true
-        }}
-        onDayLongPress={day => {
-            console.log('selected day', day);
+            festivalRedirection(day.dateString);
         }}
         monthFormat={'MMMM yyyy'}
-        onMonthChange={month => {
-            console.log('month changed', month);
-        }}
         renderArrow={direction => <AntDesign name={`arrow${direction}`} size={24} color="white" />}
         hideExtraDays={true}
         disableMonthChange={false}
