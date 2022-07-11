@@ -2,19 +2,21 @@ import {
   userLoadingLogin,
   userLoadingRegister,
   userToken,
-  userLogingError,
   actualUser,
   userFriends,
   mercureToken,
   userLoginSuccess,
-  userLoginError
+  userLoginError,
+  userRegisterError,
+  userRegisterSuccess
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
 
 export const postLogin = ({ username, password }) => {
-  return async (dispatch) => {
+  return async dispatch => {
     dispatch(userLoadingLogin(true));
+    dispatch(userLoginSuccess(false))
     try {
       const { data } = await request.post(`authentication_token`, {
         username: username,
@@ -31,15 +33,12 @@ export const postLogin = ({ username, password }) => {
       dispatch(userLoadingLogin(false));
     } catch (e) {
       dispatch(userLoginError(true))
-      let errorMessage = e?.response?.data;
-      dispatch(userLogingError(errorMessage));
     }
   };
 };
 
-export const postRegister = (data) => {
-  return async (dispatch) => {
-    dispatch(userLoadingRegister(true));
+export const postRegister = ({ data }) => {
+  return async dispatch => {
     try {
       await request.post(`users`, {
         userName: data.userName,
@@ -49,11 +48,11 @@ export const postRegister = (data) => {
         address: data.address,
         country: data.country,
       });
+    
     } catch (e) {
       console.dir(e);
-    } finally {
-      dispatch(userLoadingRegister(false));
-    }
+      dispatch(userRegisterError(true))
+    } 
   };
 };
 

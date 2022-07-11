@@ -6,7 +6,9 @@ import {
   ACTUAL_USER,
   USER_FRIENDS,
   MERCURE_TOKEN,
-  USER_LOGIN_SUCCESS
+  USER_LOGIN_SUCCESS,
+  USER_REGISTER_ERROR,
+  USER_REGISTER_SUCCESS
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -60,7 +62,21 @@ export const userLoginError = (error) => {
 
 export const userLoginSuccess = (success) => {
   return {
+    type: USER_REGISTER_ERROR,
+    payload: success
+  }
+}
+
+export const userRegisterError = (error) => {
+  return {
     type: USER_LOGIN_SUCCESS,
+    payload: error
+  }
+}
+
+export const userRegisterSuccess = (success) => {
+  return {
+    type: USER_REGISTER_SUCCESS,
     payload: success
   }
 }
