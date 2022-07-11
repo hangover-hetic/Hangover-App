@@ -136,7 +136,7 @@ class Map extends Component {
     const userData = message.user;
     console.log('message', message);
     if (message.ask) {
-      // if (userData.id === currentUser.id) return;
+      if (userData.id === currentUser.id) return;
       switch (message.ask) {
         case ASK_LOCATION:
           this.sendMyLocation(currentUser);
@@ -271,13 +271,12 @@ class Map extends Component {
             ref={this.mapViewRef}
             style={styles.map}
             provider={PROVIDER_GOOGLE}
-            region={{
+            initialRegion={{
               latitude: location?.latitude ? location.latitude : 0,
               longitude: location?.longitude ? location.longitude : 0,
               latitudeDelta: 0.09,
               longitudeDelta: 0.035,
             }}
-            showsMyLocationButton
             minZoomLevel={10}
             maxZoomLevel={20}
             customMapStyle={config.mapConfig}
