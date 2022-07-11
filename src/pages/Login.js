@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet, Text } from 'react-native';
 import SubmitButton from '../components/CustomButton';
 import { useForm, Controller } from 'react-hook-form';
 import { postLogin } from '../redux/User/userAsync-actions';
@@ -59,8 +59,10 @@ const Login = (props) => {
             />
           )}
           name="username"
-          rules={{ required: true }}
+          rules={true}
         />
+        {errors.username && <Text>Ce champ est requis</Text>}
+
         <Span content="Mot de passe" />
         <Controller
           control={control}
@@ -71,12 +73,14 @@ const Login = (props) => {
               onBlur={onBlur}
               onChangeText={(value) => onChange(value)}
               value={value}
-              secureTextEntry={true}
+              secureTextEntry
             />
           )}
           name="password"
-          rules={{ required: true }}
+          rules={true}
         />
+        {errors.password && <Text>Ce champ est requis</Text>}
+
         <View style={styles.buttonSettings}>
           <SubmitButton title={'Se connecter'} onPress={handleSubmit(onSubmit)} />
           <SubmitButton title={"S'inscrire"} onPress={goToRegister} />
@@ -97,6 +101,9 @@ const styles = StyleSheet.create({
   buttonSettings: {
     alignItems: 'center',
   },
+  errorsAlert: {
+    color: 'red',
+  }
 });
 
 const mapStateToProps = (state) => ({

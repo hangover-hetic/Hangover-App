@@ -62,6 +62,8 @@ const Register = (props) => {
           name="firstName"
           rules={{ required: true }}
         />
+        {errors.firstName && <Text>Ce champ est requis</Text>}
+
 
         <Span content="Prénom" />
         <Controller
@@ -79,6 +81,8 @@ const Register = (props) => {
           name="lastName"
           rules={{ required: true }}
         />
+        {errors.lastName && <Text>Ce champ est requis</Text>}
+
 
         <Span content="Email" />
         <Controller
@@ -96,6 +100,7 @@ const Register = (props) => {
           name="email"
           rules={{ required: true }}
         />
+        {errors.email && <Text>Ce champ est requis</Text>}
 
         <Span content="Mot de passe" />
         <Controller
@@ -113,6 +118,7 @@ const Register = (props) => {
           name="password"
           rules={{ required: true }}
         />
+        {errors.password && <Text>Ce champ est requis</Text>}
 
         <Span content="Téléphone" />
         <Controller
@@ -130,6 +136,7 @@ const Register = (props) => {
           name="phone"
           rules={{ required: true }}
         />
+        {errors.phone && <Text>Ce champ est requis</Text>}
 
         <Span content="Adresse" />
         <Controller
@@ -147,6 +154,7 @@ const Register = (props) => {
           name="address"
           rules={{ required: true }}
         />
+        {errors.address && <Text>Ce champ est requis</Text>}
 
         <Span content="Pays" />
         <Controller
@@ -164,6 +172,8 @@ const Register = (props) => {
           name="country"
           rules={{ required: true }}
         />
+        {errors.country && <Text>Ce champ est requis</Text>}
+
         <View style={styles.buttonSettings}>
           <SubmitButton title={"S'inscrire"} onPress={handleSubmit(onSubmit)} />
         </View>
