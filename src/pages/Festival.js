@@ -51,7 +51,7 @@ class Festival extends React.Component {
         try {
             await fetchInscriptionFestival();
             await fetchInscriptionFriends();
-            await fetchFestival(2, false);
+            await fetchFestival(3, false);
         } catch (e) {
             console.error(e);
         }

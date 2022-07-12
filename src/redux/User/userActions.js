@@ -10,7 +10,7 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS
+  USER_REGISTER_SUCCESS, USER_LOCATION,
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -94,3 +94,11 @@ export const userRegisterSuccess = (success) => {
     payload: success
   }
 }
+
+export const userLocation = (location) => {
+  return {
+    type: USER_LOCATION,
+    payload: location
+  }
+}
+

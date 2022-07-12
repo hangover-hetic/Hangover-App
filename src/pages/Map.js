@@ -1,5 +1,5 @@
 import { Component, createRef } from 'react';
-import { Image, Pressable, StyleSheet, Vibration, View } from 'react-native';
+import { Image, Pressable, SafeAreaView, StyleSheet, Vibration, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as TaskManager from 'expo-task-manager';
@@ -12,13 +12,18 @@ import config from '../services/config';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setGhostMode } from '../redux/User/userAsync-actions';
+import Paragraph from '../components/semantics/Paragraph';
+import Container from '../components/ui/Container';
 
-const TASK_NAME = 'BACKGROUND_LOC';
+export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
+
 class Map extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,35 +32,23 @@ class Map extends Component {
       friends: [],
       showMap: false,
     };
-    const { currentUser } = this.props;
-    TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
-      if (error) {
-        Toast.show('Erreur : ' + error.message);
-        return;
-      }
-      if (data) {
-        // Extract location coordinates from data
-        const { locations } = data;
 
-        const location = locations[0];
-        if (location) {
-          this.setMarker(currentUser, location, true);
-        }
-      }
-    });
 
     this.mapViewRef = createRef();
   }
 
   componentDidMount() {
+    this._isMounted = true;
     Location.requestForegroundPermissionsAsync().then(({ status }) => {
       if (status !== 'granted') {
         Toast.show('Permission to access location was denied');
         return;
       }
-      this.setState({
-        showMap: true,
-      });
+      if (this._isMounted) {
+        this.setState({
+          showMap: true,
+        });
+      }
     });
 
     this.initAll().catch((e) => {
@@ -63,21 +56,31 @@ class Map extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const { location: newLocation, currentUser } = this.props;
+    if (prevProps.location.latitude !== newLocation.latitude || prevProps.location.longitude !== newLocation.longitude) {
+      this.setMarker(currentUser, newLocation, true);
+      this.createMessagePosition(newLocation);
+    }
+  }
+
   async initAll() {
     try {
+      if (!this._isMounted) return;
       const { currentUser, mercureToken } = this.props;
       const { data: friendships } = await request.get(`friendships/user/${currentUser.id}`);
-
       const topics = [];
       const friends = [];
       for (let friend of friendships) {
-        topics.push(`https://hangoverapp.fr/loc/api/friend/user/${friend.id}`);
-        friends.push({
-          id: friend.id,
-          firstname: friend.firstName,
-          lastname: friend.lastName,
-          profilePicture: getProfilePicture(friend.profilePicture),
-        });
+        if (friend.validated) {
+          topics.push(`https://hangoverapp.fr/loc/api/friend/user/${friend.user.id}`);
+          friends.push({
+            id: friend.user.id,
+            firstname: friend.user.firstName,
+            lastname: friend.user.lastName,
+            profilePicture: getProfilePicture(friend.user.profilePicture),
+          });
+        }
       }
       topics.push(`https://hangoverapp.fr/loc/api/friend/user/${currentUser.id}`);
 
@@ -92,8 +95,8 @@ class Map extends Component {
     }
   }
 
-  setMarker(user, location, isUser) {
-    const { markers } = this.state;
+  setMarker(user, location) {
+    const markers = { ...this.state.markers };
     const { latitude, longitude } = this.getNormalizedLatitude(location);
     markers[user.id] = {
       markerKey: 'friend-marker-' + user.id,
@@ -104,19 +107,19 @@ class Map extends Component {
       longitude,
     };
     this.setState({ markers });
+  }
 
-    if (isUser)
-      this.setState({
-        location: {
-          latitude,
-          longitude,
-        },
-      });
+  getFriendById(id) {
+    const user = this.state.friends[id];
+    if (!user) {
+      console.error(`User ${id} is not one of your friends`);
+      return null;
+    }
+    return user;
   }
 
   deleteMarker(user) {
     const { markers } = this.state;
-    console.log('delete', markers[user.id]);
     delete markers[user.id];
     this.setState({
       markers,
@@ -131,36 +134,53 @@ class Map extends Component {
   }
 
   onFriendLocalisationReceive(response) {
+    if (!this._isMounted) return;
     const { currentUser } = this.props;
     const { message } = JSON.parse(response.data);
-    const userData = message.user;
-    console.log('message', message);
-    if (message.ask) {
-      if (userData.id === currentUser.id) return;
-      switch (message.ask) {
-        case ASK_LOCATION:
-          this.sendMyLocation(currentUser);
-          return;
-          break;
-        case ASK_ACTIVATE_GHOST:
-          console.log('hey');
-          this.deleteMarker(userData);
-          return;
-          break;
-        case ASK_ALERT:
-          Toast.show(`Votre ami ${userData.firstName} ${userData.lastName} à un problème`);
-          Vibration.vibrate();
-        default:
-          break;
+    const { location, user: userId, ask } = message;
+    let user;
+    if (userId !== currentUser.id) {
+      user = this.getFriendById(userId);
+      if (!user) return;
+      if (!this.state.markers[user.id]) {
+        this.onFriendsNewConnection(user);
       }
+
+      if (ask) {
+        let needReturn = false;
+        switch (ask) {
+          case ASK_LOCATION:
+            this.sendMyLocation(currentUser);
+            needReturn = true;
+            break;
+          case ASK_ACTIVATE_GHOST:
+            this.deleteMarker(user.id);
+            needReturn = true;
+            break;
+          case ASK_ALERT:
+            this.onFriendAlert(user);
+            break;
+        }
+        if (needReturn) {
+          return;
+        }
+      }
+    } else {
+      user = currentUser;
     }
-    const { markers } = this.state;
-    const location = message.location;
-    if (!markers[userData.id] && userData.id !== currentUser.id) {
-      Toast.show(`Votre ami ${userData.firstName} ${userData.lastName} vient de se connecter`);
-      Vibration.vibrate();
-    }
-    this.setMarker(userData, location);
+
+    if (location)
+      this.setMarker(user, location);
+  }
+
+  onFriendAlert(friend) {
+    Toast.show(`Votre ami ${friend?.firstName} ${friend?.lastName} a un problème`);
+    Vibration.vibrate();
+  }
+
+  onFriendsNewConnection(friend) {
+    Toast.show(`Votre ami ${friend?.firstName} ${friend?.lastName} vient de se connecter`);
+    Vibration.vibrate();
   }
 
   async sendMyLocation(force) {
@@ -192,6 +212,8 @@ class Map extends Component {
           notificationColor: '#ffffff',
         },
         deferredUpdatesDistance: 5,
+        deferredUpdatesInterval: 1000,
+
       });
     } catch (e) {
       Toast.show('Erreur' + e);
@@ -215,7 +237,7 @@ class Map extends Component {
   getAllFriendLocation() {
     const { currentUser } = this.props;
     this.postUserTopics({
-      user: currentUser,
+      user: currentUser.id,
       ask: ASK_LOCATION,
     });
   }
@@ -224,7 +246,7 @@ class Map extends Component {
   createMessagePosition(location) {
     const { currentUser } = this.props;
     this.postUserTopics({
-      user: currentUser,
+      user: currentUser.id,
       location: this.getNormalizedLatitude(location),
     });
   }
@@ -232,7 +254,7 @@ class Map extends Component {
   activateGhostMode() {
     const { currentUser } = this.props;
     this.postUserTopics({
-      user: currentUser,
+      user: currentUser.id,
       ask: ASK_ACTIVATE_GHOST,
     });
   }
@@ -253,65 +275,75 @@ class Map extends Component {
   }
 
   onPressAlert() {
-    const { currentUser } = this.props;
+    const { currentUser, location } = this.props;
     this.postUserTopics({
-      user: currentUser,
+      user: currentUser.id,
       ask: ASK_ALERT,
-      location: this.getNormalizedLatitude(this.state.location),
+      location: this.getNormalizedLatitude(location),
     });
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
-    const { location, markers, showMap } = this.state;
-    const { currentUser } = this.props;
+    const { markers, showMap } = this.state;
+    const { currentUser, location } = this.props;
     return (
       <View>
-        {showMap && (
-          <MapView
-            ref={this.mapViewRef}
-            style={styles.map}
-            provider={PROVIDER_GOOGLE}
-            initialRegion={{
-              latitude: location?.latitude ? location.latitude : 0,
-              longitude: location?.longitude ? location.longitude : 0,
-              latitudeDelta: 0.09,
-              longitudeDelta: 0.035,
-            }}
-            minZoomLevel={10}
-            maxZoomLevel={20}
-            customMapStyle={config.mapConfig}
-          >
-            {Object.keys(markers).map((key) => {
-              const { latitude, longitude, profilePicture, markerKey } = markers[key];
-              return (
-                <Marker coordinate={{ latitude, longitude }} key={markerKey}>
-                  <Image
-                    source={{ uri: profilePicture }}
-                    style={{ width: 30, height: 30, borderRadius: 50 }}
-                  />
-                </Marker>
-              );
-            })}
-          </MapView>
-        )}
+        {showMap && location.latitude !== 0 ? (
+          <SafeAreaView>
+            <MapView
+              ref={this.mapViewRef}
+              style={styles.map}
+              provider={PROVIDER_GOOGLE}
+              initialRegion={{
+                latitude: location?.latitude ? location.latitude : 0,
+                longitude: location?.longitude ? location.longitude : 0,
+                latitudeDelta: 0.09,
+                longitudeDelta: 0.035,
+              }}
+              minZoomLevel={10}
+              maxZoomLevel={20}
+              customMapStyle={config.mapConfig}
+            >
+              {Object.keys(markers).map((key) => {
+                const { latitude, longitude, profilePicture, firstName, lastName, markerKey } = markers[key];
+                return (
+                  <Marker coordinate={{ latitude, longitude }} key={markerKey}>
+                    <View style={{ alignItems: 'center' }}>
+                      <Paragraph content={`${firstName} ${lastName}`} styles={{ marginBottom: 5 }} />
+                      <Image
+                        source={{ uri: profilePicture }}
+                        style={{ width: 30, height: 30, borderRadius: 50 }}
+                      />
+                    </View>
+                  </Marker>
+                );
+              })}
+            </MapView>
+          </SafeAreaView>
+        ) : <Container><Paragraph content='loading' /></Container>}
+
         {currentUser && (
-          <>
-            <Pressable
-              style={[
-                styles.ghostButton,
-                { backgroundColor: currentUser.ghostMode ? 'green' : 'grey' },
-              ]}
-              onPress={this.onPressGhostMode.bind(this)}
-            >
-              <MaterialCommunityIcons name="ghost" size={30} color="white" />
-            </Pressable>
-            <Pressable
-              style={[styles.ghostButton, { top: 70, backgroundColor: 'orange' }]}
-              onPress={this.onPressAlert.bind(this)}
-            >
-              <Ionicons name="alert" size={30} color="white" />
-            </Pressable>
-          </>
+          <Pressable
+            style={[
+              styles.ghostButton,
+              { backgroundColor: currentUser.ghostMode ? 'green' : 'grey', top: 70 },
+            ]}
+            onPress={this.onPressGhostMode.bind(this)}
+          >
+            <MaterialCommunityIcons name='ghost' size={30} color='white' />
+          </Pressable>)}
+
+        {location.latitude !== 0 && (
+          <Pressable
+            style={[styles.ghostButton, { top: 140, backgroundColor: 'orange' }]}
+            onPress={this.onPressAlert.bind(this)}
+          >
+            <Ionicons name='alert' size={30} color='white' />
+          </Pressable>
         )}
       </View>
     );
@@ -338,5 +370,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   currentUser: state.user.actualUser,
   mercureToken: state.user.mercureToken,
+  location: state.user.userLocation,
 });
 export default connect(mapStateToProps)(Map);

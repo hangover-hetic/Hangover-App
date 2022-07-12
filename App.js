@@ -6,15 +6,19 @@ import FestivalConnected from './src/pages/Festival';
 import Register from './src/pages/Register';
 import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
-import Map from './src/pages/Map';
+import Map, { TASK_NAME } from './src/pages/Map';
 import { connect } from 'react-redux';
 import { FeedNavigator } from './src/pages/Feed';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'react-native';
+import { StatusBar, Vibration } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Dimensions } from 'react-native';
 import { RootSiblingParent } from 'react-native-root-siblings';
+import * as TaskManager from 'expo-task-manager';
+import Toast from 'react-native-root-toast';
+import store from './src/redux/store';
+import { userLocation } from './src/redux/User/userActions';
 
 const Tab = createBottomTabNavigator();
 
@@ -183,3 +187,18 @@ const mapStateToProps = (state) => ({
 const AppConnected = connect(mapStateToProps)(App);
 
 export default AppConnected;
+
+TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
+  if (error) {
+    Toast.show('Erreur : ' + error.message);
+    return;
+  }
+  if (data) {
+    // Extract location coordinates from data
+    const { locations } = data;
+    const location = locations[0];
+    if (location) {
+      store.dispatch(userLocation(location))
+    }
+  }
+});

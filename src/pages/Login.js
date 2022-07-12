@@ -104,7 +104,7 @@ const LoginHookForm = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: 'admin@hangover.com',
+      username: 'alfred.charpentier@petitjean.fr',
       password: 'password',
     },
   });

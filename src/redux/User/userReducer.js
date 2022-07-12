@@ -10,8 +10,9 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS,
+  USER_REGISTER_SUCCESS, USER_LOCATION,
 } from './userConstants';
+import Toast from 'react-native-root-toast';
 
 const initialState = {
   userToken: null,
@@ -25,6 +26,10 @@ const initialState = {
   useRegisterSuccess: false,
   userInscription: [],
   userInscriptionFriends: [],
+  userLocation: {
+    latitude: 0,
+    longitude: 0,
+  },
 };
 
 const userReducer = (state = initialState, action) => {
@@ -88,6 +93,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userRegisterSuccess: action.payload,
+      };
+    case USER_LOCATION:
+      return {
+        ...state,
+        userLocation: { latitude : action.payload.coords.latitude, longitude: action.payload.coords.longitude },
       };
     default:
       return state;
