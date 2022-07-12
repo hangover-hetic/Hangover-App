@@ -8,6 +8,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  Dimensions 
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../redux/User/userAsync-actions';
@@ -19,10 +20,14 @@ import Span from '../components/semantics/Span';
 import WhiteSpan from '../components/semantics/WhiteSpan';
 import { FontAwesome5, AntDesign, Feather } from '@expo/vector-icons';
 import CustomButton from '../components/CustomButton';
+import TabViewFriend from '../components/TabViewFriend';
+import ScrollContainer from '../components/ui/ScrollContainer';
+
 
 class Friends extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       email: '',
       friends: [],
@@ -33,7 +38,7 @@ class Friends extends React.Component {
     this.setState({ email: text });
   };
   async componentDidMount() {
-    console.log(this.props);
+  
     await this.loadData();
   }
 
@@ -45,18 +50,35 @@ class Friends extends React.Component {
       console.error(e);
     }
   }
+
+  deleteInvitation = (data) => {
+    console.log(data)
+    this.loadData();
+  };
+  acceptInvitation = (data) => {
+    console.log(data)
+    this.loadData();
+  };
+
+  
   render() {
     const { actualUser, userFriends } = this.props;
+
     return (
-      <Container>
+      <ScrollContainer>
+      {actualUser === null || userFriends === null || !actualUser || !userFriends ? (
+        <Paragraph content="loading" />
+            
+      ) : (
+        <>
         <Title content="Mes amis" />
         <View>
           <SectionTitle content="Mon pseudonyme" />
-          {actualUser === null ? (
-            <Paragraph content="loading" />
-          ) : (
+          
+             
             <WhiteSpan content={actualUser.email} />
-          )}
+         
+          
         </View>
         <View>
           <SectionTitle content="Ajouter un ami" />
@@ -75,43 +97,12 @@ class Friends extends React.Component {
           <CustomButton title="Ajouter cet amis" />
         </View>
         <View>
-          <SectionTitle content="Liste d'amis" />
-          <SafeAreaView style={styles.container}>
-            {actualUser === null ? (
-              <Paragraph content="loading" />
-            ) : (
-              <FlatList
-                data={userFriends}
-                keyExtractor={(item, index) => String(index)}
-                renderItem={({ item }) => {
-                  return (
-                    <View style={styles.itemList}>
-                      <View style={styles.itemListContent}>
-                        <Image
-                          style={styles.avatar}
-                          source={{
-                            uri: 'https://reactnative.dev/img/tiny_logo.png',
-                          }}
-                        />
-                        <Text style={styles.username}>
-                          @{item.firstName} {item.lastName}
-                        </Text>
-                      </View>
-                      <Feather
-                        style={{ paddingHorizontal: 5 }}
-                        name="map-pin"
-                        size={22}
-                        color="white"
-                      />
-                      <AntDesign name="deleteuser" size={26} color="#ff4848" />
-                    </View>
-                  );
-                }}
-              />
-            )}
-          </SafeAreaView>
+            <TabViewFriend data={userFriends} bindAcceptInvitation={this.acceptInvitation} bindDeletedInvitation={this.deleteInvitation}/>
         </View>
-      </Container>
+        </>
+      )}
+      </ScrollContainer>
+      
     );
   }
 }
