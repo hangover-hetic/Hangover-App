@@ -50,8 +50,8 @@ class Feed extends React.Component {
   async loadData() {
     const { fetchFestival, fetchFestivalPosts } = this.props;
     try {
-      await fetchFestival(1);
-      await fetchFestivalPosts(1);
+      await fetchFestival(3);
+      await fetchFestivalPosts(3);
     } catch (e) {
       console.error(e.response.data);
     }
@@ -103,7 +103,6 @@ class Feed extends React.Component {
             }}
           />
         </View>
-        {!this.state.successConnexionMessage && <SuccessText content="Succés"/>}
         {actualFestival === null || actualUser === null ? (
           <Paragraph content="loading" />
         ) : (
