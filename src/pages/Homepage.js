@@ -9,20 +9,23 @@ import Span from '../components/semantics/Span';
 import CarouselContainer from "../components/ui/CarouselContainer";
 import CardCarouselFestival from "../components/CardCarouselFestival";
 import {
-    fetchAllFestivals
+    fetchAllFestivals,
+    fetchInscriptionFestival
 } from "../redux/Festival/festival-async-actions";
 import Paragraph from "../components/semantics/Paragraph";
+import CalendarInscription from '../components/Calendar';
+import ScrollContainer from '../components/ui/ScrollContainer';
 
 class Homepage extends React.Component {
     constructor(props) {
         super(props);
         this.data = [
             {value: 'Nouveautés'},
-            {value: 'Tous les évènements'},
             {value: 'Prochainement'},
         ];
         this.state = {
             festivals: [],
+            radioTagSelect: 'Tous',
         };
     }
 
@@ -31,24 +34,28 @@ class Homepage extends React.Component {
     }
 
     async loadData() {
-        const {fetchAllFestivals} = this.props;
+        const {fetchAllFestivals, fetchInscriptionFestival} = this.props;
         try {
             await fetchAllFestivals();
+            await fetchInscriptionFestival();
         } catch (e) {
             console.error(e);
         }
     }
+    selectTag = (data) => {
+      this.setState({radioTagSelect: data});
+    };
 
     render() {
-        const {festivals} = this.props;
+        const {festivals, userInscription} = this.props;
 
         return (
-            <Container>
-                {festivals === null || festivals.length === 0 ? (
+            <ScrollContainer noPadding={true}>
+                {festivals === null || festivals.length === 0 || userInscription ===null || userInscription.length === 0? (
                     <Paragraph content="loading"/>
                 ) : (
                     <ScrollView>
-                        <RadioButton data={this.data}/>
+                        <RadioButton data={this.data} bindSelected={this.selectTag}/>
                         <View>
                             <SectionTitle content="Événements"/>
                             <CarouselContainer
@@ -61,9 +68,13 @@ class Homepage extends React.Component {
                             <Span content="Aucune suggestion de tes amis"/>
                             <CustomButton title="Ajouter des amis"/>
                         </View>
+                        <View>
+                            <SectionTitle content="Calendrier"/>
+                            <CalendarInscription  data={userInscription}/>
+                        </View>
                     </ScrollView>
                 )}
-            </Container>
+            </ScrollContainer>
         );
     }
 }
@@ -72,10 +83,12 @@ class Homepage extends React.Component {
 const mapStateToProps = (state) => ({
     festivals: state.festival.festivals,
     userToken: state.user.userToken,
+    userInscription: state.user.userInscription,
 });
 
 const mapActionsToProps = {
     fetchAllFestivals,
+    fetchInscriptionFestival
 };
 const HomepageConnected = connect(mapStateToProps, mapActionsToProps)(Homepage);
 

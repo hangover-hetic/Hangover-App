@@ -98,11 +98,7 @@ class App extends React.Component {
               >
                 {userToken !== null ? (
                   <>
-                    <Tab.Screen
-                      name='Account'
-                      component={AccountConnected}
-                    />
-                    <Tab.Screen
+                  <Tab.Screen
                       name='Festival'
                       component={FestivalConnected}
                       options={{
@@ -111,6 +107,11 @@ class App extends React.Component {
                         ),
                       }}
                     />
+                    <Tab.Screen
+                      name='Account'
+                      component={AccountConnected}
+                    />
+                    
                     <Tab.Screen
                       name="Friends"
                       component={FriendsConnected}

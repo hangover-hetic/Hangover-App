@@ -11,6 +11,8 @@ import { Feather, Ionicons  } from '@expo/vector-icons';
 import { fetchInscriptionFestival } from '../redux/User/userAsync-actions';
 import dayjs from '../services/dayjs';
 import CalendarInscription from '../components/Calendar';
+import CarouselContainer from "../components/ui/CarouselContainer";
+import CardCarouselFestival from "../components/CardCarouselFestival";
 
 class Account extends React.Component {
   constructor(props) {
@@ -37,7 +39,7 @@ async loadData() {
     const { actualUser, userInscription } = this.props;
     
     return (
-      <ScrollContainer>
+      <ScrollContainer noPadding={true}>
         {actualUser === null || !actualUser || userInscription === null || !userInscription ? (<Paragraph content="loading"></Paragraph>) : (
             <>
             <View>
@@ -61,7 +63,11 @@ async loadData() {
             </View>
             <View>
                 <SectionTitle content="Mes évènements"/>
-                
+                <CarouselContainer
+                    items={userInscription}
+                    renderItem={CardCarouselFestival}
+                    userInscription={true}
+                />
             </View>
             <View>
                 <SectionTitle content="Mon calendrier"/>
@@ -86,8 +92,8 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-    actualUser: state.userReducer.actualUser,
-    userInscription: state.userReducer.userInscription,
+    actualUser: state.user.actualUser,
+    userInscription: state.user.userInscription,
 });
 const mapActionsToProps = {
     fetchInscriptionFestival
