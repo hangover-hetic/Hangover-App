@@ -8,7 +8,9 @@ import Container from '../../components/ui/Container';
 import FormContainer from '../../components/ui/FormContainer';
 import { 
   TextInput,
-  Pressable 
+  Pressable,
+  Vibration,
+  Image
 } from 'react-native';
 import SubmitButton from '../../components/CustomButton';
 import { View } from 'react-native';
@@ -18,22 +20,67 @@ import Paragraph from '../../components/semantics/Paragraph';
 import BasicText from '../../components/semantics/BasicText';
 import { connect } from 'react-redux';
 import { updateDataUser } from '../../redux/User/userAsync-actions';
+import * as ImagePicker from 'expo-image-picker';
+import Toast from 'react-native-root-toast';
+import { 
+  getMediaIri, 
+  uploadMedia 
+} from '../../services/media';
 
 class UserUpdate extends React.Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      image: null,
+      message: ''
+    }
+
+    this.onSubmit  = this.onSubmit.bind(this)
     this.pickImage = this.pickImage.bind(this);
   }
 
   async pickImage() {
-    await console.log("bonjour")
-  }
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-  onSubmit = (data) => {
-    console.log(data)
-    console.log(this.props.actualUser.id)
-    this.props.updateDataUser(this.props.actualUser.id, data)
+    if (!result.cancelled) {
+      this.setState({ image: result });
+    }
+    console.log(this.state.image)
+  }
+  
+   async onSubmit(data) {
+    await this.props.updateDataUser(this.props.actualUser.id, data)
+
+    const { image, message } = this.state;
+    console.log(image, message);
+    if (!image) return;
+    try {
+      const manipResult = await manipulateAsync(image.uri, [], {
+        compress: 0.2,
+        format: SaveFormat.JPEG,
+      });
+      const { data: media } = await uploadMedia(manipResult);
+      console.log(media);
+      if (!media.contentUrl) return;
+      const { actualFestivalId, navigation } = this.props;
+      const mediaIri = getMediaIri(media.id);
+      await request.post(`/festivals/${actualFestivalId}/posts`, {
+        media: mediaIri,
+        message: message,
+      });
+      Vibration.vibrate();
+      Toast.show('Votre post est bien posté, il est en attente de modération !');
+      navigation.navigate(FEED_HOME_ROUTE);
+    } catch (e) {
+      Toast.show('Error : ' + e.response.data);
+    }
   }
 
   render() {
