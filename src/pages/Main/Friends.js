@@ -10,15 +10,16 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { fetchFriends } from '../redux/User/userAsync-actions';
-import Container from '../components/ui/ScrollContainer';
-import Title from '../components/semantics/Title';
-import Paragraph from '../components/semantics/Paragraph';
-import SectionTitle from '../components/semantics/SectionTitle';
-import Span from '../components/semantics/Span';
-import WhiteSpan from '../components/semantics/WhiteSpan';
+import { fetchFriends } from '~/redux/User/userAsync-actions';
+import Container from '~/components/ui/ScrollContainer';
+import Title from '~/components/semantics/Title';
+import Paragraph from '~/components/semantics/Paragraph';
+import SectionTitle from '~/components/semantics/SectionTitle';
+import Span from '~/components/semantics/Span';
+import WhiteSpan from '~/components/semantics/WhiteSpan';
 import { FontAwesome5, AntDesign, Feather } from '@expo/vector-icons';
-import CustomButton from '../components/CustomButton';
+import CustomButton from '~/components/CustomButton';
+import LoadingIndicator from '../../components/ui/LoadingIndicator';
 
 class Friends extends React.Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Friends extends React.Component {
   handleEmail = (text) => {
     this.setState({ email: text });
   };
+
   async componentDidMount() {
     console.log(this.props);
     await this.loadData();
@@ -45,6 +47,7 @@ class Friends extends React.Component {
       console.error(e);
     }
   }
+
   render() {
     const { actualUser, userFriends } = this.props;
     return (
@@ -52,11 +55,7 @@ class Friends extends React.Component {
         <Title content="Mes amis" />
         <View>
           <SectionTitle content="Mon pseudonyme" />
-          {actualUser === null ? (
-            <Paragraph content="loading" />
-          ) : (
-            <WhiteSpan content={actualUser.email} />
-          )}
+          {actualUser === null ? <LoadingIndicator /> : <WhiteSpan content={actualUser.email} />}
         </View>
         <View>
           <SectionTitle content="Ajouter un ami" />

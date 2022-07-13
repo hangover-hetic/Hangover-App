@@ -17,7 +17,7 @@ class Title extends React.Component {
     super(props);
   }
 
-  getStyles(){
+  getStyles() {
     return {
       view: {
         height: 50,
@@ -28,11 +28,11 @@ class Title extends React.Component {
         fontFamily: 'Poppins-Bold',
         alignSelf: 'baseline',
       },
-    }
+    };
   }
 
   render() {
-    const styles = this.getStyles()
+    const styles = this.getStyles();
 
     return (
       <MaskedView
@@ -50,6 +50,5 @@ class Title extends React.Component {
     );
   }
 }
-
 
 export default Title;

@@ -2,24 +2,22 @@ import { Component, createRef } from 'react';
 import { Image, Pressable, SafeAreaView, StyleSheet, Vibration, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import * as TaskManager from 'expo-task-manager';
-import request from '../services/request';
+import request from '~/services/request';
 import { connect } from 'react-redux';
 import Toast from 'react-native-root-toast';
-import { listenMercure, postMercure } from '../services/mercure';
-import { getProfilePicture } from '../services/media';
-import config from '../services/config';
+import { listenMercure, postMercure } from '~/services/mercure';
+import { getProfilePicture } from '~/services/media';
+import config from '~/services/config';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { setGhostMode } from '../redux/User/userAsync-actions';
-import Paragraph from '../components/semantics/Paragraph';
-import Container from '../components/ui/Container';
+import { setGhostMode } from '~/redux/User/userAsync-actions';
+import Paragraph from '~/components/semantics/Paragraph';
+import LoadingIndicator from '../../components/ui/LoadingIndicator';
 
 export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
-
 
 class Map extends Component {
   _isMounted = false;
@@ -32,7 +30,6 @@ class Map extends Component {
       friends: [],
       showMap: false,
     };
-
 
     this.mapViewRef = createRef();
   }
@@ -58,7 +55,10 @@ class Map extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { location: newLocation, currentUser } = this.props;
-    if (prevProps.location.latitude !== newLocation.latitude || prevProps.location.longitude !== newLocation.longitude) {
+    if (
+      prevProps.location.latitude !== newLocation.latitude ||
+      prevProps.location.longitude !== newLocation.longitude
+    ) {
       this.setMarker(currentUser, newLocation, true);
       this.createMessagePosition(newLocation);
     }
@@ -169,8 +169,7 @@ class Map extends Component {
       user = currentUser;
     }
 
-    if (location)
-      this.setMarker(user, location);
+    if (location) this.setMarker(user, location);
   }
 
   onFriendAlert(friend) {
@@ -213,7 +212,6 @@ class Map extends Component {
         },
         deferredUpdatesDistance: 5,
         deferredUpdatesInterval: 1000,
-
       });
     } catch (e) {
       Toast.show('Erreur' + e);
@@ -309,11 +307,15 @@ class Map extends Component {
               customMapStyle={config.mapConfig}
             >
               {Object.keys(markers).map((key) => {
-                const { latitude, longitude, profilePicture, firstName, lastName, markerKey } = markers[key];
+                const { latitude, longitude, profilePicture, firstName, lastName, markerKey } =
+                  markers[key];
                 return (
                   <Marker coordinate={{ latitude, longitude }} key={markerKey}>
                     <View style={{ alignItems: 'center' }}>
-                      <Paragraph content={`${firstName} ${lastName}`} styles={{ marginBottom: 5 }} />
+                      <Paragraph
+                        content={`${firstName} ${lastName}`}
+                        styles={{ marginBottom: 5 }}
+                      />
                       <Image
                         source={{ uri: profilePicture }}
                         style={{ width: 30, height: 30, borderRadius: 50 }}
@@ -324,7 +326,9 @@ class Map extends Component {
               })}
             </MapView>
           </SafeAreaView>
-        ) : <Container><Paragraph content='loading' /></Container>}
+        ) : (
+          <LoadingIndicator />
+        )}
 
         {currentUser && (
           <Pressable
@@ -334,15 +338,16 @@ class Map extends Component {
             ]}
             onPress={this.onPressGhostMode.bind(this)}
           >
-            <MaterialCommunityIcons name='ghost' size={30} color='white' />
-          </Pressable>)}
+            <MaterialCommunityIcons name="ghost" size={30} color="white" />
+          </Pressable>
+        )}
 
-        {location.latitude !== 0 && (
+        {currentUser && location.latitude !== 0 && (
           <Pressable
             style={[styles.ghostButton, { top: 140, backgroundColor: 'orange' }]}
             onPress={this.onPressAlert.bind(this)}
           >
-            <Ionicons name='alert' size={30} color='white' />
+            <Ionicons name="alert" size={30} color="white" />
           </Pressable>
         )}
       </View>

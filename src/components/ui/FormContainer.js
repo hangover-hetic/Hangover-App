@@ -13,12 +13,10 @@ class FormContainer extends React.Component {
   getStyle() {
     return {
       form: {
-        backgroundColor: '#232323',
         justifyItems: 'center',
         textAlign: 'center',
         color: '#fff',
         padding: 20,
-        borderRadius: 20,
         // top: '50%',
         // transform: [{translateY: -(this.state.width / 2)}],
       },
