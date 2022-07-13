@@ -1,15 +1,18 @@
 import React from 'react';
-import { Text, View, TextInput, StyleSheet } from 'react-native';
-import SubmitButton from '../components/CustomButton';
+import { Text, View, TextInput, StyleSheet, Pressable } from 'react-native';
+import SubmitButton from '~/components/CustomButton';
 import { useForm, Controller } from 'react-hook-form';
-import { postRegister } from '../redux/User/userAsync-actions';
+import { postRegister } from '~/redux/User/userAsync-actions';
 import { connect } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import Span from '../components/semantics/Span';
-import FormContainer from '../components/ui/FormContainer';
-import Title from '../components/semantics/Title';
-import ErrorText from '../components/semantics/ErrorText';
-import ScrollContainer from '../components/ui/ScrollContainer';
+import Span from '~/components/semantics/Span';
+import FormContainer from '~/components/ui/FormContainer';
+import Title from '~/components/semantics/Title';
+import ErrorText from '~/components/semantics/ErrorText';
+import ScrollContainer from '~/components/ui/ScrollContainer';
+import { LOGIN_ROUTE, REGISTER_ROUTE } from './routes';
+import Input from '../../components/ui/Input';
+import Paragraph from '../../components/semantics/Paragraph';
 
 class Register extends React.Component {
   constructor(props) {
@@ -37,13 +40,12 @@ class Register extends React.Component {
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="Dupont"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
+                defaultValue={value}
               />
             )}
             rules={{ required: true }}
@@ -55,13 +57,12 @@ class Register extends React.Component {
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="Catherine"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={false}
+                defaultValue={value}
               />
             )}
             rules={{ required: true }}
@@ -73,14 +74,13 @@ class Register extends React.Component {
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="catherine.dupont@gmail.com"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
-                value={value}
+                defaultValue={value}
                 keyboardType="email-address"
-                secureTextEntry={false}
               />
             )}
             rules={{ required: true }}
@@ -92,13 +92,13 @@ class Register extends React.Component {
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="password"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry={true}
+                defaultValue={value}
+                secureTextEntry
               />
             )}
             rules={{ required: true }}
@@ -108,6 +108,16 @@ class Register extends React.Component {
 
           <View style={styles.buttonSettings}>
             <SubmitButton title={"S'inscrire"} onPress={this.props.handleSubmit(this.onSubmit)} />
+            <Pressable onPress={() => this.props.navigation.navigate(LOGIN_ROUTE)}>
+              <Paragraph
+                content="Déjà un compte ? Connectez-vous "
+                styles={{
+                  textDecorationLine: 'underline',
+                  marginVertical: 30,
+                  textAlign: 'center',
+                }}
+              />
+            </Pressable>
           </View>
         </FormContainer>
       </ScrollContainer>
@@ -117,17 +127,7 @@ class Register extends React.Component {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
-    width: 300,
-    paddingHorizontal: 5,
-    backgroundColor: 'white',
     marginBottom: 5,
-  },
-  inputContainer: {
-    backgroundColor: '#202020',
-    flex: 1,
-    justifyContent: 'center',
-    alignSelf: 'center',
   },
   buttonSettings: {
     alignItems: 'center',

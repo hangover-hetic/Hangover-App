@@ -4,12 +4,20 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 
 class Container extends React.Component {
+  static propTypes = {
+    styles: PropTypes.object,
+  };
+
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <SafeAreaView style={styles.container}>{this.props.children}</SafeAreaView>;
+    return (
+      <SafeAreaView style={[styles.container, this.props.styles]}>
+        {this.props.children}
+      </SafeAreaView>
+    );
   }
 }
 

@@ -10,7 +10,8 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS, USER_LOCATION,
+  USER_REGISTER_SUCCESS,
+  USER_LOCATION,
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -77,28 +78,27 @@ export const userLoginError = (error) => {
 export const userLoginSuccess = (success) => {
   return {
     type: USER_REGISTER_ERROR,
-    payload: success
-  }
-}
+    payload: success,
+  };
+};
 
 export const userRegisterError = (error) => {
   return {
     type: USER_LOGIN_SUCCESS,
-    payload: error
-  }
-}
+    payload: error,
+  };
+};
 
 export const userRegisterSuccess = (success) => {
   return {
     type: USER_REGISTER_SUCCESS,
-    payload: success
-  }
-}
+    payload: success,
+  };
+};
 
 export const userLocation = (location) => {
   return {
     type: USER_LOCATION,
-    payload: location
-  }
-}
-
+    payload: location,
+  };
+};

@@ -1,17 +1,19 @@
 import { Component } from 'react';
-import Title from '../../components/semantics/Title';
+import Title from '~/components/semantics/Title';
 import * as ImagePicker from 'expo-image-picker';
-import { Button, Image, Pressable, Text, TextInput, Vibration, View } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Paragraph from '../../components/semantics/Paragraph';
-import { getMediaIri, uploadMedia } from '../../services/media';
-import request from '../../services/request';
+import { Image, Pressable, TextInput, Vibration, View } from 'react-native';
+import Paragraph from '~/components/semantics/Paragraph';
+import { getMediaIri, uploadMedia } from '~/services/media';
+import request from '~/services/request';
 import { connect } from 'react-redux';
 import { FEED_HOME_ROUTE } from './routes';
 import Toast from 'react-native-root-toast';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
-import Span from '../../components/semantics/Span';
-import ScrollContainer from '../../components/ui/ScrollContainer';
+import Span from '~/components/semantics/Span';
+import ScrollContainer from '~/components/ui/ScrollContainer';
+import { AntDesign } from '@expo/vector-icons';
+import Input from '~/components/ui/Input';
+import SubmitButton from '../../../components/ui/SubmitButton';
 
 class AddPost extends Component {
   constructor(props) {
@@ -79,53 +81,44 @@ class AddPost extends Component {
     console.log({ canPost });
     return (
       <ScrollContainer>
-        <Title content='Poster' />
-        <View style={{ justifyContent: 'center' }}>
+        <View style={{height: 40}} />
+        <Title content="Poster" />
+        <View style={{ justifyContent: 'center', marginTop : 20 }}>
+          {image ? (
+            <Image source={{ uri: image.uri }} style={{ width: "100%", aspectRatio: 1 }} />
+          ) : (
+            <View style={{ width: "100%", aspectRatio: 1, backgroundColor: '#414141' }} />
+          )}
           <Pressable
             onPress={this.pickImage.bind(this)}
-            style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
+            style={{ flexDirection: 'row', alignItems: 'center', width: 300, marginBottom : 20, marginTop : 20 }}
           >
-            <Paragraph content='Pick from gallery' styles={{ marginRight: 10 }} />
-            <Ionicons name='folder' size={50} color='white' />
+            <Paragraph content="Choisir depuis la galerie" styles={{ marginRight: 10 }} />
+            <AntDesign name="addfolder" size={20} color="#9D9D9D" />
           </Pressable>
           <Pressable
             onPress={this.takePicture.bind(this)}
-            style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
+            style={{ flexDirection: 'row', alignItems: 'center', width: 300, marginBottom : 20 }}
           >
-            <Paragraph content='Take a picture' styles={{ marginRight: 10 }} />
-            <Ionicons name='camera' size={50} color='white' />
+            <Paragraph content="Prendre une photo" styles={{ marginRight: 10 }} />
+            <AntDesign name="plus" size={20} color="#9D9D9D" />
           </Pressable>
-          {image ? (
-            <Image source={{ uri: image.uri }} style={{ width: 300, height: 300 }} />
-          ) : (
-            <View style={{ width: 300, height: 300, backgroundColor: 'grey' }} />
-          )}
-          <Span content='Message' />
-          <TextInput
-            style={{
-              width: 300,
-              paddingHorizontal: 5,
-              backgroundColor: 'white',
-              marginBottom: 5,
-            }}
-            placeholder="J'adore ce festival, vraiment trop top ! xoxo"
-            onChangeText={(value) => this.setState({ message: value })}
-            keyboardType='twitter'
-          />
 
-          <Pressable
-            style={{
-              backgroundColor: canPost ? 'green' : 'grey',
-              color: 'white',
-              marginTop: 10,
-              width: 100,
-              padding: 10,
-            }}
-            disabled={!canPost}
-            onPress={this.postPost.bind(this)}
-          >
-            <Paragraph content='Poster' styles={{ textAlign: 'center' }} />
-          </Pressable>
+          <Span content="Description" style={{marginBottom : 10}} />
+          <Input
+            placeholder="Trop de la bombe ce festival !"
+            keyboardType="twitter"
+            onChangeText={(value) => this.setState({message : value})}
+          />
+          <View style={{alignItems : "center"}}>
+            <SubmitButton
+              title="Partager"
+              onPress={this.postPost.bind(this)}
+              disabled={!canPost}
+              style={{width : 200, marginTop : 20}}
+            />
+          </View>
+
         </View>
       </ScrollContainer>
     );

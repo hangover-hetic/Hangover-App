@@ -1,9 +1,9 @@
 import React from 'react';
-import { baseUrl } from '../api/client';
-import { client } from '../api/client';
-import Paragraph from '../components/semantics/Paragraph';
-import Title from '../components/semantics/Title';
-import Container from '../components/ui/Container';
+import { baseUrl } from '~/api/client';
+import { client } from '~/api/client';
+import Paragraph from '~/components/semantics/Paragraph';
+import Title from '~/components/semantics/Title';
+import Container from '~/components/ui/Container';
 
 class Program extends React.Component {
   constructor(props) {

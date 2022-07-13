@@ -4,7 +4,7 @@ import {
   getFestival,
   getFestivals,
   setFestivals,
-  setFestival
+  setFestival,
 } from './festival-actions';
 import request from '../../services/request';
 
@@ -15,9 +15,9 @@ export const fetchFestival = (id, isActual = true) => {
         method: 'GET',
         url: `festivals/${id}`,
       });
-      if(isActual){
+      if (isActual) {
         dispatch(setActualFestival(data));
-      } else if(!isActual) {
+      } else if (!isActual) {
         dispatch(setFestival(data));
       }
     } catch (e) {
@@ -29,7 +29,7 @@ export const fetchFestival = (id, isActual = true) => {
 export const fetchAllFestivals = () => {
   return async (dispatch) => {
     try {
-      const {data} = await request({
+      const { data } = await request({
         method: 'GET',
         url: `festivals`,
       });

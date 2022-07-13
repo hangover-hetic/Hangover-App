@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Paragraph from '../semantics/Paragraph';
 import { getAbsoluteMediaPath } from '../../services/media';
 import dayjs from '../../services/dayjs';
+import Span from '../semantics/Span';
+import { AntDesign } from '@expo/vector-icons';
 
 class PostContainer extends React.Component {
   static propTypes = {
@@ -11,6 +13,7 @@ class PostContainer extends React.Component {
     userName: PropTypes.string,
     postImage: PropTypes.string.isRequired,
     postCreatedAt: PropTypes.string.isRequired,
+    message: PropTypes.string,
   };
 
   constructor(props) {
@@ -18,7 +21,7 @@ class PostContainer extends React.Component {
   }
 
   render() {
-    const { userName, userProfilePicture, postImage, postCreatedAt } = this.props;
+    const { userName, userProfilePicture, postImage, postCreatedAt, message } = this.props;
     const profilePicture = userProfilePicture
       ? getAbsoluteMediaPath(userProfilePicture)
       : 'https://doodleipsum.com/500/avatar-5?bg=ceebff&shape=circle';
@@ -35,7 +38,11 @@ class PostContainer extends React.Component {
           source={{ uri: getAbsoluteMediaPath(postImage) }}
           style={{ width: '100%', height: 300, marginTop: 10, marginBottom: 10 }}
         />
-        <Paragraph content={dayjs(postCreatedAt).fromNow()} />
+        {message && <Paragraph content={message} />}
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <AntDesign name="clockcircleo" size={15} color="#9D9D9D" />
+          <Span content={dayjs(postCreatedAt).fromNow()} style={{ marginLeft: 6 }} />
+        </View>
       </View>
     );
   }
