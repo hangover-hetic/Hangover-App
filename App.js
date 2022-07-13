@@ -19,6 +19,7 @@ import * as TaskManager from 'expo-task-manager';
 import Toast from 'react-native-root-toast';
 import store from './src/redux/store';
 import { userLocation } from './src/redux/User/userActions';
+import UserUpdateHookForm from './src/pages/User/UserUpdate';
 
 const Tab = createBottomTabNavigator();
 
@@ -71,30 +72,7 @@ class App extends React.Component {
                     marginBottom: 50,
                     borderRadius: 60,
                   },
-                  // tabBarIcon: ({ focused, color, size }) => {
-                  //   let iconName;
-                  //
-                  //   switch (route.name) {
-                  //     case 'Feed':
-                  //       iconName = 'albums';
-                  //       break;
-                  //     case 'Homepage':
-                  //       iconName = 'home';
-                  //       break;
-                  //     case 'Map':
-                  //       iconName = 'map';
-                  //       break;
-                  //     case 'Connexion':
-                  //       iconName = 'person-outline';
-                  //       break;
-                  //     case 'Inscription':
-                  //       iconName = 'person-add-outline';
-                  //       break;
-                  //   }
-                  //
-                  //   // You can return any component that you like here!
-                  //   return <Ionicons name={iconName} size={size} color={color} />;
-                  // },
+                  
                   tabBarActiveTintColor: 'tomato',
                   tabBarInactiveTintColor: 'gray',
                 })}
@@ -143,6 +121,15 @@ class App extends React.Component {
                       options={{
                         tabBarIcon: ({ color, size }) => (
                           <MaterialIcons name="map" color={color} size={size} />
+                        ),
+                      }}
+                    />
+                     <Tab.Screen
+                      name="Paramètres"
+                      component={UserUpdateHookForm}
+                      options={{
+                        tabBarIcon: ({ color, size }) => (
+                          <Ionicons name="settings-outline" color={color} size={size} />
                         ),
                       }}
                     />
