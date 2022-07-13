@@ -17,6 +17,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Paragraph from '../../components/semantics/Paragraph';
 import BasicText from '../../components/semantics/BasicText';
 import { connect } from 'react-redux';
+import { updateDataUser } from '../../redux/User/userAsync-actions';
 
 class UserUpdate extends React.Component {
   constructor(props) {
@@ -25,16 +26,14 @@ class UserUpdate extends React.Component {
     this.pickImage = this.pickImage.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.actualUser.id)
-  }
-
   async pickImage() {
     await console.log("bonjour")
   }
 
   onSubmit = (data) => {
-    console.log()
+    console.log(data)
+    console.log(this.props.actualUser.id)
+    this.props.updateDataUser(this.props.actualUser.id, data)
   }
 
   render() {
@@ -268,10 +267,17 @@ const UserUpdateHookForm = (props) => {
   />
 }
 
+const mapActionsToProps = {
+  updateDataUser
+}
+
 const mapStateToProps = (state) => ({
   actualUser: state.user.actualUser,
 });
 
-const UserUpdateConnected = connect(mapStateToProps)(UserUpdateHookForm);
+const UserUpdateConnected = connect(
+  mapStateToProps, 
+  mapActionsToProps
+)(UserUpdateHookForm);
 
 export default UserUpdateConnected;
