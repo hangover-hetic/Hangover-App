@@ -7,17 +7,17 @@ import {
   acceptFriend,
   searchUsersByEmail,
   createInvitation,
-} from '../redux/User/userAsync-actions';
-import Title from '../components/semantics/Title';
-import Paragraph from '../components/semantics/Paragraph';
-import SectionTitle from '../components/semantics/SectionTitle';
-import WhiteSpan from '../components/semantics/WhiteSpan';
+} from '~/redux/User/userAsync-actions';
+import Title from '~/components/semantics/Title';
+import Paragraph from '~/components/semantics/Paragraph';
+import SectionTitle from '~/components/semantics/SectionTitle';
+import WhiteSpan from '~/components/semantics/WhiteSpan';
 import { FontAwesome5 } from '@expo/vector-icons';
-import CustomButton from '../components/CustomButton';
-import TabViewFriend from '../components/TabViewFriend';
-import ScrollContainer from '../components/ui/ScrollContainer';
+import CustomButton from '~/components/CustomButton';
+import TabViewFriend from '~/components/TabViewFriend';
+import ScrollContainer from '~/components/ui/ScrollContainer';
 import AutocompleteInput from 'react-native-autocomplete-input';
-import { usersSearchEmail as setUserSearchEmail } from '~/redux/User/userActions';
+
 
 class Friends extends React.Component {
   constructor(props) {

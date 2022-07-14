@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import { LocaleConfig, CalendarList } from 'react-native-calendars';
 import { AntDesign } from '@expo/vector-icons';
 import dayjs from '../services/dayjs';
-import { Route } from 'react-router-native';
-import FestivalConnected from '../pages/Festival';
+
+
 
 export default function CalendarInscription({ data }) {
   LocaleConfig.locales['fr'] = {
