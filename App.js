@@ -13,6 +13,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginRegisterNavigator } from './src/pages/LoginRegister';
 import MainNavigator from './src/pages/Main/MainNavigator';
 import { TASK_NAME } from './src/pages/Main/Map';
+import UserUpdateHookForm from './src/pages/User/UserUpdate';
+
 
 const Stack = createNativeStackNavigator();
 
