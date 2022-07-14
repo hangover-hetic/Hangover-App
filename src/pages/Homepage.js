@@ -1,21 +1,20 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import RadioButton from '../../components/RadioButton';
-import CustomButton from '../../components/CustomButton';
-import SectionTitle from '../../components/semantics/SectionTitle';
-import Span from '../../components/semantics/Span';
-import CarouselContainer from '../../components/ui/CarouselContainer';
-import CardCarouselFestival from '../../components/CardCarouselFestival';
+import RadioButton from '../components/RadioButton';
+import CustomButton from '../components/CustomButton';
+import SectionTitle from '../components/semantics/SectionTitle';
+import Container from '../components/ui/Container';
+import Span from '../components/semantics/Span';
+import CarouselContainer from '../components/ui/CarouselContainer';
+import CardCarouselFestival from '../components/CardCarouselFestival';
 import {
   fetchAllFestivals,
-} from '../../redux/Festival/festival-async-actions';
-import {
   fetchInscriptionFestival,
-} from '../../redux/User/userAsync-actions';
-import Paragraph from '../../components/semantics/Paragraph';
-import CalendarInscription from '../../components/Calendar';
-import ScrollContainer from '../../components/ui/ScrollContainer';
+} from '../redux/Festival/festival-async-actions';
+import Paragraph from '../components/semantics/Paragraph';
+import CalendarInscription from '../components/Calendar';
+import ScrollContainer from '../components/ui/ScrollContainer';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -52,7 +51,7 @@ class Homepage extends React.Component {
         {festivals === null ||
         festivals.length === 0 ||
         userInscription === null ||
-        !userInscription ? (
+        userInscription.length === 0 ? (
           <Paragraph content="loading" />
         ) : (
           <ScrollView>

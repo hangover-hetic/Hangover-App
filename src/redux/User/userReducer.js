@@ -11,6 +11,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
   USER_REGISTER_SUCCESS,
+  USERS_SEARCH_EMAIL,
   USER_LOCATION,
 } from './userConstants';
 import Toast from 'react-native-root-toast';
@@ -27,6 +28,7 @@ const initialState = {
   useRegisterSuccess: false,
   userInscription: [],
   userInscriptionFriends: [],
+  usersSearchEmail: [],
   userLocation: {
     latitude: 0,
     longitude: 0,
@@ -54,6 +56,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userFriends: action.payload,
+      };
+    case USERS_SEARCH_EMAIL:
+      return {
+        ...state,
+        usersSearchEmail: action.payload,
       };
     case USER_INSCRIPTION:
       return {
