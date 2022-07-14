@@ -12,6 +12,7 @@ import {
   USER_REGISTER_ERROR,
   USER_REGISTER_SUCCESS,
   USERS_SEARCH_EMAIL,
+  USER_LOCATION,
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -99,5 +100,12 @@ export const userRegisterSuccess = (success) => {
   return {
     type: USER_REGISTER_SUCCESS,
     payload: success,
+  };
+};
+
+export const userLocation = (location) => {
+  return {
+    type: USER_LOCATION,
+    payload: location,
   };
 };

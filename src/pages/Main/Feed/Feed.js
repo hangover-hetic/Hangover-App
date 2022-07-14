@@ -1,18 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { RefreshControl, Vibration, View } from 'react-native';
+import { FlatList, RefreshControl, Vibration, View } from 'react-native';
 import Toast from 'react-native-root-toast';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { fetchFestival, fetchFestivalPosts } from '~/redux/Festival/festival-async-actions';
 import Title from '~/components/semantics/Title';
 import SectionTitle from '~/components/semantics/SectionTitle';
 import PostContainer from '~/components/feed/PostContainer';
-import Paragraph from '~/components/semantics/Paragraph';
 import { addActualFestivalPosts } from '~/redux/Festival/festival-actions';
-import ScrollContainer from '~/components/ui/ScrollContainer';
 import { ADD_POST_ROUTE } from './routes';
-import SuccessText from '../../components/semantics/SuccessText';
-import { listenMercure } from '../../services/mercure';
+import { listenMercure } from '~/services/mercure';
+import Container from '../../../components/ui/Container';
+import LoadingIndicator from '../../../components/ui/LoadingIndicator';
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -47,8 +46,8 @@ class Feed extends React.Component {
   async loadData() {
     const { fetchFestival, fetchFestivalPosts } = this.props;
     try {
-      await fetchFestival(1);
-      await fetchFestivalPosts(1);
+      await fetchFestival(3);
+      await fetchFestivalPosts(3);
     } catch (e) {
       console.error(e.response.data);
     }
@@ -79,7 +78,7 @@ class Feed extends React.Component {
     const { posts, actualUser, actualFestival } = this.props;
     const { isRefreshing } = this.state;
     return (
-      <ScrollContainer
+      <Container
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={this.onRefresh.bind(this)} />
         }
@@ -98,26 +97,27 @@ class Feed extends React.Component {
             }}
           />
         </View>
-        {!this.state.successConnexionMessage && <SuccessText content="Succés" />}
         {actualFestival === null || actualUser === null ? (
-          <Paragraph content="loading" />
+          <LoadingIndicator />
         ) : (
           <>
             <SectionTitle content={actualFestival.name} />
-            {posts.map((post, i) => {
-              return (
+            <FlatList
+              data={posts}
+              renderItem={({ item: post }) => (
                 <PostContainer
-                  userName={`${post.relatedUser.firstName} ${post.relatedUser.lastName}`}
+                  userName={`${post.relatedUser?.firstName} ${post.relatedUser?.lastName}`}
                   userProfilePicture={post.relatedUser?.profilePicture?.contentUrl}
-                  key={'post-' + i + post.createdAt}
-                  postImage={post.media.contentUrl}
+                  key={'post-' + id + post.createdAt}
+                  postImage={post.media?.contentUrl}
                   postCreatedAt={post.createdAt}
+                  message={post.message}
                 />
-              );
-            })}
+              )}
+            />
           </>
         )}
-      </ScrollContainer>
+      </Container>
     );
   }
 }

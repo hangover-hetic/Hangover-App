@@ -1,20 +1,28 @@
 import React from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 
 class SubmitButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
+    style: PropTypes.object,
+  };
 
   render() {
     return (
-      <>
-        <TouchableWithoutFeedback onPress={this.props.onPress}>
-          <View style={styles.container}>
-            <Text style={styles.text}>{this.props.title}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-      </>
+      <TouchableWithoutFeedback onPress={this.props.onPress} disabled={this.props.disabled}>
+        <View
+          style={[
+            styles.container,
+            { backgroundColor: this.props.disabled ? '#9D9D9D' : '#fff' },
+            this.props.style,
+          ]}
+        >
+          <Text style={styles.text}>{this.props.title}</Text>
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -23,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
     marginTop: 10,
-    backgroundColor: '#fff',
+
     borderRadius: 50,
     height: 40,
     justifyContent: 'center',

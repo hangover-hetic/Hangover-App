@@ -1,16 +1,26 @@
 import React, { useEffect } from 'react';
-import { View, TextInput, StyleSheet, Text } from 'react-native';
-import SubmitButton from '../components/CustomButton';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  Pressable,
+} from 'react-native';
+import SubmitButton from '~/components/CustomButton';
 import { useForm, Controller } from 'react-hook-form';
-import { postLogin } from '../redux/User/userAsync-actions';
+import { postLogin } from '~/redux/User/userAsync-actions';
 import { connect, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import Span from '../components/semantics/Span';
-import Container from '../components/ui/Container';
-import FormContainer from '../components/ui/FormContainer';
-import SectionTitle from '../components/semantics/SectionTitle';
-import Title from '../components/semantics/Title';
-import ErrorText from '../components/semantics/ErrorText';
+import Span from '~/components/semantics/Span';
+import Container from '~/components/ui/Container';
+import FormContainer from '~/components/ui/FormContainer';
+import Title from '~/components/semantics/Title';
+import ErrorText from '~/components/semantics/ErrorText';
+import { REGISTER_ROUTE } from './routes';
+import Input from '../../components/ui/Input';
+import WhiteSpan from '../../components/semantics/WhiteSpan';
+import Paragraph from '../../components/semantics/Paragraph';
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,17 +43,17 @@ class Login extends React.Component {
 
           {this.props.userErrorLogin && <ErrorText content="Données mauvaises, réessayer" />}
 
-          <Span content="Utilisateur" />
+          <WhiteSpan content="Utilisateur" />
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="Utilisateur"
                 onBlur={onBlur}
+                defaultValue={value}
                 onChangeText={(value) => onChange(value)}
                 value={value}
-                secureTextEntry={false}
               />
             )}
             name="username"
@@ -51,17 +61,17 @@ class Login extends React.Component {
           />
           {this.props.errors.username && <Text style={styles.errorText}>Ce champ est requis</Text>}
 
-          <Span content="Mot de passe" />
+          <WhiteSpan content="Mot de passe" />
           <Controller
             control={this.props.control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <TextInput
+              <Input
                 style={styles.input}
                 placeholder="Mot de passe"
                 onBlur={onBlur}
                 onChangeText={(value) => onChange(value)}
-                value={value}
-                secureTextEntry
+                defaultValue={value}
+                secureTextEntry={true}
               />
             )}
             name="password"
@@ -72,6 +82,15 @@ class Login extends React.Component {
           <View style={styles.buttonSettings}>
             <SubmitButton title={'Se connecter'} onPress={this.props.handleSubmit(this.onSubmit)} />
           </View>
+          <Pressable
+            onPress={() => this.props.navigation.navigate(REGISTER_ROUTE)}
+            style={{ marginVertical: 10 }}
+          >
+            <Paragraph
+              content="Pas de compte ? Inscrivez-vous"
+              styles={{ textDecorationLine: 'underline', marginVertical: 20, textAlign: 'center' }}
+            />
+          </Pressable>
         </FormContainer>
       </Container>
     );
@@ -80,11 +99,7 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
   input: {
-    height: 40,
-    width: 300,
-    paddingHorizontal: 5,
-    backgroundColor: 'white',
-    marginBottom: 5,
+    marginBottom: 20,
   },
   buttonSettings: {
     alignItems: 'center',
@@ -104,7 +119,7 @@ const LoginHookForm = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: 'admin@hangover.com',
+      username: 'mallet.bertrand@yahoo.fr',
       password: 'password',
     },
   });

@@ -12,25 +12,26 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { connect } from 'react-redux';
-import ScrollContainer from '../components/ui/ScrollContainer';
-import Title from '../components/semantics/Title';
-import Paragraph from '../components/semantics/Paragraph';
-import RadioButton from '../components/RadioButton';
-import WhiteSpan from '../components/semantics/WhiteSpan';
-import FriendsInscriptionList from '../components/FriendsInscriptionList';
-import LineUp from '../components/LineUp';
-import { fetchFestival } from '../redux/Festival/festival-async-actions';
+import ScrollContainer from '~/components/ui/ScrollContainer';
+import Title from '~/components/semantics/Title';
+import Paragraph from '~/components/semantics/Paragraph';
+import RadioButton from '~/components/RadioButton';
+import WhiteSpan from '~/components/semantics/WhiteSpan';
+import FriendsInscriptionList from '~/components/FriendsInscriptionList';
+import LineUp from '~/components/LineUp';
+import { fetchFestival } from '~/redux/Festival/festival-async-actions';
 import {
   fetchInscriptionFriends,
   postInscriptionFestival,
   fetchInscriptionFestival,
-} from '../redux/User/userAsync-actions';
-import dayjs from '../services/dayjs';
-import SectionTitle from '../components/semantics/SectionTitle';
-import Span from '../components/semantics/Span';
+} from '~/redux/User/userAsync-actions';
+import dayjs from '~/services/dayjs';
+import SectionTitle from '~/components/semantics/SectionTitle';
+import Span from '~/components/semantics/Span';
 import MenuDrawer from 'react-native-side-drawer';
 import { Entypo, Feather, FontAwesome5 } from '@expo/vector-icons';
-import TagList from '../components/TagList';
+import TagList from '~/components/TagList';
+import LoadingIndicator from '../../components/ui/LoadingIndicator';
 
 class Festival extends React.Component {
   constructor(props) {
@@ -116,7 +117,7 @@ class Festival extends React.Component {
     return (
       <ScrollContainer noPadding={true}>
         {festival === null || userInscription === null ? (
-          <Paragraph content="loading" />
+          <LoadingIndicator />
         ) : (
           <View>
             <View>

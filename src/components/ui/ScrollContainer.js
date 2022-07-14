@@ -27,7 +27,14 @@ class ScrollContainer extends React.Component {
     const styles = this.getStyles();
     const { refreshControl, children } = this.props;
     return (
-      <ScrollView style={styles.container} refreshControl={refreshControl}>
+      <ScrollView
+        style={styles.container}
+        refreshControl={refreshControl}
+        contentContainerStyle={{
+          paddingTop: 20,
+          paddingBottom: 150,
+        }}
+      >
         {children}
       </ScrollView>
     );

@@ -19,14 +19,13 @@ import Toast from 'react-native-root-toast';
 
 export const postLogin = ({ username, password }) => {
   return async (dispatch) => {
-    dispatch(userLoadingLogin(true));
-    dispatch(userLoginSuccess(false));
     try {
       const { data } = await request.post(`authentication_token`, {
         username: username,
         password: password,
       });
 
+      console.log({ data });
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
 
@@ -36,8 +35,8 @@ export const postLogin = ({ username, password }) => {
       dispatch(userLoginSuccess(true));
       dispatch(userLoadingLogin(false));
     } catch (e) {
-      Toast.show('Erreur : ' + e.response.data.detail);
-      console.log(e.response.detail);
+      Toast.show('Erreur : ' + e?.response?.data?.message);
+      console.log(e.response.data.message);
       dispatch(userLoginError(true));
     }
   };
