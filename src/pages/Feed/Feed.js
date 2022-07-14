@@ -14,7 +14,6 @@ import { ADD_POST_ROUTE } from './routes';
 import SuccessText from '../../components/semantics/SuccessText';
 import { listenMercure } from '../../services/mercure';
 
-
 class Feed extends React.Component {
   mercureInit = false;
 
@@ -22,7 +21,7 @@ class Feed extends React.Component {
     super(props);
     this.state = {
       isRefreshing: false,
-      successConnexionMessage : false
+      successConnexionMessage: false,
     };
   }
 
@@ -36,15 +35,13 @@ class Feed extends React.Component {
     }
   }
 
-  setSuccessMessage = () => (
-    this.setState({successConnexionMessage: true})
-  )
+  setSuccessMessage = () => this.setState({ successConnexionMessage: true });
 
   componentDidMount() {
     this.loadData();
-    setTimeout( () => {
+    setTimeout(() => {
       this.setSuccessMessage();
-   },3000);
+    }, 3000);
   }
 
   async loadData() {
@@ -87,9 +84,7 @@ class Feed extends React.Component {
           <RefreshControl refreshing={isRefreshing} onRefresh={this.onRefresh.bind(this)} />
         }
       >
-        <View
-          style={{display :'flex', flexDirection: 'row', alignItems: 'center' }}
-        >
+        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           <Title width={'90%'} content="Feed" />
           <Ionicons
             name="add-circle"
@@ -103,7 +98,7 @@ class Feed extends React.Component {
             }}
           />
         </View>
-        {!this.state.successConnexionMessage && <SuccessText content="Succés"/>}
+        {!this.state.successConnexionMessage && <SuccessText content="Succés" />}
         {actualFestival === null || actualUser === null ? (
           <Paragraph content="loading" />
         ) : (
@@ -132,7 +127,7 @@ const mapStateToProps = (state) => ({
   posts: state.festival.actualFeed,
   actualUser: state.user.actualUser,
   actualFestival: state.festival.actualFestival,
-  successConnexion : state.user.userLoginSuccess
+  successConnexion: state.user.userLoginSuccess,
 });
 
 const mapActionsToProps = {

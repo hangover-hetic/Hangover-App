@@ -1,10 +1,16 @@
-import { ADD_ACTUAL_FESTIVAL_POSTS, SET_ACTUAL_FESTIVAL, SET_ACTUAL_FESTIVAL_POSTS, SET_FESTIVAL, SET_FESTIVALS } from './festival-constants';
+import {
+  ADD_ACTUAL_FESTIVAL_POSTS,
+  SET_ACTUAL_FESTIVAL,
+  SET_ACTUAL_FESTIVAL_POSTS,
+  SET_FESTIVAL,
+  SET_FESTIVALS,
+} from './festival-constants';
 
 const initialState = {
   actualFestival: null,
   actualFeed: [],
   festival: null,
-  festivals: []
+  festivals: [],
 };
 
 const festivalReducer = (state = initialState, action) => {
@@ -32,8 +38,8 @@ const festivalReducer = (state = initialState, action) => {
     case SET_FESTIVALS:
       return {
         ...state,
-        festivals: action.payload
-      }
+        festivals: action.payload,
+      };
     default:
       return state;
   }

@@ -19,7 +19,7 @@ class ErrorText extends React.Component {
 const styles = StyleSheet.create({
   text: {
     color: '#D8000C',
-    backgroundColor: '#FFBABA'
+    backgroundColor: '#FFBABA',
   },
 });
 

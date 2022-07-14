@@ -11,6 +11,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
   USER_REGISTER_SUCCESS,
+  USERS_SEARCH_EMAIL,
 } from './userConstants';
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   useRegisterSuccess: false,
   userInscription: [],
   userInscriptionFriends: [],
+  usersSearchEmail: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -48,6 +50,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userFriends: action.payload,
+      };
+    case USERS_SEARCH_EMAIL:
+      return {
+        ...state,
+        usersSearchEmail: action.payload,
       };
     case USER_INSCRIPTION:
       return {
