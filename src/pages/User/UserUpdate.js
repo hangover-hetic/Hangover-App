@@ -10,8 +10,7 @@ import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
 import { 
   TextInput,
   Pressable,
-  Vibration,
-  Image
+  Vibration
 } from 'react-native';
 import SubmitButton from '../../components/CustomButton';
 import { View } from 'react-native';
@@ -69,16 +68,15 @@ class UserUpdate extends React.Component {
       const { actualFestivalId, navigation } = this.props;
       const mediaIri = getMediaIri(media.id);
     
-      const dataWithImage = {...data,profilePicture: mediaIri}
+      const dataWithImage = {...data, profilePicture: mediaIri}
 
       await this.props.updateDataUser(this.props.actualUser.id, dataWithImage)
 
       Vibration.vibrate();
       Toast.show('Votre post est bien posté, il est en attente de modération !');
-      navigation.navigate(FEED_HOME_ROUTE);
 
     } catch (e) {
-      Toast.show('Error : ' + e.response.data);
+      Toast.show('Error : ' + e);
     }
   }
 

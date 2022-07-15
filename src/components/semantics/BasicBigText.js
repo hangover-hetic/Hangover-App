@@ -25,4 +25,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BasicBigText;
+export default BasicBigText
+
