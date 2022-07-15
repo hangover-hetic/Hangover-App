@@ -12,7 +12,6 @@ import {
   USER_REGISTER_ERROR,
   USER_REGISTER_SUCCESS, 
   USER_LOCATION,
-  USER_UPDATE_USER
 } from './userConstants';
 
 const initialState = {
@@ -103,11 +102,6 @@ const userReducer = (state = initialState, action) => {
           latitude: action.payload.coords.latitude,
           longitude: action.payload.coords.longitude,
         },
-      };
-    case USER_UPDATE_USER:
-      return {
-        ...state,
-        userUpdateError: action.payload,
       };
     default:
       return state;
