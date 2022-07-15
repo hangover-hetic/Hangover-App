@@ -87,7 +87,7 @@ class Friends extends React.Component {
   async updateSearchEmail(val) {
     const { searchUsersByEmail } = this.props;
 
-    if (searchUsersByEmail && this.props && val.length >= 3) {
+    if (searchUsersByEmail && this.props && val.length >= 1) {
       try {
         this.setState({ filteredEmail: await searchUsersByEmail(val) });
       } catch (e) {
@@ -106,12 +106,12 @@ class Friends extends React.Component {
         ) : (
           <>
             <Title content="Mes amis" />
-            <View>
+            <View style={styles.view}>
               <SectionTitle content="Mon pseudonyme" />
 
               <WhiteSpan content={actualUser.email} />
             </View>
-            <View>
+            <View style={styles.view}>
               <SectionTitle content="Ajouter un ami" />
 
               <View style={styles.searchSection}>
@@ -190,6 +190,9 @@ class Friends extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  view:{
+    paddingTop:25
+  },
   searchSection: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -151,6 +151,19 @@ export const postInscriptionFestival = (idFestival, idUser) => {
     }
   };
 };
+export const deleteInscriptionFestival = (id) => {
+  return async (dispatch) => {
+    try {
+      await request({
+        method: 'DELETE',
+        url: `inscriptions/${id}`,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
+
 export const fetchInscriptionFestival = () => {
   return async (dispatch) => {
     try {

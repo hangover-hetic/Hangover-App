@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import RadioButton from '../components/RadioButton';
 import CustomButton from '../components/CustomButton';
 import SectionTitle from '../components/semantics/SectionTitle';
-import Container from '../components/ui/Container';
 import Span from '../components/semantics/Span';
 import CarouselContainer from '../components/ui/CarouselContainer';
 import CardCarouselFestival from '../components/CardCarouselFestival';

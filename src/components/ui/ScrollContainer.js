@@ -1,6 +1,8 @@
 import React from 'react';
 import { Platform, ScrollView } from 'react-native';
 import PropTypes from 'prop-types';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
 
 class ScrollContainer extends React.Component {
   static propTypes = {
@@ -28,11 +30,11 @@ class ScrollContainer extends React.Component {
     const { refreshControl, children } = this.props;
     return (
       <ScrollView
-        style={styles.container}
+        style={[styles.container, this.props.style]}
         refreshControl={refreshControl}
         contentContainerStyle={{
           paddingTop: 20,
-          paddingBottom: 150,
+          paddingBottom: 105,
         }}
       >
         {children}

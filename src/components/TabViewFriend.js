@@ -36,7 +36,7 @@ export default function TabViewExample({ data, bindAcceptInvitation, bindDeleted
                   <Image
                     style={styles.avatar}
                     source={{
-                      uri: getAbsoluteMediaPath(friendship.user.profilePicture),
+                      uri: getAbsoluteMediaPath(friendship.user.profilePicture.contentUrl),
                     }}
                   />
                 ) : (
@@ -74,7 +74,7 @@ export default function TabViewExample({ data, bindAcceptInvitation, bindDeleted
                   <Image
                     style={styles.avatar}
                     source={{
-                      uri: getAbsoluteMediaPath(friendship.user.profilePicture),
+                      uri: getAbsoluteMediaPath(friendship.user.profilePicture.contentUrl),
                     }}
                   />
                 ) : (

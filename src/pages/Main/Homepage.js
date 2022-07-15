@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import RadioButton from '../../components/RadioButton';
 import CustomButton from '../../components/CustomButton';
@@ -12,15 +12,17 @@ import {
 } from '../../redux/Festival/festival-async-actions';
 import {
   fetchInscriptionFestival,
+  fetchInscriptionFriends
 } from '../../redux/User/userAsync-actions';
 import Paragraph from '../../components/semantics/Paragraph';
 import CalendarInscription from '../../components/Calendar';
 import ScrollContainer from '../../components/ui/ScrollContainer';
+import dayjs from '~/services/dayjs';
 
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
-    this.data = [{ value: 'Nouveautés' }, { value: 'Prochainement' }];
+    this.data = [ { value: 'Prochainement' }];
     this.state = {
       festivals: [],
       radioTagSelect: 'Tous',
@@ -32,10 +34,11 @@ class Homepage extends React.Component {
   }
 
   async loadData() {
-    const { fetchAllFestivals, fetchInscriptionFestival } = this.props;
+    const { fetchAllFestivals, fetchInscriptionFestival, fetchInscriptionFriends } = this.props;
     try {
       await fetchAllFestivals();
       await fetchInscriptionFestival();
+      await fetchInscriptionFriends();
     } catch (e) {
       console.error(e);
     }
@@ -45,10 +48,11 @@ class Homepage extends React.Component {
   };
 
   render() {
-    const { festivals, userInscription } = this.props;
-
+    const { festivals, userInscription, friendsInscription } = this.props;
+    const { radioTagSelect } = this.state;
+    
     return (
-      <ScrollContainer noPadding={true}>
+      <ScrollContainer>
         {festivals === null ||
         festivals.length === 0 ||
         userInscription === null ||
@@ -56,17 +60,28 @@ class Homepage extends React.Component {
           <Paragraph content="loading" />
         ) : (
           <ScrollView>
+            
+            <View style={styles.view}>
             <RadioButton data={this.data} bindSelected={this.selectTag} />
-            <View>
               <SectionTitle content="Événements" />
-              <CarouselContainer items={festivals} renderItem={CardCarouselFestival} />
+              <CarouselContainer items={radioTagSelect==='Tous' ? festivals.filter((festival) => dayjs(festival.startDate) >= dayjs()) : festivals.filter((festival) => dayjs(festival.startDate) >= dayjs() && dayjs(festival.startDate) <= dayjs().add(2,'month'))} renderItem={CardCarouselFestival} />
             </View>
-            <View>
+            <View style={styles.view}>
               <SectionTitle content="Tes amis sont intéressés" />
-              <Span content="Aucune suggestion de tes amis" />
+              { friendsInscription === [] ? (
+              <Span content="Aucune suggestion de tes amis" />) 
+              : (
+              <CarouselContainer
+                items={friendsInscription}
+                renderItem={CardCarouselFestival}
+                userInscription={true}
+              />
+              )}
+              
+              
               <CustomButton title="Ajouter des amis" />
             </View>
-            <View>
+            <View style={styles.view}>
               <SectionTitle content="Calendrier" />
               <CalendarInscription data={userInscription} />
             </View>
@@ -77,15 +92,23 @@ class Homepage extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  view:{
+    marginTop: 25
+  }
+})
+
 const mapStateToProps = (state) => ({
   festivals: state.festival.festivals,
   userToken: state.user.userToken,
   userInscription: state.user.userInscription,
+  friendsInscription: state.user.userInscriptionFriends,
 });
 
 const mapActionsToProps = {
   fetchAllFestivals,
   fetchInscriptionFestival,
+  fetchInscriptionFriends
 };
 const HomepageConnected = connect(mapStateToProps, mapActionsToProps)(Homepage);
 
