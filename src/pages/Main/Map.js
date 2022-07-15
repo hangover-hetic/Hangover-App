@@ -377,4 +377,7 @@ const mapStateToProps = (state) => ({
   mercureToken: state.user.mercureToken,
   location: state.user.userLocation,
 });
-export default connect(mapStateToProps)(Map);
+
+const MapConnected = connect(mapStateToProps)(Map);
+
+export default MapConnected;
