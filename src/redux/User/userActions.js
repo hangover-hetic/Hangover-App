@@ -106,6 +106,7 @@ export const userRegisterSuccess = (success) => {
 export const userLocation = (location) => {
   return {
     type: USER_LOCATION,
-    payload: location,
-  };
-};
+    payload: location
+  }
+}
+

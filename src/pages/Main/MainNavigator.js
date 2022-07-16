@@ -6,9 +6,10 @@ import Friends from './Friends';
 import { FeedNavigator } from './Feed';
 import Homepage from './Homepage';
 import Map from './Map';
-import { FEED_ROUTE, FESTIVAL_ROUTE, FRIENDS_ROUTE, HOME_ROUTE, MAP_ROUTE } from './routes';
+import { FEED_ROUTE, FESTIVAL_ROUTE, FRIENDS_ROUTE, HOME_ROUTE, MAP_ROUTE, SETTINGS_ROUTE } from './routes';
 import { Dimensions } from 'react-native';
 import TabBarIcon from '~/components/TabBarIcon';
+import UserUpdateConnected from '../User/UserUpdate';
 
 const Tab = createBottomTabNavigator();
 
@@ -85,6 +86,15 @@ class LoginRegisterNavigator extends Component {
             ),
           }}
         />
+        <Tab.Screen
+        name={SETTINGS_ROUTE}
+        component={UserUpdateConnected}
+        options={{
+          tabBarIcon: ({ focused, size, color }) => (
+            <TabBarIcon name="settings" size={size} active={focused} color={color} />
+          ),
+        }}
+      />
       </Tab.Navigator>
     );
   }

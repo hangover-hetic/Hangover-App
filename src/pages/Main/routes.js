@@ -4,3 +4,4 @@ export const HOME_ROUTE = 'Home';
 export const MAP_ROUTE = 'Map';
 export const PROGRAM_ROUTE = 'Program';
 export const FESTIVAL_ROUTE = 'Festival';
+export const SETTINGS_ROUTE = 'Settings'
