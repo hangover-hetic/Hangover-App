@@ -12,6 +12,7 @@ import { ADD_POST_ROUTE } from './routes';
 import { listenMercure } from '~/services/mercure';
 import Container from '../../../components/ui/Container';
 import LoadingIndicator from '../../../components/ui/LoadingIndicator';
+import { getProfilePicture } from '../../../services/media';
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -107,7 +108,7 @@ class Feed extends React.Component {
               renderItem={({ item: post, id }) => (
                 <PostContainer
                   userName={`${post.relatedUser?.firstName} ${post.relatedUser?.lastName}`}
-                  userProfilePicture={post.relatedUser?.profilePicture?.contentUrl}
+                  userProfilePicture={getProfilePicture(post.relatedUser?.profilePicture)}
                   key={'post-' + id + post.createdAt}
                   postImage={post.media?.contentUrl}
                   postCreatedAt={post.createdAt}

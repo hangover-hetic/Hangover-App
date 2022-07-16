@@ -28,6 +28,10 @@ export const postLogin = ({ username, password }) => {
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
 
+      if (!data.user || !data.token) {
+        Toast.show('Erreur serveur');
+        return;
+      }
       dispatch(actualUser(data.user));
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));

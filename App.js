@@ -14,11 +14,10 @@ import { LoginRegisterNavigator } from './src/pages/LoginRegister';
 import MainNavigator from './src/pages/Main/MainNavigator';
 import { TASK_NAME } from './src/pages/Main/Map';
 
-
 const Stack = createNativeStackNavigator();
 
-export const LOGIN_REGISTER_ROUTE = "LoginRegister"
-export const MAIN_ROUTE = "Main"
+export const LOGIN_REGISTER_ROUTE = 'LoginRegister';
+export const MAIN_ROUTE = 'Main';
 
 class App extends React.Component {
   state = {
@@ -60,18 +59,11 @@ class App extends React.Component {
                 }}
               >
                 {userToken !== null ? (
-                  <Stack.Screen
-                    name={MAIN_ROUTE}
-                    component={MainNavigator}
-                  />
+                  <Stack.Screen name={MAIN_ROUTE} component={MainNavigator} />
                 ) : (
-                  <Stack.Screen
-                    name={LOGIN_REGISTER_ROUTE}
-                    component={LoginRegisterNavigator}
-                  />
+                  <Stack.Screen name={LOGIN_REGISTER_ROUTE} component={LoginRegisterNavigator} />
                 )}
               </Stack.Navigator>
-
             </NavigationContainer>
           </RootSiblingParent>
         </SafeAreaProvider>
@@ -97,6 +89,7 @@ TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
     // Extract location coordinates from data
     const { locations } = data;
     const location = locations[0];
+
     if (location) {
       store.dispatch(userLocation(location));
     }
@@ -104,5 +97,3 @@ TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
 });
 
 export default AppConnected;
-
-

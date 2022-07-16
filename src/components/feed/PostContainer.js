@@ -22,14 +22,11 @@ class PostContainer extends React.Component {
 
   render() {
     const { userName, userProfilePicture, postImage, postCreatedAt, message } = this.props;
-    const profilePicture = userProfilePicture
-      ? getAbsoluteMediaPath(userProfilePicture)
-      : 'https://doodleipsum.com/500/avatar-5?bg=ceebff&shape=circle';
     return (
       <View style={styles.container}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <Image
-            source={{ uri: profilePicture }}
+            source={{ uri: userProfilePicture }}
             style={{ width: 30, height: 30, marginRight: 10, borderRadius: 20, marginBottom: 10 }}
           />
           <Paragraph content={`${userName}`} />
