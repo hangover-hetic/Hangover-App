@@ -104,7 +104,7 @@ class Feed extends React.Component {
             <SectionTitle content={actualFestival.name} />
             <FlatList
               data={posts}
-              renderItem={({ item: post,id }) => (
+              renderItem={({ item: post, id }) => (
                 <PostContainer
                   userName={`${post.relatedUser?.firstName} ${post.relatedUser?.lastName}`}
                   userProfilePicture={post.relatedUser?.profilePicture?.contentUrl}

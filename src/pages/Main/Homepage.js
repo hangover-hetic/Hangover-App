@@ -7,12 +7,10 @@ import SectionTitle from '../../components/semantics/SectionTitle';
 import Span from '../../components/semantics/Span';
 import CarouselContainer from '../../components/ui/CarouselContainer';
 import CardCarouselFestival from '../../components/CardCarouselFestival';
-import {
-  fetchAllFestivals,
-} from '../../redux/Festival/festival-async-actions';
+import { fetchAllFestivals } from '../../redux/Festival/festival-async-actions';
 import {
   fetchInscriptionFestival,
-  fetchInscriptionFriends
+  fetchInscriptionFriends,
 } from '../../redux/User/userAsync-actions';
 import Paragraph from '../../components/semantics/Paragraph';
 import CalendarInscription from '../../components/Calendar';
@@ -22,7 +20,7 @@ import dayjs from '~/services/dayjs';
 class Homepage extends React.Component {
   constructor(props) {
     super(props);
-    this.data = [ { value: 'Prochainement' }];
+    this.data = [{ value: 'Prochainement' }];
     this.state = {
       festivals: [],
       radioTagSelect: 'Tous',
@@ -60,24 +58,33 @@ class Homepage extends React.Component {
           <Paragraph content="loading" />
         ) : (
           <ScrollView>
-
             <View style={styles.view}>
-            <RadioButton data={this.data} bindSelected={this.selectTag} />
+              <RadioButton data={this.data} bindSelected={this.selectTag} />
               <SectionTitle content="Événements" />
-              <CarouselContainer items={radioTagSelect==='Tous' ? festivals.filter((festival) => dayjs(festival.startDate) >= dayjs()) : festivals.filter((festival) => dayjs(festival.startDate) >= dayjs() && dayjs(festival.startDate) <= dayjs().add(2,'month'))} renderItem={CardCarouselFestival} />
+              <CarouselContainer
+                items={
+                  radioTagSelect === 'Tous'
+                    ? festivals.filter((festival) => dayjs(festival.startDate) >= dayjs())
+                    : festivals.filter(
+                        (festival) =>
+                          dayjs(festival.startDate) >= dayjs() &&
+                          dayjs(festival.startDate) <= dayjs().add(2, 'month')
+                      )
+                }
+                renderItem={CardCarouselFestival}
+              />
             </View>
             <View style={styles.view}>
               <SectionTitle content="Tes amis sont intéressés" />
-              { friendsInscription === [] ? (
-              <Span content="Aucune suggestion de tes amis" />)
-              : (
-              <CarouselContainer
-                items={friendsInscription}
-                renderItem={CardCarouselFestival}
-                userInscription={true}
-              />
+              {friendsInscription === [] ? (
+                <Span content="Aucune suggestion de tes amis" />
+              ) : (
+                <CarouselContainer
+                  items={friendsInscription}
+                  renderItem={CardCarouselFestival}
+                  userInscription={true}
+                />
               )}
-
 
               <CustomButton title="Ajouter des amis" />
             </View>
@@ -93,10 +100,10 @@ class Homepage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  view:{
-    marginTop: 25
-  }
-})
+  view: {
+    marginTop: 25,
+  },
+});
 
 const mapStateToProps = (state) => ({
   festivals: state.festival.festivals,
@@ -108,7 +115,7 @@ const mapStateToProps = (state) => ({
 const mapActionsToProps = {
   fetchAllFestivals,
   fetchInscriptionFestival,
-  fetchInscriptionFriends
+  fetchInscriptionFriends,
 };
 const HomepageConnected = connect(mapStateToProps, mapActionsToProps)(Homepage);
 

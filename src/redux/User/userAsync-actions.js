@@ -12,7 +12,6 @@ import {
   userRegisterError,
   userRegisterSuccess,
   usersSearchEmail,
-
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
@@ -193,31 +192,33 @@ export const setGhostMode = (id, value) => {
 };
 
 export const updateDataUser = (id, value) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       await request.put(`users/${id}`, {
         firstName: value.firstName,
-        lastName : value.lastName,
-        email    : value.email,
-        password : value.password,
-        phone    : value.phone,
-        address  : value.address,
-        country  : value.country,
-        profilePicture: value.profilePicture
+        lastName: value.lastName,
+        email: value.email,
+        password: value.password,
+        phone: value.phone,
+        address: value.address,
+        country: value.country,
+        profilePicture: value.profilePicture,
       });
-    
-      dispatch(actualUser({
-        firstName: value.firstName,
-        lastName : value.lastName,
-        email    : value.email,
-        password : value.password,
-        phone    : value.phone,
-        address  : value.address,
-        country  : value.country,
-        profilePicture: value.profilePicture
-      }))
+
+      dispatch(
+        actualUser({
+          firstName: value.firstName,
+          lastName: value.lastName,
+          email: value.email,
+          password: value.password,
+          phone: value.phone,
+          address: value.address,
+          country: value.country,
+          profilePicture: value.profilePicture,
+        })
+      );
     } catch (e) {
       Toast.show('Error : ' + e);
     }
-  }
-}
+  };
+};

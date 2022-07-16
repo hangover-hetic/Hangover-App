@@ -12,7 +12,6 @@ import {
   USER_REGISTER_ERROR,
   USER_REGISTER_SUCCESS,
   USERS_SEARCH_EMAIL,
-
   USER_LOCATION,
 } from './userConstants';
 

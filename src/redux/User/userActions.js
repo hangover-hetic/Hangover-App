@@ -6,13 +6,13 @@ import {
   ACTUAL_USER,
   USER_FRIENDS,
   USER_INSCRIPTION_FRIENDS,
-  USER_INSCRIPTION,
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS,
   USERS_SEARCH_EMAIL,
+  USER_REGISTER_SUCCESS,
   USER_LOCATION,
+  USER_INSCRIPTION,
 } from './userConstants';
 
 export const userToken = (token) => {
@@ -106,7 +106,6 @@ export const userRegisterSuccess = (success) => {
 export const userLocation = (location) => {
   return {
     type: USER_LOCATION,
-    payload: location
-  }
-}
-
+    payload: location,
+  };
+};

@@ -11,9 +11,8 @@ class FeedNavigator extends Component {
     return (
       <Stack.Navigator
         screenOptions={{
-          headerStyle: {
-          },
-          headerTransparent : true,
+          headerStyle: {},
+          headerTransparent: true,
           headerTintColor: '#fff',
         }}
       >

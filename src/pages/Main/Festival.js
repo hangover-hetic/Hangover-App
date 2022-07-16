@@ -24,7 +24,7 @@ import {
   fetchInscriptionFriends,
   postInscriptionFestival,
   fetchInscriptionFestival,
-  deleteInscriptionFestival
+  deleteInscriptionFestival,
 } from '~/redux/User/userAsync-actions';
 import dayjs from '~/services/dayjs';
 import SectionTitle from '~/components/semantics/SectionTitle';
@@ -271,19 +271,19 @@ class Festival extends React.Component {
                       (inscription) => inscription.festival.id === festival.id
                     ).length !== 0 ? (
                       <>
-                      <Span content="Vous êtes déjà inscrit"></Span>
-                      <TouchableOpacity
-                        style={styles.inscriptionButton}
-                        onPress={() => this.deleteInscription(userInscription.filter(
-                          (inscription) => inscription.festival.id === festival.id
-                        )[0].id)}
-                      >
-                        
-                        <Span
-                          style={styles.spanButton}
-                          content="Se désinscrire"
-                        />
-                      </TouchableOpacity>
+                        <Span content="Vous êtes déjà inscrit"></Span>
+                        <TouchableOpacity
+                          style={styles.inscriptionButton}
+                          onPress={() =>
+                            this.deleteInscription(
+                              userInscription.filter(
+                                (inscription) => inscription.festival.id === festival.id
+                              )[0].id
+                            )
+                          }
+                        >
+                          <Span style={styles.spanButton} content="Se désinscrire" />
+                        </TouchableOpacity>
                       </>
                     ) : (
                       <TouchableOpacity
@@ -322,11 +322,11 @@ class Festival extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container:{
-    paddingBottom: 105
+  container: {
+    paddingBottom: 105,
   },
   view: {
-    marginTop: 25
+    marginTop: 25,
   },
   cover: {
     alignSelf: 'stretch',
@@ -406,7 +406,7 @@ const mapActionsToProps = {
   postInscriptionFestival,
   fetchInscriptionFriends,
   fetchInscriptionFestival,
-  deleteInscriptionFestival
+  deleteInscriptionFestival,
 };
 
 const FestivalConnected = connect(mapStateToProps, mapActionsToProps)(Festival);

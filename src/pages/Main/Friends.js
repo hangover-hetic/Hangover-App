@@ -18,7 +18,6 @@ import TabViewFriend from '~/components/TabViewFriend';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import AutocompleteInput from 'react-native-autocomplete-input';
 
-
 class Friends extends React.Component {
   constructor(props) {
     super(props);
@@ -100,12 +99,12 @@ class Friends extends React.Component {
     const { actualUser, userFriends } = this.props;
     const { filteredEmail } = this.state;
     return (
-      <ScrollContainer style={{paddingTop: 80}}>
+      <ScrollContainer style={{ paddingTop: 80 }}>
         {actualUser === null || userFriends === null || !actualUser || !userFriends ? (
           <Paragraph content="loading" />
         ) : (
           <>
-            <Title content="Mes amis"/>
+            <Title content="Mes amis" />
             <WhiteSpan content={actualUser.email} />
             <View style={styles.view}>
               <SectionTitle content="Ajouter un ami" />
@@ -186,8 +185,8 @@ class Friends extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  view:{
-    paddingTop:25
+  view: {
+    paddingTop: 25,
   },
   searchSection: {
     flexDirection: 'row',

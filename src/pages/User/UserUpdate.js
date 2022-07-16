@@ -1,42 +1,31 @@
-import React from 'react'
-import { 
-  useForm, 
-  Controller,
-} from 'react-hook-form';
+import React from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import BasicBigText from '../../components/semantics/BasicBigText';
 import Container from '../../components/ui/Container';
 import FormContainer from '../../components/ui/FormContainer';
 import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
-import { 
-  TextInput,
-  Pressable,
-  Vibration
-} from 'react-native';
-import SubmitButton from '../../components/CustomButton';
+import { TextInput, Pressable, Vibration } from 'react-native';
+import SubmitButton from '../../components/ui/CustomButton';
 import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import Paragraph from '../../components/semantics/Paragraph';
 import BasicText from '../../components/semantics/BasicText';
 import { connect } from 'react-redux';
 import { updateDataUser } from '../../redux/User/userAsync-actions';
 import * as ImagePicker from 'expo-image-picker';
 import Toast from 'react-native-root-toast';
-import { 
-  getMediaIri, 
-  uploadMedia 
-} from '../../services/media';
+import { getMediaIri, uploadMedia } from '../../services/media';
 
 class UserUpdate extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       image: null,
-      message: ''
-    }
+      message: '',
+    };
 
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
     this.pickImage = this.pickImage.bind(this);
   }
 
@@ -67,14 +56,13 @@ class UserUpdate extends React.Component {
       if (!media.contentUrl) return;
       const { actualFestivalId, navigation } = this.props;
       const mediaIri = getMediaIri(media.id);
-    
-      const dataWithImage = {...data, profilePicture: mediaIri}
 
-      await this.props.updateDataUser(this.props.actualUser.id, dataWithImage)
+      const dataWithImage = { ...data, profilePicture: mediaIri };
+
+      await this.props.updateDataUser(this.props.actualUser.id, dataWithImage);
 
       Vibration.vibrate();
       Toast.show('Votre post est bien posté, il est en attente de modération !');
-
     } catch (e) {
       Toast.show('Error : ' + e);
     }
@@ -83,18 +71,18 @@ class UserUpdate extends React.Component {
   render() {
     const { image } = this.state;
     const canPost = image !== null;
-    console.log(canPost)
+    console.log(canPost);
     return (
       <Container>
         <FormContainer>
           <BasicBigText content="Modifier mes informations" />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Prénom"/>
+          <BasicText content="Prénom" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -109,13 +97,13 @@ class UserUpdate extends React.Component {
             name="firstName"
             rules={{ required: true }}
           />
-          
-          <View style={styles.spaceBetween}/>
 
-          <BasicText content="Nom"/>
+          <View style={styles.spaceBetween} />
+
+          <BasicText content="Nom" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -130,12 +118,12 @@ class UserUpdate extends React.Component {
             name="lastName"
           />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Email"/>
+          <BasicText content="Email" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -150,12 +138,12 @@ class UserUpdate extends React.Component {
             name="email"
           />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Mot de passe"/>
+          <BasicText content="Mot de passe" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -171,12 +159,12 @@ class UserUpdate extends React.Component {
             name="password"
           />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Portable"/>
+          <BasicText content="Portable" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -191,12 +179,12 @@ class UserUpdate extends React.Component {
             name="phone"
           />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Adresse"/>
+          <BasicText content="Adresse" />
           <Controller
             control={this.props.control}
-            render={({ field: { onChange, onBlur, value}}) => (
+            render={({ field: { onChange, onBlur, value } }) => (
               <View style={styles.headerInput}>
                 <TextInput
                   style={styles.input}
@@ -211,14 +199,14 @@ class UserUpdate extends React.Component {
             name="address"
           />
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
-          <BasicText content="Pays"/>
+          <BasicText content="Pays" />
 
-          <View style= {styles.placeholderCustom}>
+          <View style={styles.placeholderCustom}>
             <Controller
               control={this.props.control}
-              render={({ field: { onChange, onBlur, value}}) => (
+              render={({ field: { onChange, onBlur, value } }) => (
                 <View style={styles.headerInput}>
                   <TextInput
                     style={styles.input}
@@ -226,36 +214,35 @@ class UserUpdate extends React.Component {
                     onBlur={onBlur}
                     onChangeText={(value) => onChange(value)}
                     value={value}
-                    
                     placeholderTextColor="#9D9D9D"
                   />
                 </View>
-              )}  
+              )}
               name="country"
               rules={{ required: true }}
             />
           </View>
 
-          <View style={styles.spaceBetween}/>
+          <View style={styles.spaceBetween} />
 
           <Pressable
             onPress={this.pickImage}
             style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
           >
-            <Ionicons name='person-circle-outline' size={40} color='white' />
-            <Paragraph content='Modifier ma photo de profil' styles={{ marginLeft: 10 }} />
+            <Ionicons name="person-circle-outline" size={40} color="white" />
+            <Paragraph content="Modifier ma photo de profil" styles={{ marginLeft: 10 }} />
           </Pressable>
 
           <View style={styles.buttonSettings}>
-            <SubmitButton 
-              title={'Enregistrer'} 
+            <SubmitButton
+              title={'Enregistrer'}
               onPress={this.props.handleSubmit(this.onSubmit)}
               disabled={!canPost}
             />
           </View>
         </FormContainer>
       </Container>
-    )
+    );
   }
 }
 
@@ -266,7 +253,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     marginBottom: 5,
     fontSize: 11,
-    color: 'white'
+    color: 'white',
   },
   spaceBetween: {
     marginBottom: 10,
@@ -282,8 +269,8 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   placeholderCustom: {
-    color : '#9D9D9D',
-  }
+    color: '#9D9D9D',
+  },
 });
 
 const UserUpdateHookForm = (props) => {
@@ -293,7 +280,7 @@ const UserUpdateHookForm = (props) => {
     handleSubmit,
     control,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     defaultValues: {
       firstName: props.actualUser.firstName,
@@ -301,29 +288,21 @@ const UserUpdateHookForm = (props) => {
       email: props.actualUser.email,
       phone: props.actualUser.phone,
       address: props.actualUser.address,
-      country: props.actualUser.country
-    }
-  })
+      country: props.actualUser.country,
+    },
+  });
 
-  return <UserUpdate
-    {...props}
-    handleSubmit={handleSubmit}
-    control={control}
-    errors={errors}
-  />
-}
+  return <UserUpdate {...props} handleSubmit={handleSubmit} control={control} errors={errors} />;
+};
 
 const mapActionsToProps = {
-  updateDataUser
-}
+  updateDataUser,
+};
 
 const mapStateToProps = (state) => ({
   actualUser: state.user.actualUser,
 });
 
-const UserUpdateConnected = connect(
-  mapStateToProps, 
-  mapActionsToProps
-)(UserUpdateHookForm);
+const UserUpdateConnected = connect(mapStateToProps, mapActionsToProps)(UserUpdateHookForm);
 
 export default UserUpdateConnected;

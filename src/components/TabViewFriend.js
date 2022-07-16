@@ -28,9 +28,9 @@ export default function TabViewExample({ data, bindAcceptInvitation, bindDeleted
     <View style={{ flex: 1 }}>
       {data
         .filter((friendship) => friendship.validated)
-        .map((friendship) => {
+        .map((friendship, i) => {
           return (
-            <View style={styles.itemList}>
+            <View style={styles.itemList} key={`friend§${i}`}>
               <View style={styles.itemListContent}>
                 {friendship.user.profilePicture !== null ? (
                   <Image

@@ -81,44 +81,49 @@ class AddPost extends Component {
     console.log({ canPost });
     return (
       <ScrollContainer>
-        <View style={{height: 40}} />
+        <View style={{ height: 40 }} />
         <Title content="Poster" />
-        <View style={{ justifyContent: 'center', marginTop : 20 }}>
+        <View style={{ justifyContent: 'center', marginTop: 20 }}>
           {image ? (
-            <Image source={{ uri: image.uri }} style={{ width: "100%", aspectRatio: 1 }} />
+            <Image source={{ uri: image.uri }} style={{ width: '100%', aspectRatio: 1 }} />
           ) : (
-            <View style={{ width: "100%", aspectRatio: 1, backgroundColor: '#414141' }} />
+            <View style={{ width: '100%', aspectRatio: 1, backgroundColor: '#414141' }} />
           )}
           <Pressable
             onPress={this.pickImage.bind(this)}
-            style={{ flexDirection: 'row', alignItems: 'center', width: 300, marginBottom : 20, marginTop : 20 }}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              width: 300,
+              marginBottom: 20,
+              marginTop: 20,
+            }}
           >
             <Paragraph content="Choisir depuis la galerie" styles={{ marginRight: 10 }} />
             <AntDesign name="addfolder" size={20} color="#9D9D9D" />
           </Pressable>
           <Pressable
             onPress={this.takePicture.bind(this)}
-            style={{ flexDirection: 'row', alignItems: 'center', width: 300, marginBottom : 20 }}
+            style={{ flexDirection: 'row', alignItems: 'center', width: 300, marginBottom: 20 }}
           >
             <Paragraph content="Prendre une photo" styles={{ marginRight: 10 }} />
             <AntDesign name="plus" size={20} color="#9D9D9D" />
           </Pressable>
 
-          <Span content="Description" style={{marginBottom : 10}} />
+          <Span content="Description" style={{ marginBottom: 10 }} />
           <Input
             placeholder="Trop de la bombe ce festival !"
             keyboardType="twitter"
-            onChangeText={(value) => this.setState({message : value})}
+            onChangeText={(value) => this.setState({ message: value })}
           />
-          <View style={{alignItems : "center"}}>
+          <View style={{ alignItems: 'center' }}>
             <SubmitButton
               title="Partager"
               onPress={this.postPost.bind(this)}
               disabled={!canPost}
-              style={{width : 200, marginTop : 20}}
+              style={{ width: 200, marginTop: 20 }}
             />
           </View>
-
         </View>
       </ScrollContainer>
     );

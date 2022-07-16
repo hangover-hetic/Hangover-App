@@ -3,8 +3,6 @@ import { LocaleConfig, CalendarList } from 'react-native-calendars';
 import { AntDesign } from '@expo/vector-icons';
 import dayjs from '../services/dayjs';
 
-
-
 export default function CalendarInscription({ data }) {
   LocaleConfig.locales['fr'] = {
     monthNames: [
