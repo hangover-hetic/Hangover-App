@@ -51,4 +51,16 @@ class Title extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  view: {
+    height: 50,
+    width: '70%',
+  },
+  text: {
+    fontSize: 32,
+    fontFamily: 'Poppins-Bold',
+    alignSelf: 'baseline',
+  },
+});
+
 export default Title;

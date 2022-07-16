@@ -10,7 +10,8 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS, 
+  USER_REGISTER_SUCCESS,
+  USERS_SEARCH_EMAIL,
   USER_LOCATION,
 } from './userConstants';
 
@@ -38,6 +39,12 @@ export const actualUser = (user) => {
 export const userFriends = (error) => {
   return {
     type: USER_FRIENDS,
+    payload: error,
+  };
+};
+export const usersSearchEmail = (error) => {
+  return {
+    type: USERS_SEARCH_EMAIL,
     payload: error,
   };
 };

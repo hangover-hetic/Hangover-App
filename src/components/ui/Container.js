@@ -14,7 +14,7 @@ class Container extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={[styles.container, this.props.styles]}>
+      <SafeAreaView style={[styles.container, this.props.style]}>
         {this.props.children}
       </SafeAreaView>
     );
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     padding: 20,
     paddingTop: 50,
+    paddingBottom: 200,
   },
 });
 

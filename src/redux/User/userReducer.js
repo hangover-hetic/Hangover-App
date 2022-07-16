@@ -10,7 +10,9 @@ import {
   MERCURE_TOKEN,
   USER_LOGIN_SUCCESS,
   USER_REGISTER_ERROR,
-  USER_REGISTER_SUCCESS, 
+  USER_REGISTER_SUCCESS,
+  USERS_SEARCH_EMAIL,
+
   USER_LOCATION,
 } from './userConstants';
 
@@ -27,6 +29,7 @@ const initialState = {
   userInscription: [],
   userInscriptionFriends: [],
   userUpdateError: false,
+
   userLocation: {
     latitude: 0,
     longitude: 0,
@@ -54,6 +57,11 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         userFriends: action.payload,
+      };
+    case USERS_SEARCH_EMAIL:
+      return {
+        ...state,
+        usersSearchEmail: action.payload,
       };
     case USER_INSCRIPTION:
       return {

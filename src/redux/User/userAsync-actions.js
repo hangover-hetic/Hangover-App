@@ -10,6 +10,9 @@ import {
   userLoginSuccess,
   userLoginError,
   userRegisterError,
+  userRegisterSuccess,
+  usersSearchEmail,
+
 } from './userActions';
 import request from '../../services/request';
 import { mercure } from '../../services/mercure';
@@ -72,6 +75,54 @@ export const fetchFriends = (id) => {
     }
   };
 };
+export const searchUsersByEmail = (val) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await request({
+        method: 'GET',
+        url: `users?email=${val}`,
+      });
+      return data;
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
+export const deleteFriend = (id) => {
+  return async (dispatch) => {
+    try {
+      await request({
+        method: 'DELETE',
+        url: `friendships/${id}`,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
+export const acceptFriend = (id) => {
+  return async (dispatch) => {
+    try {
+      await request.put(`friendships/${id}`, {
+        validated: true,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
+export const createInvitation = (friendId, actualUserId) => {
+  return async (dispatch) => {
+    try {
+      await request.post(`friendships`, {
+        friend: `/api/users/${friendId}`,
+        relatedUser: `/api/users/${actualUserId}`,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
 
 export const fetchInscriptionFriends = () => {
   return async (dispatch) => {
@@ -100,6 +151,19 @@ export const postInscriptionFestival = (idFestival, idUser) => {
     }
   };
 };
+export const deleteInscriptionFestival = (id) => {
+  return async (dispatch) => {
+    try {
+      await request({
+        method: 'DELETE',
+        url: `inscriptions/${id}`,
+      });
+    } catch (e) {
+      console.dir(e);
+    }
+  };
+};
+
 export const fetchInscriptionFestival = () => {
   return async (dispatch) => {
     try {
