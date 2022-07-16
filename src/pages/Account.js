@@ -38,7 +38,7 @@ class Account extends React.Component {
     return (
       <ScrollContainer noPadding={true}>
         {actualUser === null || !actualUser || userInscription === null || !userInscription ? (
-          <Paragraph content="loading"></Paragraph>
+          <Paragraph content="loading"/>
         ) : (
           <>
             <View>
@@ -50,7 +50,7 @@ class Account extends React.Component {
                   alignItems: 'center',
                 }}
               >
-                <Title content="Mon compte"></Title>
+                <Title content="Mon compte"/>
                 <Feather name="settings" size={26} color="white" />
               </View>
               <View>

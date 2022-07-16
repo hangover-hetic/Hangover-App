@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   Pressable,
 } from 'react-native';
-import SubmitButton from '~/components/CustomButton';
+import SubmitButton from "../../components/ui/SubmitButton";
 import { useForm, Controller } from 'react-hook-form';
 import { postLogin } from '~/redux/User/userAsync-actions';
 import { connect, useDispatch } from 'react-redux';
