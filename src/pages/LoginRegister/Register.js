@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TextInput, StyleSheet, Pressable } from 'react-native';
-import SubmitButton from '~/components/CustomButton';
+import SubmitButton from '../../components/ui/SubmitButton';
 import { useForm, Controller } from 'react-hook-form';
 import { postRegister } from '~/redux/User/userAsync-actions';
 import { connect } from 'react-redux';

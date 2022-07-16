@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TouchableWithoutFeedback, View, Text, StyleSheet } from 'react-native';
 
-const SubmitButton = ({ title, onPress }) => {
+const CustomButton = ({ title, onPress }) => {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SubmitButton;
+export default CustomButton;

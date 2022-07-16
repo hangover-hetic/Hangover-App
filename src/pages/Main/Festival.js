@@ -24,6 +24,7 @@ import {
   fetchInscriptionFriends,
   postInscriptionFestival,
   fetchInscriptionFestival,
+  deleteInscriptionFestival,
 } from '~/redux/User/userAsync-actions';
 import dayjs from '~/services/dayjs';
 import SectionTitle from '~/components/semantics/SectionTitle';
@@ -63,6 +64,17 @@ class Festival extends React.Component {
     if (this.props.actualUser.id !== null) {
       try {
         await postInscriptionFestival(this.props.festival.id, this.props.actualUser.id);
+        await fetchInscriptionFestival();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }
+  async deleteInscription(id) {
+    const { deleteInscriptionFestival, fetchInscriptionFestival } = this.props;
+    if (deleteInscriptionFestival && this.props) {
+      try {
+        await deleteInscriptionFestival(id);
         await fetchInscriptionFestival();
       } catch (e) {
         console.error(e);
@@ -163,7 +175,7 @@ class Festival extends React.Component {
                   }
                 />
               </View>
-              <View style={styles.friendlist}>
+              <View style={[styles.friendlist, styles.view]}>
                 {friendsInscription === null || friendsInscription === [] ? (
                   <Paragraph content="loading" />
                 ) : (
@@ -176,7 +188,7 @@ class Festival extends React.Component {
                 <SectionTitle content="À propos" />
                 <Span content={festival.description} />
               </View>
-              <View style={styles.lineup}>
+              <View style={[styles.lineup, styles.view]}>
                 <View
                   style={{
                     flex: 1,
@@ -201,7 +213,7 @@ class Festival extends React.Component {
                 </View>
                 <LineUp data={festival.shows} direction="row"></LineUp>
               </View>
-              <View>
+              <View style={styles.view}>
                 <SectionTitle content="Ambiance" />
                 {festival.shows.map((item) => {
                   item.styles.map((style) => {
@@ -214,7 +226,7 @@ class Festival extends React.Component {
                 })}
                 <TagList data={stylesTagsUni} />
               </View>
-              <View>
+              <View style={styles.view}>
                 <SectionTitle content="Save the date !" />
 
                 {actualUser === null ? (
@@ -258,7 +270,21 @@ class Festival extends React.Component {
                     {userInscription.filter(
                       (inscription) => inscription.festival.id === festival.id
                     ).length !== 0 ? (
-                      <Span content="Vous êtes déjà inscrit"></Span>
+                      <>
+                        <Span content="Vous êtes déjà inscrit"></Span>
+                        <TouchableOpacity
+                          style={styles.inscriptionButton}
+                          onPress={() =>
+                            this.deleteInscription(
+                              userInscription.filter(
+                                (inscription) => inscription.festival.id === festival.id
+                              )[0].id
+                            )
+                          }
+                        >
+                          <Span style={styles.spanButton} content="Se désinscrire" />
+                        </TouchableOpacity>
+                      </>
                     ) : (
                       <TouchableOpacity
                         style={styles.inscriptionButton}
@@ -274,7 +300,7 @@ class Festival extends React.Component {
                   </>
                 )}
               </View>
-              <View>
+              <View style={styles.view}>
                 <SectionTitle content="Billeterie" />
                 <TouchableOpacity
                   style={styles.inscriptionButton}
@@ -296,7 +322,12 @@ class Festival extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingBottom: 105,
+  },
+  view: {
+    marginTop: 25,
+  },
   cover: {
     alignSelf: 'stretch',
     height: 180,
@@ -306,8 +337,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   lineUpDrawer: {
-    elevation: 5,
-    position: 'absolute',
     width: '100%',
     height: 5000,
   },
@@ -377,6 +406,7 @@ const mapActionsToProps = {
   postInscriptionFestival,
   fetchInscriptionFriends,
   fetchInscriptionFestival,
+  deleteInscriptionFestival,
 };
 
 const FestivalConnected = connect(mapStateToProps, mapActionsToProps)(Festival);

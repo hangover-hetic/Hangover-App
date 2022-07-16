@@ -28,15 +28,14 @@ class SubmitVariant extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 10,
-    marginTop: 10,
-
+    alignSelf: 'center',
+    marginHorizontal: 4,
+    backgroundColor: 'white',
     borderRadius: 50,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 50,
-    minWidth: 250,
+    paddingHorizontal: 25,
+    paddingBottom: 6,
+    paddingTop: 6,
+    marginVertical: 7,
   },
   text: {
     fontFamily: 'Poppins-SemiBold',

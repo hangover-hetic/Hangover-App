@@ -14,6 +14,7 @@ import { LoginRegisterNavigator } from './src/pages/LoginRegister';
 import MainNavigator from './src/pages/Main/MainNavigator';
 import { TASK_NAME } from './src/pages/Main/Map';
 
+
 const Stack = createNativeStackNavigator();
 
 export const LOGIN_REGISTER_ROUTE = "LoginRegister"

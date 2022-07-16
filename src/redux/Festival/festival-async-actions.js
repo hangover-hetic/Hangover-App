@@ -1,8 +1,6 @@
 import {
   setActualFestival,
   setActualFestivalPosts,
-  getFestival,
-  getFestivals,
   setFestivals,
   setFestival,
 } from './festival-actions';

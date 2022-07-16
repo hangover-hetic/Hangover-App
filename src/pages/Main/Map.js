@@ -462,4 +462,7 @@ const mapStateToProps = (state) => ({
   location: state.user.userLocation,
   festival: state.festival.actualFestival,
 });
-export default connect(mapStateToProps)(Map);
+
+const MapConnected = connect(mapStateToProps)(Map);
+
+export default MapConnected;

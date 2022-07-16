@@ -1,14 +1,20 @@
 import { Component } from 'react';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Festival from './Festival';
-import Friends from './Friends';
 import { FeedNavigator } from './Feed';
 import Homepage from './Homepage';
 import Map from './Map';
-import { FEED_ROUTE, FESTIVAL_ROUTE, FRIENDS_ROUTE, HOME_ROUTE, MAP_ROUTE } from './routes';
+import {
+  ACCOUNT_ROUTE,
+  FEED_ROUTE,
+  FESTIVAL_ROUTE,
+  FRIENDS_ROUTE,
+  HOME_ROUTE,
+  MAP_ROUTE,
+} from './routes';
 import { Dimensions } from 'react-native';
 import TabBarIcon from '~/components/TabBarIcon';
+import { AccountNavigator } from './Account';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,33 +47,6 @@ class LoginRegisterNavigator extends Component {
         }}
       >
         <Tab.Screen
-          name={FESTIVAL_ROUTE}
-          component={Festival}
-          options={{
-            tabBarIcon: ({ size, focused, color }) => (
-              <TabBarIcon name="event" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={FRIENDS_ROUTE}
-          component={Friends}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="group" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={FEED_ROUTE}
-          component={FeedNavigator}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="image" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen
           name={HOME_ROUTE}
           component={Homepage}
           options={{
@@ -77,11 +56,49 @@ class LoginRegisterNavigator extends Component {
           }}
         />
         <Tab.Screen
+          name={FESTIVAL_ROUTE}
+          component={Festival}
+          options={{
+            tabBarIcon: ({ size, focused, color }) => (
+              <TabBarIcon name="event" size={size} active={focused} color={color} />
+            ),
+          }}
+        />
+
+        {/*<Tab.Screen*/}
+        {/*    name={FRIENDS_ROUTE}*/}
+        {/*    component={Friends}*/}
+        {/*    options={{*/}
+        {/*        tabBarIcon: ({focused, size, color}) => (*/}
+        {/*            <TabBarIcon name="group" size={size} active={focused} color={color}/>*/}
+        {/*        ),*/}
+        {/*    }}*/}
+        {/*/>*/}
+        <Tab.Screen
+          name={FEED_ROUTE}
+          component={FeedNavigator}
+          options={{
+            tabBarIcon: ({ focused, size, color }) => (
+              <TabBarIcon name="image" size={size} active={focused} color={color} />
+            ),
+          }}
+        />
+
+        <Tab.Screen
           name={MAP_ROUTE}
           component={Map}
           options={{
             tabBarIcon: ({ focused, size, color }) => (
               <TabBarIcon name="map" size={size} active={focused} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={ACCOUNT_ROUTE}
+          component={AccountNavigator}
+          options={{
+            tabBarIcon: ({ focused, size, color }) => (
+              <TabBarIcon name="account-circle" size={size} active={focused} color={color} />
             ),
           }}
         />
