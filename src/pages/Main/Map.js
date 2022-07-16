@@ -1,6 +1,6 @@
 import { Component, createRef } from 'react';
 import { Image, Pressable, SafeAreaView, StyleSheet, Vibration, View } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker, Polygon } from 'react-native-maps';
 import * as Location from 'expo-location';
 import request from '~/services/request';
 import { connect } from 'react-redux';
@@ -13,14 +13,26 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { setGhostMode } from '~/redux/User/userAsync-actions';
 import Paragraph from '~/components/semantics/Paragraph';
 import LoadingIndicator from '../../components/ui/LoadingIndicator';
+import { fetchFestival } from '../../redux/Festival/festival-async-actions';
+import uuid from 'react-native-uuid';
+import { userLocation } from '../../redux/User/userActions';
+
+import SceneIcon from '../../../assets/fashion.png';
+import TrashIcon from '../../../assets/trash-can.png';
 
 export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
+const MARKERS_TYPES = {
+  scene: SceneIcon,
+  poubelle: TrashIcon,
+};
+
 class Map extends Component {
   _isMounted = false;
+  styleIcones = { width: 30, height: 30, borderRadius: 50 };
 
   constructor(props) {
     super(props);
@@ -39,15 +51,26 @@ class Map extends Component {
     Location.requestForegroundPermissionsAsync().then(({ status }) => {
       if (status !== 'granted') {
         Toast.show('Permission to access location was denied');
-        return;
+        if (this._isMounted) {
+          this.setState({
+            showMap: false,
+          });
+        }
       }
-      if (this._isMounted) {
-        this.setState({
-          showMap: true,
-        });
-      }
+
     });
 
+    Location.requestBackgroundPermissionsAsync().then(({ status }) => {
+      if (status !== 'granted') {
+        Toast.show('Permission to access location was denied');
+        if (this._isMounted) {
+          this.setState({
+            showMap: false,
+          });
+        }
+      }
+
+    });
     this.initAll().catch((e) => {
       console.log('Erreur init', e);
     });
@@ -59,7 +82,7 @@ class Map extends Component {
       prevProps.location.latitude !== newLocation.latitude ||
       prevProps.location.longitude !== newLocation.longitude
     ) {
-      this.setMarker(currentUser, newLocation, true);
+      this.setUserMarker(currentUser, newLocation, true);
       this.createMessagePosition(newLocation);
     }
   }
@@ -87,7 +110,17 @@ class Map extends Component {
       this.setState({
         friends,
       });
+
       listenMercure(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
+
+      const { festival, dispatch } = this.props;
+      if (!festival) {
+        try {
+          await dispatch(fetchFestival(3, true));
+        } catch (e) {
+          Toast.show(e?.response?.data);
+        }
+      }
 
       await this.initMap(currentUser);
     } catch (e) {
@@ -95,18 +128,29 @@ class Map extends Component {
     }
   }
 
-  setMarker(user, location) {
+  setMarker({ id, label, icon, latitude, longitude }) {
     const markers = { ...this.state.markers };
-    const { latitude, longitude } = this.getNormalizedLatitude(location);
-    markers[user.id] = {
-      markerKey: 'friend-marker-' + user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profilePicture: getProfilePicture(user.profilePicture),
+    markers[id] = {
+      markerKey: 'marker-' + uuid.v4(),
+      label,
+      icon,
       latitude,
       longitude,
     };
     this.setState({ markers });
+  }
+
+
+  setUserMarker(user, location) {
+    const { latitude, longitude } = this.getNormalizedLatitude(location);
+    this.setMarker({
+      id: user.id,
+      label: `${user.firstName} ${user.lastName}`,
+      icon: <Image source={{ uri: getProfilePicture(user.profilePicture) }}
+                   style={this.styleIcones} />,
+      latitude,
+      longitude,
+    });
   }
 
   getFriendById(id) {
@@ -169,7 +213,7 @@ class Map extends Component {
       user = currentUser;
     }
 
-    if (location) this.setMarker(user, location);
+    if (location) this.setUserMarker(user, location);
   }
 
   onFriendAlert(friend) {
@@ -197,11 +241,11 @@ class Map extends Component {
     const { currentUser } = this.props;
 
     try {
-      this.setMarker(currentUser, await Location.getCurrentPositionAsync({}), true);
+      this.setUserMarker(currentUser, await Location.getCurrentPositionAsync({}), true);
 
       this.getAllFriendLocation(currentUser);
       await this.sendMyLocation(currentUser);
-
+      await this.initFromFestival();
       await Location.startLocationUpdatesAsync(TASK_NAME, {
         accuracy: Location.Accuracy.BestForNavigation,
         showsBackgroundLocationIndicator: true,
@@ -213,6 +257,8 @@ class Map extends Component {
         deferredUpdatesDistance: 5,
         deferredUpdatesInterval: 1000,
       });
+
+
     } catch (e) {
       Toast.show('Erreur' + e);
       console.log('Erreur' + e);
@@ -285,45 +331,84 @@ class Map extends Component {
     this._isMounted = false;
   }
 
+  async initFromFestival() {
+    const { festival, dispatch } = this.props;
+    if (!festival || !festival.map) return;
+    if (festival.map.markers) {
+      festival.map.markers.forEach((marker, i) => {
+        this.setMarker({
+          id: 'map-marker-' + i,
+          label: marker.name,
+          icon: <Image source={MARKERS_TYPES[marker.icon]} style={this.styleIcones} />,
+          latitude: marker.position.lat,
+          longitude: marker.position.lng,
+        });
+      });
+    }
+    if (festival.map.center) {
+      const { lat, lng } = festival.map.center;
+      this.setState({
+        festivalCenter: {
+          latitude: lat,
+          longitude: lng,
+        },
+      });
+    } else {
+      const location = await Location.getCurrentPositionAsync();
+      dispatch(userLocation(this.getNormalizedLatitude(location)));
+    }
+
+    if (festival.map.zone) {
+      this.setState({
+        festivalZone: festival.map.zone.map(({ lat, lng }) => {
+          return { latitude: lat, longitude: lng };
+        }),
+      });
+
+    }
+
+    if (this._isMounted) {
+      this.setState({
+        showMap: true,
+      });
+    }
+  }
+
   render() {
-    const { markers, showMap } = this.state;
-    const { currentUser, location } = this.props;
+    const { markers, showMap, festivalCenter, festivalZone } = this.state;
+    const { currentUser } = this.props;
     return (
       <View>
-        {showMap && location.latitude !== 0 ? (
+        {showMap && (festivalCenter) ? (
           <SafeAreaView>
             <MapView
               ref={this.mapViewRef}
               style={styles.map}
               provider={PROVIDER_GOOGLE}
-              initialRegion={{
-                latitude: location?.latitude ? location.latitude : 0,
-                longitude: location?.longitude ? location.longitude : 0,
+              region={{
+                latitude: festivalCenter.latitude,
+                longitude: festivalCenter.longitude,
                 latitudeDelta: 0.09,
                 longitudeDelta: 0.035,
               }}
-              minZoomLevel={10}
-              maxZoomLevel={20}
               customMapStyle={config.mapConfig}
+              showsPointsOfInterest={false}
             >
               {Object.keys(markers).map((key) => {
-                const { latitude, longitude, profilePicture, firstName, lastName, markerKey } =
-                  markers[key];
+                const { latitude, longitude, icon, label, markerKey } = markers[key];
                 return (
                   <Marker coordinate={{ latitude, longitude }} key={markerKey}>
                     <View style={{ alignItems: 'center' }}>
                       <Paragraph
-                        content={`${firstName} ${lastName}`}
+                        content={label}
                         styles={{ marginBottom: 5 }}
                       />
-                      <Image
-                        source={{ uri: profilePicture }}
-                        style={{ width: 30, height: 30, borderRadius: 50 }}
-                      />
+                      {icon}
                     </View>
                   </Marker>
                 );
               })}
+              {festivalZone && <Polygon coordinates={festivalZone} fillColor={"orange"} />}
             </MapView>
           </SafeAreaView>
         ) : (
@@ -338,21 +423,23 @@ class Map extends Component {
             ]}
             onPress={this.onPressGhostMode.bind(this)}
           >
-            <MaterialCommunityIcons name="ghost" size={30} color="white" />
+            <MaterialCommunityIcons name='ghost' size={30} color='white' />
           </Pressable>
         )}
 
-        {currentUser && location.latitude !== 0 && (
+        {currentUser && (
           <Pressable
             style={[styles.ghostButton, { top: 140, backgroundColor: 'orange' }]}
             onPress={this.onPressAlert.bind(this)}
           >
-            <Ionicons name="alert" size={30} color="white" />
+            <Ionicons name='alert' size={30} color='white' />
           </Pressable>
         )}
       </View>
     );
   }
+
+
 }
 
 const styles = StyleSheet.create({
@@ -376,5 +463,6 @@ const mapStateToProps = (state) => ({
   currentUser: state.user.actualUser,
   mercureToken: state.user.mercureToken,
   location: state.user.userLocation,
+  festival: state.festival.actualFestival,
 });
 export default connect(mapStateToProps)(Map);

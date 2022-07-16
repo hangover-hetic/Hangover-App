@@ -24,10 +24,18 @@ export const postLogin = ({ username, password }) => {
         password: password,
       });
 
-      console.log({ data });
+      // if(typeof data === "string") {
+      //   console.log("stringify", data);
+      //   data = JSON.parse(data);
+      //   console.log(data);
+      // }
       request.defaults.headers['Authorization'] = `BEARER ${data.token}`;
       mercure.defaults.headers['Authorization'] = `Bearer ${data.mercureToken}`;
 
+      if(!data.user || !data.token) {
+        Toast.show("Erreur serveur");
+        return
+      }
       dispatch(actualUser(data.user));
       dispatch(userToken(data.token));
       dispatch(mercureToken(data.mercureToken));
