@@ -5,3 +5,4 @@ export const ACCOUNT_ROUTE = 'Account';
 export const MAP_ROUTE = 'Map';
 export const PROGRAM_ROUTE = 'Program';
 export const FESTIVAL_ROUTE = 'Festival';
+export const SETTINGS_ROUTE = 'Settings'

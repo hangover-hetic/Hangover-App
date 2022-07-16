@@ -1,8 +1,6 @@
 import { Component } from 'react';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Festival from './Festival';
-import Friends from './Friends';
 import { FeedNavigator } from './Feed';
 import Homepage from './Homepage';
 import Map from './Map';
