@@ -8,7 +8,7 @@ import Toast from 'react-native-root-toast';
 import { listenMercure, postMercure } from '~/services/mercure';
 import { getProfilePicture } from '~/services/media';
 import config from '~/services/config';
-import { Ionicons } from '@expo/vector-icons';
+import {Ionicons} from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setGhostMode } from '~/redux/User/userAsync-actions';
 import Paragraph from '~/components/semantics/Paragraph';
@@ -17,17 +17,14 @@ import { fetchFestival } from '../../redux/Festival/festival-async-actions';
 import uuid from 'react-native-uuid';
 import { userLocation } from '../../redux/User/userActions';
 
-import SceneIcon from '../../../assets/fashion.png';
-import TrashIcon from '../../../assets/trash-can.png';
-
 export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
 const MARKERS_TYPES = {
-  scene: SceneIcon,
-  poubelle: TrashIcon,
+  scene: <Image source={require("../../../assets/icons/scene.png")} style={{width:20, height: 20}}/>,
+  poubelle: <Image source={require("../../../assets/icons/trash.png")} style={{width:20, height: 20}}/>,
 };
 
 class Map extends Component {
@@ -385,7 +382,7 @@ class Map extends Component {
               ref={this.mapViewRef}
               style={styles.map}
               provider={PROVIDER_GOOGLE}
-              region={{
+              initialRegion={{
                 latitude: festivalCenter.latitude,
                 longitude: festivalCenter.longitude,
                 latitudeDelta: 0.09,
@@ -408,7 +405,7 @@ class Map extends Component {
                   </Marker>
                 );
               })}
-              {festivalZone && <Polygon coordinates={festivalZone} fillColor={"orange"} />}
+              {festivalZone && <Polygon coordinates={festivalZone} fillColor={"#FEAC5E55"} />}
             </MapView>
           </SafeAreaView>
         ) : (
@@ -429,7 +426,7 @@ class Map extends Component {
 
         {currentUser && (
           <Pressable
-            style={[styles.ghostButton, { top: 140, backgroundColor: 'orange' }]}
+            style={[styles.ghostButton, { top: 140, backgroundColor: '#FEAC5E' }]}
             onPress={this.onPressAlert.bind(this)}
           >
             <Ionicons name='alert' size={30} color='white' />
