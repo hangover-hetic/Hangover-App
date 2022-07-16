@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import RadioButton from '../components/RadioButton';
-import SubmitButton from "../components/ui/SubmitButton";
+import CustomButton from "../components/ui/CustomButton";
 import SectionTitle from '../components/semantics/SectionTitle';
 import Span from '../components/semantics/Span';
 import CarouselContainer from '../components/ui/CarouselContainer';
@@ -62,7 +62,7 @@ class Homepage extends React.Component {
             <View>
               <SectionTitle content="Tes amis sont intéressés" />
               <Span content="Aucune suggestion de tes amis" />
-              <SubmitButton title="Ajouter des amis" />
+              <CustomButton title="Ajouter des amis" />
             </View>
             <View>
               <SectionTitle content="Calendrier" />

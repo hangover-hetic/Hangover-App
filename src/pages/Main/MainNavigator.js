@@ -6,9 +6,10 @@ import Friends from './Friends';
 import { FeedNavigator } from './Feed';
 import Homepage from './Homepage';
 import Map from './Map';
-import { FEED_ROUTE, FESTIVAL_ROUTE, FRIENDS_ROUTE, HOME_ROUTE, MAP_ROUTE } from './routes';
+import {ACCOUNT_ROUTE, FEED_ROUTE, FESTIVAL_ROUTE, FRIENDS_ROUTE, HOME_ROUTE, MAP_ROUTE} from './routes';
 import { Dimensions } from 'react-native';
 import TabBarIcon from '~/components/TabBarIcon';
+import {AccountNavigator} from "./Account";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,6 +41,15 @@ class LoginRegisterNavigator extends Component {
           tabBarHideOnKeyboard: true,
         }}
       >
+          <Tab.Screen
+              name={HOME_ROUTE}
+              component={Homepage}
+              options={{
+                  tabBarIcon: ({focused, size, color}) => (
+                      <TabBarIcon name="home" size={size} active={focused} color={color}/>
+                  ),
+              }}
+          />
         <Tab.Screen
           name={FESTIVAL_ROUTE}
           component={Festival}
@@ -49,15 +59,16 @@ class LoginRegisterNavigator extends Component {
             ),
           }}
         />
-        <Tab.Screen
-          name={FRIENDS_ROUTE}
-          component={Friends}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="group" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
+
+          {/*<Tab.Screen*/}
+          {/*    name={FRIENDS_ROUTE}*/}
+          {/*    component={Friends}*/}
+          {/*    options={{*/}
+          {/*        tabBarIcon: ({focused, size, color}) => (*/}
+          {/*            <TabBarIcon name="group" size={size} active={focused} color={color}/>*/}
+          {/*        ),*/}
+          {/*    }}*/}
+          {/*/>*/}
         <Tab.Screen
           name={FEED_ROUTE}
           component={FeedNavigator}
@@ -67,15 +78,7 @@ class LoginRegisterNavigator extends Component {
             ),
           }}
         />
-        <Tab.Screen
-          name={HOME_ROUTE}
-          component={Homepage}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="home" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
+
         <Tab.Screen
           name={MAP_ROUTE}
           component={Map}
@@ -85,6 +88,15 @@ class LoginRegisterNavigator extends Component {
             ),
           }}
         />
+          <Tab.Screen
+              name={ACCOUNT_ROUTE}
+              component={AccountNavigator}
+              options={{
+                  tabBarIcon: ({focused, size, color}) => (
+                      <TabBarIcon name="account-circle" size={size} active={focused} color={color}/>
+                  ),
+              }}
+          />
       </Tab.Navigator>
     );
   }

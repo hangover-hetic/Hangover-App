@@ -13,7 +13,7 @@ import Paragraph from '~/components/semantics/Paragraph';
 import SectionTitle from '~/components/semantics/SectionTitle';
 import WhiteSpan from '~/components/semantics/WhiteSpan';
 import { FontAwesome5 } from '@expo/vector-icons';
-import CustomButton from '~/components/CustomButton';
+import CustomButton from '~/components/ui/CustomButton';
 import TabViewFriend from '~/components/TabViewFriend';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import AutocompleteInput from 'react-native-autocomplete-input';
@@ -100,17 +100,13 @@ class Friends extends React.Component {
     const { actualUser, userFriends } = this.props;
     const { filteredEmail } = this.state;
     return (
-      <ScrollContainer>
+      <ScrollContainer style={{paddingTop: 80}}>
         {actualUser === null || userFriends === null || !actualUser || !userFriends ? (
           <Paragraph content="loading" />
         ) : (
           <>
-            <Title content="Mes amis" />
-            <View style={styles.view}>
-              <SectionTitle content="Mon pseudonyme" />
-
-              <WhiteSpan content={actualUser.email} />
-            </View>
+            <Title content="Mes amis"/>
+            <WhiteSpan content={actualUser.email} />
             <View style={styles.view}>
               <SectionTitle content="Ajouter un ami" />
 
@@ -164,7 +160,7 @@ class Friends extends React.Component {
                 }
               />
               <CustomButton
-                title="Ajouter cet amis"
+                title="Ajouter en ami"
                 onPress={
                   this.state.selectedValue.firstName
                     ? () => {

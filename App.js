@@ -13,7 +13,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginRegisterNavigator } from './src/pages/LoginRegister';
 import MainNavigator from './src/pages/Main/MainNavigator';
 import { TASK_NAME } from './src/pages/Main/Map';
-import AccountConnected from './src/pages/Account';
 
 const Stack = createNativeStackNavigator();
 

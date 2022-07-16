@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import RadioButton from '../../components/RadioButton';
-import CustomButton from '../../components/CustomButton';
+import CustomButton from '../../components/ui/CustomButton';
 import SectionTitle from '../../components/semantics/SectionTitle';
 import Span from '../../components/semantics/Span';
 import CarouselContainer from '../../components/ui/CarouselContainer';
@@ -50,7 +50,7 @@ class Homepage extends React.Component {
   render() {
     const { festivals, userInscription, friendsInscription } = this.props;
     const { radioTagSelect } = this.state;
-    
+
     return (
       <ScrollContainer>
         {festivals === null ||
@@ -60,7 +60,7 @@ class Homepage extends React.Component {
           <Paragraph content="loading" />
         ) : (
           <ScrollView>
-            
+
             <View style={styles.view}>
             <RadioButton data={this.data} bindSelected={this.selectTag} />
               <SectionTitle content="Événements" />
@@ -69,7 +69,7 @@ class Homepage extends React.Component {
             <View style={styles.view}>
               <SectionTitle content="Tes amis sont intéressés" />
               { friendsInscription === [] ? (
-              <Span content="Aucune suggestion de tes amis" />) 
+              <Span content="Aucune suggestion de tes amis" />)
               : (
               <CarouselContainer
                 items={friendsInscription}
@@ -77,8 +77,8 @@ class Homepage extends React.Component {
                 userInscription={true}
               />
               )}
-              
-              
+
+
               <CustomButton title="Ajouter des amis" />
             </View>
             <View style={styles.view}>

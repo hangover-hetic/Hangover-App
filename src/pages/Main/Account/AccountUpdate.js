@@ -1,18 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
-import FormContainer from "../../components/ui/FormContainer";
-import Title from "../../components/semantics/Title";
-import ErrorText from "../../components/semantics/ErrorText";
-import Span from "../../components/semantics/Span";
+import FormContainer from "../../../components/ui/FormContainer";
+import Title from "../../../components/semantics/Title";
+import ErrorText from "../../../components/semantics/ErrorText";
+import Span from "../../../components/semantics/Span";
 import {Controller, useForm} from "react-hook-form";
 import {StyleSheet, Text, TextInput, View} from "react-native";
-import SubmitButton from "../../components/ui/SubmitButton";
-import Container from "../../components/ui/Container";
+import SubmitButton from "../../../components/ui/SubmitButton";
+import Container from "../../../components/ui/Container";
 import {useNavigation} from "@react-navigation/native";
-import {actualUser} from "../../redux/User/userActions";
-import SectionTitle from "../../components/semantics/SectionTitle";
-import Paragraph from "../../components/semantics/Paragraph";
-import {postLogin} from "../../redux/User/userAsync-actions";
+import {actualUser} from "../../../redux/User/userActions";
+import SectionTitle from "../../../components/semantics/SectionTitle";
+import Paragraph from "../../../components/semantics/Paragraph";
+import {postLogin} from "../../../redux/User/userAsync-actions";
 
 class AccountUpdate extends React.Component {
     constructor(props) {
