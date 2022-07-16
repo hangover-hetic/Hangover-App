@@ -8,14 +8,14 @@ import Toast from 'react-native-root-toast';
 import { listenMercure, postMercure } from '~/services/mercure';
 import { getProfilePicture } from '~/services/media';
 import config from '~/services/config';
-import {Ionicons} from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setGhostMode } from '~/redux/User/userAsync-actions';
 import Paragraph from '~/components/semantics/Paragraph';
 import LoadingIndicator from '../../components/ui/LoadingIndicator';
 import { fetchFestival } from '../../redux/Festival/festival-async-actions';
 import uuid from 'react-native-uuid';
-import { userLocation } from '../../redux/User/userActions';
+import CustomMarker from '../../components/map/CustomMarker';
 
 export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
@@ -23,13 +23,13 @@ const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
 const MARKERS_TYPES = {
-  scene: <Image source={require("../../../assets/icons/scene.png")} style={{width:20, height: 20}}/>,
-  poubelle: <Image source={require("../../../assets/icons/trash.png")} style={{width:20, height: 20}}/>,
+  scene: require('../../../assets/icons/scene.png'),
+  poubelle: require('../../../assets/icons/trash.png'),
+  help: require('../../../assets/icons/help.png'),
 };
 
 class Map extends Component {
   _isMounted = false;
-  styleIcones = { width: 30, height: 30, borderRadius: 50 };
 
   constructor(props) {
     super(props);
@@ -38,6 +38,7 @@ class Map extends Component {
       markers: {},
       friends: [],
       showMap: false,
+      mapCenter: false,
     };
 
     this.mapViewRef = createRef();
@@ -54,19 +55,6 @@ class Map extends Component {
           });
         }
       }
-
-    });
-
-    Location.requestBackgroundPermissionsAsync().then(({ status }) => {
-      if (status !== 'granted') {
-        Toast.show('Permission to access location was denied');
-        if (this._isMounted) {
-          this.setState({
-            showMap: false,
-          });
-        }
-      }
-
     });
     this.initAll().catch((e) => {
       console.log('Erreur init', e);
@@ -137,14 +125,12 @@ class Map extends Component {
     this.setState({ markers });
   }
 
-
   setUserMarker(user, location) {
     const { latitude, longitude } = this.getNormalizedLatitude(location);
     this.setMarker({
       id: user.id,
       label: `${user.firstName} ${user.lastName}`,
-      icon: <Image source={{ uri: getProfilePicture(user.profilePicture) }}
-                   style={this.styleIcones} />,
+      icon: { uri: getProfilePicture(user.profilePicture) },
       latitude,
       longitude,
     });
@@ -254,8 +240,6 @@ class Map extends Component {
         deferredUpdatesDistance: 5,
         deferredUpdatesInterval: 1000,
       });
-
-
     } catch (e) {
       Toast.show('Erreur' + e);
       console.log('Erreur' + e);
@@ -336,7 +320,7 @@ class Map extends Component {
         this.setMarker({
           id: 'map-marker-' + i,
           label: marker.name,
-          icon: <Image source={MARKERS_TYPES[marker.icon]} style={this.styleIcones} />,
+          icon: MARKERS_TYPES[marker.icon],
           latitude: marker.position.lat,
           longitude: marker.position.lng,
         });
@@ -345,14 +329,16 @@ class Map extends Component {
     if (festival.map.center) {
       const { lat, lng } = festival.map.center;
       this.setState({
-        festivalCenter: {
+        mapCenter: {
           latitude: lat,
           longitude: lng,
         },
       });
     } else {
       const location = await Location.getCurrentPositionAsync();
-      dispatch(userLocation(this.getNormalizedLatitude(location)));
+      this.setState({
+        mapCenter: this.getNormalizedLatitude(location),
+      });
     }
 
     if (festival.map.zone) {
@@ -361,7 +347,6 @@ class Map extends Component {
           return { latitude: lat, longitude: lng };
         }),
       });
-
     }
 
     if (this._isMounted) {
@@ -372,19 +357,19 @@ class Map extends Component {
   }
 
   render() {
-    const { markers, showMap, festivalCenter, festivalZone } = this.state;
+    const { markers, showMap, mapCenter } = this.state;
     const { currentUser } = this.props;
     return (
       <View>
-        {showMap && (festivalCenter) ? (
+        {showMap && mapCenter ? (
           <SafeAreaView>
             <MapView
               ref={this.mapViewRef}
               style={styles.map}
               provider={PROVIDER_GOOGLE}
               initialRegion={{
-                latitude: festivalCenter.latitude,
-                longitude: festivalCenter.longitude,
+                latitude: mapCenter.latitude,
+                longitude: mapCenter.longitude,
                 latitudeDelta: 0.09,
                 longitudeDelta: 0.035,
               }}
@@ -394,49 +379,47 @@ class Map extends Component {
               {Object.keys(markers).map((key) => {
                 const { latitude, longitude, icon, label, markerKey } = markers[key];
                 return (
-                  <Marker coordinate={{ latitude, longitude }} key={markerKey}>
-                    <View style={{ alignItems: 'center' }}>
-                      <Paragraph
-                        content={label}
-                        styles={{ marginBottom: 5 }}
-                      />
-                      {icon}
-                    </View>
-                  </Marker>
+                  <CustomMarker
+                    key={markerKey}
+                    iconSource={icon}
+                    label={label}
+                    latitude={latitude}
+                    longitude={longitude}
+                  />
                 );
               })}
-              {festivalZone && <Polygon coordinates={festivalZone} fillColor={"#FEAC5E55"} />}
             </MapView>
           </SafeAreaView>
         ) : (
           <LoadingIndicator />
         )}
 
-        {currentUser && (
+        {showMap && (
           <Pressable
             style={[
               styles.ghostButton,
-              { backgroundColor: currentUser.ghostMode ? 'green' : 'grey', top: 70 },
+              {
+                backgroundColor: currentUser.ghostMode ? '#5efe6e' : '#6b6b6b',
+                top: 70,
+              },
             ]}
             onPress={this.onPressGhostMode.bind(this)}
           >
-            <MaterialCommunityIcons name='ghost' size={30} color='white' />
+            <MaterialCommunityIcons name="ghost" size={30} color="white" />
           </Pressable>
         )}
 
-        {currentUser && (
+        {showMap && (
           <Pressable
             style={[styles.ghostButton, { top: 140, backgroundColor: '#FEAC5E' }]}
             onPress={this.onPressAlert.bind(this)}
           >
-            <Ionicons name='alert' size={30} color='white' />
+            <Ionicons name="alert" size={30} color="white" />
           </Pressable>
         )}
       </View>
     );
   }
-
-
 }
 
 const styles = StyleSheet.create({

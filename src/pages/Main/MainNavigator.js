@@ -65,15 +65,6 @@ class LoginRegisterNavigator extends Component {
           }}
         />
 
-        {/*<Tab.Screen*/}
-        {/*    name={FRIENDS_ROUTE}*/}
-        {/*    component={Friends}*/}
-        {/*    options={{*/}
-        {/*        tabBarIcon: ({focused, size, color}) => (*/}
-        {/*            <TabBarIcon name="group" size={size} active={focused} color={color}/>*/}
-        {/*        ),*/}
-        {/*    }}*/}
-        {/*/>*/}
         <Tab.Screen
           name={FEED_ROUTE}
           component={FeedNavigator}
