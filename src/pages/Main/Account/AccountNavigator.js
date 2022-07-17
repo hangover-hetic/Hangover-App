@@ -5,6 +5,7 @@ import Params from './Params';
 import AccountUpdate from './AccountUpdate';
 import Account from './Account';
 import Friends from '../Friends';
+import UserUpdateConnected from './UserUpdate';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,7 +32,7 @@ class AccountNavigator extends Component {
         />
         <Stack.Screen
           name={UPDATE_ACCOUNT}
-          component={AccountUpdate}
+          component={UserUpdateConnected}
           options={{ headerShown: true, title: '' }}
         />
       </Stack.Navigator>
