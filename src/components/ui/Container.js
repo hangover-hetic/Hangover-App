@@ -1,28 +1,36 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import PropTypes from 'prop-types';
 
 class Container extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+  static propTypes = {
+    styles: PropTypes.object,
+  };
 
-    render() {
-        return <>
-            <View style={styles.container}>
-                {this.props.children}
-            </View>
-        </>
-    }
-}
+  constructor(props) {
+    super(props);
+  }
 
-const styles = StyleSheet.create({
-    container: {
+  getStyles() {
+    return {
+      container: {
         backgroundColor: '#202020',
         minHeight: '100%',
         color: '#fff',
-        padding: 20,
-        paddingTop: 50
-    }
-})
+        padding: this.props.noPadding === true ? 0 : 20,
+      },
+    };
+  }
 
-export default Container
+  render() {
+    const styles = this.getStyles();
+
+    return (
+      <SafeAreaView style={[styles.container, this.props.style]}>
+        {this.props.children}
+      </SafeAreaView>
+    );
+  }
+}
+
+export default Container;

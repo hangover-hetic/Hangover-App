@@ -1,10 +1,33 @@
 {
   "expo": {
-    "name": "hangover-app-2",
+    "name": "Hangover",
     "slug": "hangover-app-2",
     "version": "1.0.0",
+    "icon": "./assets/logo.png",
+    "orientation": "portrait",
+    "splash": {
+      "image": "./assets/splashscreen.jpg",
+      "backgroundColor": "#202020",
+      "resizeMode": "contain"
+    },
+    "ios": {
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
+    },
     "assetBundlePatterns": [
       "**/*"
+    ],
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Nous avons besoin de votre permission pour utiliser vos photos"
+        }
+      ]
     ]
   }
 }

@@ -1,147 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5e5a8b15-402c-4e27-be24-2cb4f0b52503" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.expo/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/.buckconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/BUCK" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/build_defs.bzl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/debug.keystore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/proguard-rules.pro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/debug/java/com/hangoverapp2/ReactNativeFlipper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-ExtraBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/assets/fonts/Poppins-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/java/com/hangoverapp2/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/java/com/hangoverapp2/MainApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/java/com/hangoverapp2/newarchitecture/MainApplicationReactNativeHost.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/java/com/hangoverapp2/newarchitecture/components/MainComponentsRegistry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/java/com/hangoverapp2/newarchitecture/modules/MainApplicationTurboModuleManagerDelegate.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/Android.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainApplicationModuleProvider.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainApplicationModuleProvider.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainApplicationTurboModuleManagerDelegate.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainApplicationTurboModuleManagerDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainComponentsRegistry.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/MainComponentsRegistry.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/jni/OnLoad.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/drawable/rn_edit_text_material.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/drawable/splashscreen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/drawable/splashscreen_image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-ExtraBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/assets/fonts/Poppins-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/Podfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/Podfile.properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2.xcodeproj/xcshareddata/xcschemes/hangoverapp2.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/AppDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/AppDelegate.mm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/SplashScreen.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/SplashScreen.imageset/splashscreen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/SplashScreenBackground.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Images.xcassets/SplashScreenBackground.imageset/background.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/SplashScreen.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/Supporting/Expo.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/ios/hangoverapp2/main.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/metro.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/react-native.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/settings/request.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/CustomButton.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/semantics/Paragraph.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/semantics/SectionTitle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/semantics/Span.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/semantics/Title.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/ui/Container.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/components/ui/Separator.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/pages/Homepage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/pages/Login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/pages/Map.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/pages/NotFound.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/pages/Register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/User/userActions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/User/userAsync-actions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/User/userConstants.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/User/userReducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/rootReducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/src/redux/store.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hangover-app-2/yarn.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.yarn-integrity" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.yarn-integrity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/TextGradientExample/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/TextGradientExample/android/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/TextGradientExample/ios/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/android/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/ios/.npmignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/react-native-text-gradient/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/react-native-text-gradient/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/dayjs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CardFestival.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CardFestival.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/InterTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/InterTitle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/SectionTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/SectionTitle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/semantics/TextDate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/semantics/TextDate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/ScrollContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/ScrollContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Events.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Events.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Program.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Program.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/feed/PostContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/feed/PostContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/Container.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/Container.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Feed.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Feed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/Festival/festival-async-actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/media.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/media.js" afterDir="false" />
+>>>>>>> Stashed changes
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,22 +49,46 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2BCFuE9URLX5pkvHxY0iC8XVbQ5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
-    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/timot/CODE_PROJECTS/COURS/HANGOVER-APP-2/settings&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\timot\\AppData\\Local\\JetBrains\\Toolbox\\apps\\WebStorm\\ch-0\\221.5921.27\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+>>>>>>> Stashed changes
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\timot\CODE_PROJECTS\COURS\HANGOVER-APP-2\settings" />
+      <recent name="C:\Users\timot\CODE_PROJECTS\COURS\HANGOVER-APP-2\src\redux" />
+      <recent name="C:\Users\timot\CODE_PROJECTS\COURS\HANGOVER-APP-2\src\pages" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/hangover-app-2/assets/fonts" />
@@ -185,25 +97,25 @@
       <recent name="$PROJECT_DIR$/hangover-app-2" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.Map.js">
+  <component name="RunManager" selected="npm.start">
     <configuration name="Map.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/hangover-app-2/src/pages/Map.js" working-dir="$PROJECT_DIR$/hangover-app-2/src/pages">
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/hangover-app-2/package.json" />
+      <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="start" />
       </scripts>
       <node-interpreter value="project" />
-      <package-manager value="npm" />
+      <package-manager value="yarn" />
       <envs />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.Map.js" />
         <item itemvalue="npm.start" />
+        <item itemvalue="Node.js.Map.js" />
       </list>
     </recent_temporary>
   </component>
@@ -223,6 +135,7 @@
       <workItem from="1656589598652" duration="24000" />
       <workItem from="1656589637235" duration="51000" />
       <workItem from="1656591549426" duration="326000" />
+      <workItem from="1657180883392" duration="6291000" />
     </task>
     <servers />
   </component>
@@ -240,5 +153,13 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="work" />
+    <option name="LAST_COMMIT_MESSAGE" value="work" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

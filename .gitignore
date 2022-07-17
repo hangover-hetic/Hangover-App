@@ -55,3 +55,14 @@ web-build/
 dist/
 
 .yarn.lock
+
+node_modules
+
+package-lock.json
+
+.vscode/settings.json
+
+yarn.lock
+
+yarn.lock
+package-lock.json
