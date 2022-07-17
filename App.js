@@ -12,7 +12,7 @@ import { userLocation } from './src/redux/User/userActions';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LoginRegisterNavigator } from './src/pages/LoginRegister';
 import MainNavigator from './src/pages/Main/MainNavigator';
-import { TASK_NAME } from './src/pages/Main/Map';
+import {TASK_NAME} from "./src/pages/Main/Festival/Map";
 
 const Stack = createNativeStackNavigator();
 

@@ -11,21 +11,21 @@ import config from '~/services/config';
 import { Ionicons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setGhostMode } from '~/redux/User/userAsync-actions';
-import Paragraph from '~/components/semantics/Paragraph';
-import LoadingIndicator from '../../components/ui/LoadingIndicator';
-import { fetchFestival } from '../../redux/Festival/festival-async-actions';
+import LoadingIndicator from '~/components/ui/LoadingIndicator';
 import uuid from 'react-native-uuid';
-import CustomMarker from '../../components/map/CustomMarker';
+import CustomMarker from '~/components/map/CustomMarker';
 
 export const TASK_NAME = 'BACKGROUND_LOC';
 const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
+const basIconDir = '../../../../assets/icons/';
+
 const MARKERS_TYPES = {
-  scene: require('../../../assets/icons/scene.png'),
-  poubelle: require('../../../assets/icons/trash.png'),
-  help: require('../../../assets/icons/help.png'),
+  scene: require(basIconDir + 'scene.png'),
+  poubelle: require(basIconDir + 'trash.png'),
+  help: require(basIconDir + 'help.png'),
 };
 
 class Map extends Component {
@@ -97,15 +97,6 @@ class Map extends Component {
       });
 
       listenMercure(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
-
-      const { festival, dispatch } = this.props;
-      if (!festival) {
-        try {
-          await dispatch(fetchFestival(3, true));
-        } catch (e) {
-          Toast.show(e?.response?.data);
-        }
-      }
 
       await this.initMap(currentUser);
     } catch (e) {

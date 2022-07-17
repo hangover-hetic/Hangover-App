@@ -1,5 +1,6 @@
 import {
   ADD_ACTUAL_FESTIVAL_POSTS,
+  IS_ACTUAL_SELECTED,
   SET_ACTUAL_FESTIVAL,
   SET_ACTUAL_FESTIVAL_POSTS,
   SET_FESTIVAL,
@@ -11,6 +12,7 @@ const initialState = {
   actualFeed: [],
   festival: null,
   festivals: [],
+  isActualSelected: false,
 };
 
 const festivalReducer = (state = initialState, action) => {
@@ -39,6 +41,11 @@ const festivalReducer = (state = initialState, action) => {
       return {
         ...state,
         festivals: action.payload,
+      };
+    case IS_ACTUAL_SELECTED:
+      return {
+        ...state,
+        isActualSelected: action.payload,
       };
     default:
       return state;

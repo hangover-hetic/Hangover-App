@@ -63,6 +63,7 @@ const userReducer = (state = initialState, action) => {
         usersSearchEmail: action.payload,
       };
     case USER_INSCRIPTION:
+      console.log('paylo', action.payload);
       return {
         ...state,
         userInscription: action.payload,

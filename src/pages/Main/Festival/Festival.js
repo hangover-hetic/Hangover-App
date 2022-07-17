@@ -32,7 +32,7 @@ import Span from '~/components/semantics/Span';
 import MenuDrawer from 'react-native-side-drawer';
 import { Entypo, Feather, FontAwesome5 } from '@expo/vector-icons';
 import TagList from '~/components/TagList';
-import LoadingIndicator from '../../components/ui/LoadingIndicator';
+import LoadingIndicator from '~/components/ui/LoadingIndicator';
 
 class Festival extends React.Component {
   constructor(props) {
@@ -49,11 +49,10 @@ class Festival extends React.Component {
   }
 
   async loadData() {
-    const { fetchFestival, fetchInscriptionFriends, fetchInscriptionFestival } = this.props;
+    const { fetchInscriptionFriends, fetchInscriptionFestival } = this.props;
     try {
       await fetchInscriptionFestival();
       await fetchInscriptionFriends();
-      await fetchFestival(3, false);
     } catch (e) {
       console.error(e);
     }
@@ -126,6 +125,7 @@ class Festival extends React.Component {
     const { actualUser, friendsInscription, festival, userInscription } = this.props;
     var stylesTags = [];
     var stylesTagsUni = [];
+    console.log('fet', festival);
     return (
       <ScrollContainer noPadding={true}>
         {festival === null || userInscription === null ? (
@@ -399,7 +399,7 @@ const mapStateToProps = (state) => ({
   actualUser: state.user.actualUser,
   friendsInscription: state.user.userInscriptionFriends,
   userInscription: state.user.userInscription,
-  festival: state.festival.festival,
+  festival: state.festival.actualFestival,
 });
 const mapActionsToProps = {
   fetchFestival,
