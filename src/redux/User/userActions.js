@@ -109,3 +109,10 @@ export const userLocation = (location) => {
     payload: location,
   };
 };
+
+export const userLogout = () => {
+  return {
+    type: USER_TOKEN,
+    payload: null,
+  };
+};

@@ -20,12 +20,10 @@ const ASK_LOCATION = 'SEND_LOCATION';
 const ASK_ACTIVATE_GHOST = 'MAKE_ME_DISAPPEAR';
 const ASK_ALERT = 'HELP';
 
-const basIconDir = '../../../../assets/icons/';
-
 const MARKERS_TYPES = {
-  scene: require(basIconDir + 'scene.png'),
-  poubelle: require(basIconDir + 'trash.png'),
-  help: require(basIconDir + 'help.png'),
+  scene: require('assets/icons/scene.png'),
+  poubelle: require('assets/icons/trash.png'),
+  help: require('assets/icons/help.png'),
 };
 
 class Map extends Component {
