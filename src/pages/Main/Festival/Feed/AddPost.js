@@ -13,7 +13,7 @@ import Span from '~/components/semantics/Span';
 import ScrollContainer from '~/components/ui/ScrollContainer';
 import { AntDesign } from '@expo/vector-icons';
 import Input from '~/components/ui/Input';
-import SubmitButton from '../../../components/ui/SubmitButton';
+import SubmitButton from '~/components/ui/SubmitButton';
 
 class AddPost extends Component {
   constructor(props) {

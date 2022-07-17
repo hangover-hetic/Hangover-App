@@ -16,6 +16,7 @@ import Paragraph from '../../components/semantics/Paragraph';
 import CalendarInscription from '../../components/Calendar';
 import ScrollContainer from '../../components/ui/ScrollContainer';
 import dayjs from '~/services/dayjs';
+import LoadingIndicator from '../../components/ui/LoadingIndicator';
 
 class Homepage extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class Homepage extends React.Component {
         festivals.length === 0 ||
         userInscription === null ||
         !userInscription ? (
-          <Paragraph content="loading" />
+          <LoadingIndicator />
         ) : (
           <ScrollView>
             <View style={styles.view}>

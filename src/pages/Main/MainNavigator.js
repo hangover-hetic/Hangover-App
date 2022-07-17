@@ -1,25 +1,19 @@
 import { Component } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Festival from './Festival';
-import { FeedNavigator } from './Feed';
 import Homepage from './Homepage';
-import Map from './Map';
-import {
-  ACCOUNT_ROUTE,
-  FEED_ROUTE,
-  FESTIVAL_ROUTE,
-  FRIENDS_ROUTE,
-  HOME_ROUTE,
-  MAP_ROUTE,
-} from './routes';
+import { ACCOUNT_ROUTE, FESTIVAL_ROUTE, HOME_ROUTE, INSCRIPTIONS_ROUTE, MAP_ROUTE } from './routes';
 import { Dimensions } from 'react-native';
 import TabBarIcon from '~/components/TabBarIcon';
 import { AccountNavigator } from './Account';
+import { FestivalNavigator } from './Festival';
+import { connect } from 'react-redux';
+import Inscriptions from './Inscriptions';
 
 const Tab = createBottomTabNavigator();
 
-class LoginRegisterNavigator extends Component {
+class MainNavigator extends Component {
   render() {
+    const { isActualSelected } = this.props;
     const tabBarWidth = 300;
     const tabBarLeft = (Dimensions.get('window').width - tabBarWidth) / 2;
     return (
@@ -57,33 +51,23 @@ class LoginRegisterNavigator extends Component {
         />
         <Tab.Screen
           name={FESTIVAL_ROUTE}
-          component={Festival}
+          component={isActualSelected ? FestivalNavigator : Inscriptions}
           options={{
             tabBarIcon: ({ size, focused, color }) => (
               <TabBarIcon name="event" size={size} active={focused} color={color} />
             ),
           }}
         />
+        {/*<Tab.Screen*/}
+        {/*  name={INSCRIPTIONS_ROUTE}*/}
+        {/*  component={Inscriptions}*/}
+        {/*  options={{*/}
+        {/*    tabBarIcon: ({ size, focused, color }) => (*/}
+        {/*      <TabBarIcon name="view-agenda" size={size} active={focused} color={color} />*/}
+        {/*    ),*/}
+        {/*  }}*/}
+        {/*/>*/}
 
-        <Tab.Screen
-          name={FEED_ROUTE}
-          component={FeedNavigator}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="image" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
-
-        <Tab.Screen
-          name={MAP_ROUTE}
-          component={Map}
-          options={{
-            tabBarIcon: ({ focused, size, color }) => (
-              <TabBarIcon name="map" size={size} active={focused} color={color} />
-            ),
-          }}
-        />
         <Tab.Screen
           name={ACCOUNT_ROUTE}
           component={AccountNavigator}
@@ -98,4 +82,8 @@ class LoginRegisterNavigator extends Component {
   }
 }
 
-export default LoginRegisterNavigator;
+const mapStateToProps = (state) => ({
+  isActualSelected: state.festival.isActualSelected,
+});
+
+export default connect(mapStateToProps)(MainNavigator);

@@ -174,10 +174,9 @@ export const fetchInscriptionFestival = () => {
         method: 'GET',
         url: 'inscriptions',
       });
-
       dispatch(userInscription(data));
     } catch (e) {
-      console.dir(e);
+      Toast.show('Erreur' + e);
     }
   };
 };

@@ -12,15 +12,32 @@ export default class CustomMarker extends React.Component {
     label: PropTypes.string.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMounted: false,
+    };
+  }
+
   styleIcons = { width: 30, height: 30, borderRadius: 50 };
 
   shouldComponentUpdate(nextProps) {
-    return nextProps.latitude !== this.props.longitude;
+    return nextProps.latitude !== this.props.latitude;
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.iconSource !== this.props.iconSource) {
+      this.setState({
+        isMounted: true,
+      });
+    }
+  }
+
   render() {
     const { latitude, longitude, iconSource, label } = this.props;
+    const { isMounted } = this.state;
     return (
-      <Marker coordinate={{ latitude, longitude }} tracksViewChanges={false}>
+      <Marker coordinate={{ latitude, longitude }} tracksViewChanges={!isMounted}>
         <View style={{ alignItems: 'center' }}>
           <Paragraph content={label} styles={{ marginBottom: 5 }} />
           <Image source={iconSource} style={this.styleIcons} />

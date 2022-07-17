@@ -1,5 +1,6 @@
 import {
   ADD_ACTUAL_FESTIVAL_POSTS,
+  IS_ACTUAL_SELECTED,
   SET_ACTUAL_FESTIVAL,
   SET_ACTUAL_FESTIVAL_POSTS,
   SET_FESTIVAL,
@@ -34,6 +35,13 @@ export const addActualFestivalPosts = (payload) => {
 export const setFestivals = (payload) => {
   return {
     type: SET_FESTIVALS,
+    payload,
+  };
+};
+
+export const setIsActualSelectedFestivals = (payload) => {
+  return {
+    type: IS_ACTUAL_SELECTED,
     payload,
   };
 };

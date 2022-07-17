@@ -3,17 +3,14 @@ import SectionTitle from '../../../components/semantics/SectionTitle';
 import { Image, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../../../redux/User/userAsync-actions';
-import InterTitle from '../../../components/semantics/InterTitle';
 import { Entypo, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import React from 'react';
-import Paragraph from '../../../components/semantics/Paragraph';
 import BigSpan from '../../../components/semantics/BigSpan';
 import Span from '../../../components/semantics/Span';
 import { getProfilePicture } from '../../../services/media';
-import { ADD_POST_ROUTE } from '../Feed/routes';
 import { UPDATE_ACCOUNT } from './routes';
-import Container from '../../../components/ui/Container';
 import ScrollContainer from '../../../components/ui/ScrollContainer';
+import { userLogout } from '../../../redux/User/userActions';
 
 class Params extends React.Component {
   constructor(props) {
@@ -26,7 +23,7 @@ class Params extends React.Component {
   }
 
   render() {
-    const { actualUser } = this.props;
+    const { actualUser, userLogout } = this.props;
     const grey = '#9D9D9D';
 
     return (
@@ -110,7 +107,7 @@ class Params extends React.Component {
               </View>
             </TouchableHighlight>
 
-            <TouchableHighlight style={styles.listItemWithoutBorder}>
+            <TouchableHighlight style={styles.listItemWithoutBorder} onPress={() => userLogout()}>
               <View style={styles.listContent}>
                 <MaterialIcons style={styles.listIcon} name={'logout'} color={grey} size={25} />
                 <BigSpan content={'Déconnexion'} />
@@ -167,6 +164,7 @@ const mapStateToProps = (state) => ({
 });
 const mapActionsToProps = {
   fetchFriends,
+  userLogout,
 };
 
 const ParamsConnected = connect(mapStateToProps, mapActionsToProps)(Params);

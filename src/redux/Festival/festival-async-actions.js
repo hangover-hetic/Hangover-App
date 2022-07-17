@@ -3,6 +3,7 @@ import {
   setActualFestivalPosts,
   setFestivals,
   setFestival,
+  setIsActualSelectedFestivals,
 } from './festival-actions';
 import request from '../../services/request';
 
@@ -15,9 +16,11 @@ export const fetchFestival = (id, isActual = true) => {
       });
       if (isActual) {
         dispatch(setActualFestival(data));
+        dispatch(setIsActualSelectedFestivals(true));
       } else if (!isActual) {
         dispatch(setFestival(data));
       }
+      return data;
     } catch (e) {
       console.log(e);
     }

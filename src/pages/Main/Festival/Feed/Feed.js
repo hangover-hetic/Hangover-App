@@ -10,9 +10,9 @@ import PostContainer from '~/components/feed/PostContainer';
 import { addActualFestivalPosts } from '~/redux/Festival/festival-actions';
 import { ADD_POST_ROUTE } from './routes';
 import { listenMercure } from '~/services/mercure';
-import Container from '../../../components/ui/Container';
-import LoadingIndicator from '../../../components/ui/LoadingIndicator';
-import { getProfilePicture } from '../../../services/media';
+import Container from '~/components/ui/Container';
+import LoadingIndicator from '~/components/ui/LoadingIndicator';
+import { getProfilePicture } from '~/services/media';
 
 class Feed extends React.Component {
   mercureInit = false;
@@ -45,10 +45,9 @@ class Feed extends React.Component {
   }
 
   async loadData() {
-    const { fetchFestival, fetchFestivalPosts } = this.props;
+    const { actualFestival, fetchFestivalPosts } = this.props;
     try {
-      await fetchFestival(3);
-      await fetchFestivalPosts(3);
+      await fetchFestivalPosts(actualFestival.id);
     } catch (e) {
       console.error(e.response.data);
     }
