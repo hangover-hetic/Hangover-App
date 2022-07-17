@@ -1,31 +1,22 @@
 import React from 'react';
 import {
   View,
-  Text,
-  TextInput,
   StyleSheet,
-  SafeAreaView,
-  FlatList,
-  Image,
-  TouchableOpacity,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../../../redux/User/userAsync-actions';
 import Title from '../../../components/semantics/Title';
-import { FontAwesome5, Ionicons } from '@expo/vector-icons';
-import ScrollContainer from '../../../components/ui/ScrollContainer';
+import { Ionicons } from '@expo/vector-icons';
 import Container from '../../../components/ui/Container';
-import BigSpan from '../../../components/semantics/BigSpan';
 import Span from '../../../components/semantics/Span';
 import SectionTitle from '../../../components/semantics/SectionTitle';
 import Paragraph from '../../../components/semantics/Paragraph';
 import WhiteSpan from '../../../components/semantics/WhiteSpan';
 import CustomButton from '../../../components/ui/CustomButton';
-import { FRIENDS, FRIENDS_ACCOUNT, PARAMS_ACCOUNT } from './routes';
+import { FRIENDS_ACCOUNT, PARAMS_ACCOUNT } from './routes';
 import CarouselContainer from '../../../components/ui/CarouselContainer';
 import CardCarouselFestival from '../../../components/CardCarouselFestival';
 import CalendarInscription from '../../../components/Calendar';
-import { FRIENDS_ROUTE } from '../routes';
 
 class Account extends React.Component {
   constructor(props) {
@@ -65,19 +56,29 @@ class Account extends React.Component {
   }
 
   render() {
-    const { actualUser, userFriends, userInscription } = this.props;
+    const { actualUser, userInscription } = this.props;
     return (
       <Container>
         <View style={{ display: 'flex' }}>
           <Title content="Mon compte" />
           <Ionicons
-            name="settings"
+            name="settings-outline"
             color="white"
             size={30}
             onPress={this.navigateToParams.bind(this)}
             style={{
               position: 'absolute',
               right: 10,
+              top: 10,
+            }}
+          />
+          <Ionicons
+            name="card-outline"
+            color="white"
+            size={30}
+            style={{
+              position: 'absolute',
+              right: 60,
               top: 10,
             }}
           />

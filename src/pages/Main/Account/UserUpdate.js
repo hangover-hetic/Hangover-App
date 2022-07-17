@@ -1,20 +1,36 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import BasicBigText from '../../components/semantics/BasicBigText';
-import Container from '../../components/ui/Container';
-import FormContainer from '../../components/ui/FormContainer';
-import { manipulateAsync, SaveFormat } from 'expo-image-manipulator';
-import { TextInput, Pressable, Vibration } from 'react-native';
-import SubmitButton from '../../components/ui/CustomButton';
-import { View } from 'react-native';
-import { StyleSheet } from 'react-native';
-import Paragraph from '../../components/semantics/Paragraph';
-import BasicText from '../../components/semantics/BasicText';
+import { 
+  useForm, 
+  Controller 
+} from 'react-hook-form';
+import BasicBigText from '../../../components/semantics/BasicBigText';
+import Container from '../../../components/ui/Container';
+import FormContainer from '../../../components/ui/FormContainer';
+import { 
+  manipulateAsync,
+  SaveFormat 
+} from 'expo-image-manipulator';
+import { 
+  TextInput, 
+  Pressable, 
+  Vibration,
+  View, 
+  StyleSheet,
+  Image
+} from 'react-native';
+import SubmitButton from '../../../components/ui/CustomButton';
+import Paragraph from '../../../components/semantics/Paragraph';
+import BasicText from '../../../components/semantics/BasicText';
 import { connect } from 'react-redux';
-import { updateDataUser } from '../../redux/User/userAsync-actions';
+import { updateDataUser } from '../../../redux/User/userAsync-actions';
 import * as ImagePicker from 'expo-image-picker';
 import Toast from 'react-native-root-toast';
-import { getMediaIri, uploadMedia } from '../../services/media';
+import { 
+  getMediaIri, 
+  uploadMedia 
+} from '../../../services/media';
+import { Ionicons } from '@expo/vector-icons';
+import { getProfilePicture } from '../../../services/media';
 
 class UserUpdate extends React.Component {
   constructor(props) {
@@ -71,7 +87,7 @@ class UserUpdate extends React.Component {
   render() {
     const { image } = this.state;
     const canPost = image !== null;
-    console.log(canPost);
+
     return (
       <Container>
         <FormContainer>
@@ -229,7 +245,10 @@ class UserUpdate extends React.Component {
             onPress={this.pickImage}
             style={{ flexDirection: 'row', alignItems: 'center', width: 300 }}
           >
-            <Ionicons name="person-circle-outline" size={40} color="white" />
+              <Image
+                style={styles.profilePicture}
+                source={{ uri: getProfilePicture(this.props.actualUser.profilePicture) }}
+              />
             <Paragraph content="Modifier ma photo de profil" styles={{ marginLeft: 10 }} />
           </Pressable>
 
@@ -254,6 +273,12 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 11,
     color: 'white',
+  },
+  profilePicture: {
+    width: 50,
+    height: 50,
+    borderRadius: 20,
+    marginRight: 10,
   },
   spaceBetween: {
     marginBottom: 10,
