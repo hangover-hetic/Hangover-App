@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { fetchFriends } from '../../../redux/User/userAsync-actions';
 import Title from '../../../components/semantics/Title';
@@ -17,6 +14,7 @@ import { FRIENDS_ACCOUNT, PARAMS_ACCOUNT } from './routes';
 import CarouselContainer from '../../../components/ui/CarouselContainer';
 import CardCarouselFestival from '../../../components/CardCarouselFestival';
 import CalendarInscription from '../../../components/Calendar';
+import ScrollContainer from '../../../components/ui/ScrollContainer';
 
 class Account extends React.Component {
   constructor(props) {
@@ -58,7 +56,7 @@ class Account extends React.Component {
   render() {
     const { actualUser, userInscription } = this.props;
     return (
-      <Container>
+      <ScrollContainer>
         <View style={{ display: 'flex' }}>
           <Title content="Mon compte" />
           <Ionicons
@@ -123,7 +121,7 @@ class Account extends React.Component {
             </>
           )}
         </View>
-      </Container>
+      </ScrollContainer>
     );
   }
 }
