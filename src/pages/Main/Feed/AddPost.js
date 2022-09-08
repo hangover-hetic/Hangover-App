@@ -59,7 +59,7 @@ class AddPost extends Component {
         format: SaveFormat.JPEG,
       });
       const { data: media } = await uploadMedia(manipResult);
-      console.log(media);
+
       if (!media.contentUrl) return;
       const { actualFestivalId, navigation } = this.props;
       const mediaIri = getMediaIri(media.id);

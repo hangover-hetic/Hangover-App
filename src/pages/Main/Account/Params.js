@@ -12,12 +12,16 @@ import Span from '../../../components/semantics/Span';
 import { getProfilePicture } from '../../../services/media';
 import { ADD_POST_ROUTE } from '../Feed/routes';
 import { UPDATE_ACCOUNT } from './routes';
+import { TERMS_OF_USE } from './routes';
 import Container from '../../../components/ui/Container';
 import ScrollContainer from '../../../components/ui/ScrollContainer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class Params extends React.Component {
   constructor(props) {
     super(props);
+
+    this.logout = this.logout.bind(this);
   }
 
   navigateUpdateAccount() {

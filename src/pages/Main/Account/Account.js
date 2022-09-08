@@ -32,7 +32,6 @@ class Account extends React.Component {
   };
 
   async componentDidMount() {
-    console.log(this.props);
     await this.loadData();
   }
 

@@ -47,7 +47,7 @@ export default function CalendarInscription({ data }) {
     endingDay: true,
     color: '#ff9531',
   };
-  console.log(data);
+
   data.map((item) => {
     var color = colors[Math.floor(Math.random() * colors.length)];
     dateInscription[dayjs(item.startDate).format('YYYY-MM-DD')] = {
