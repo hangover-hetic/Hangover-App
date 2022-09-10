@@ -8,7 +8,7 @@ import React from 'react';
 import BigSpan from '../../../components/semantics/BigSpan';
 import Span from '../../../components/semantics/Span';
 import { getProfilePicture } from '../../../services/media';
-import { TERMS_OF_USE, UPDATE_ACCOUNT } from './routes';
+import { ABOUT, TERMS_OF_USE, UPDATE_ACCOUNT } from './routes';
 import ScrollContainer from '../../../components/ui/ScrollContainer';
 import { userLogout } from '../../../redux/User/userActions';
 
@@ -25,6 +25,11 @@ class Params extends React.Component {
   navigateTermsOfUSe(){
     const { navigation } = this.props;
     navigation.navigate(TERMS_OF_USE);
+  }
+
+  navigateAbout(){
+    const { navigation } = this.props;
+    navigation.navigate(ABOUT);
   }
 
   render() {
@@ -102,7 +107,10 @@ class Params extends React.Component {
               </View>
             </TouchableHighlight>
 
-            <TouchableHighlight style={styles.listItem}>
+            <TouchableHighlight 
+              style={styles.listItem}
+              onPress={this.navigateAbout.bind(this)}
+            >
               <View style={styles.listContent}>
                 <Entypo style={styles.listIcon} name={'info-with-circle'} color={grey} size={25} />
                 <BigSpan content={'À propos'} />

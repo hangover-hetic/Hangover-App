@@ -1,12 +1,13 @@
 import { Component } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { PARAMS_ACCOUNT, UPDATE_ACCOUNT, ACCOUNT, FRIENDS_ACCOUNT, TERMS_OF_USE } from './routes';
+import { PARAMS_ACCOUNT, UPDATE_ACCOUNT, ACCOUNT, FRIENDS_ACCOUNT, TERMS_OF_USE, ABOUT } from './routes';
 import Params from './Params';
 import AccountUpdate from './AccountUpdate';
 import Account from './Account';
 import Friends from '../Friends';
 import UserUpdateConnected from './UserUpdate';
 import TermsOfUse from './TermsOfUse';
+import About from './About';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,11 @@ class AccountNavigator extends Component {
         <Stack.Screen
           name={TERMS_OF_USE}
           component={TermsOfUse}
+          options={{ headerShown: true, title: '' }}
+        />
+         <Stack.Screen
+          name={ABOUT}
+          component={About}
           options={{ headerShown: true, title: '' }}
         />
       </Stack.Navigator>
