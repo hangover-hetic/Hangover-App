@@ -10,10 +10,6 @@ import FestivalRow from '../../components/FestivalRow';
 import { getAbsoluteMediaPath } from '../../services/media';
 import dayjs from '../../services/dayjs';
 import Toast from 'react-native-root-toast';
-import {
-  setActualFestival,
-  setIsActualSelectedFestivals,
-} from '../../redux/Festival/festival-actions';
 import { fetchFestival } from '../../redux/Festival/festival-async-actions';
 import { FESTIVAL_ROUTE, INSCRIPTIONS_ROUTE } from './routes';
 

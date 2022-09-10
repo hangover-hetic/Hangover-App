@@ -96,4 +96,5 @@ TaskManager.defineTask(TASK_NAME, async ({ data, error }) => {
   }
 });
 
+
 export default AppConnected;
