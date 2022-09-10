@@ -58,15 +58,6 @@ class MainNavigator extends Component {
             ),
           }}
         />
-        {/*<Tab.Screen*/}
-        {/*  name={INSCRIPTIONS_ROUTE}*/}
-        {/*  component={Inscriptions}*/}
-        {/*  options={{*/}
-        {/*    tabBarIcon: ({ size, focused, color }) => (*/}
-        {/*      <TabBarIcon name="view-agenda" size={size} active={focused} color={color} />*/}
-        {/*    ),*/}
-        {/*  }}*/}
-        {/*/>*/}
 
         <Tab.Screen
           name={ACCOUNT_ROUTE}

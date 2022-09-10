@@ -2,6 +2,7 @@
   "expo": {
     "name": "Hangover",
     "slug": "hangover-app-2",
+    "owner": "pieroneri",
     "version": "1.0.0",
     "icon": "./assets/logo.png",
     "orientation": "portrait",
