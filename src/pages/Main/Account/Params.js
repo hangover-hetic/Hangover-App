@@ -8,7 +8,7 @@ import React from 'react';
 import BigSpan from '../../../components/semantics/BigSpan';
 import Span from '../../../components/semantics/Span';
 import { getProfilePicture } from '../../../services/media';
-import { UPDATE_ACCOUNT } from './routes';
+import { TERMS_OF_USE, UPDATE_ACCOUNT } from './routes';
 import ScrollContainer from '../../../components/ui/ScrollContainer';
 import { userLogout } from '../../../redux/User/userActions';
 
@@ -20,6 +20,11 @@ class Params extends React.Component {
   navigateUpdateAccount() {
     const { navigation } = this.props;
     navigation.navigate(UPDATE_ACCOUNT);
+  }
+
+  navigateTermsOfUSe(){
+    const { navigation } = this.props;
+    navigation.navigate(TERMS_OF_USE);
   }
 
   render() {
@@ -81,7 +86,10 @@ class Params extends React.Component {
               </View>
             </TouchableHighlight>
 
-            <TouchableHighlight style={styles.listItem}>
+            <TouchableHighlight 
+              onPress={this.navigateTermsOfUSe.bind(this)}
+              style={styles.listItem}
+            >
               <View style={styles.listContent}>
                 <FontAwesome5 style={styles.listIcon} name={'book-open'} color={grey} size={25} />
                 <BigSpan content={"Conditions d'utilisation"} />
