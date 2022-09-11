@@ -290,7 +290,7 @@ class Festival extends React.Component {
                         style={styles.inscriptionButton}
                         onPress={() => this.setModalVisible()}
                       >
-                        <Feather name="calendar" size={16} color="#9D9D9D" />
+                        <Feather name="calendar" size={24} color="#000" />
                         <Span
                           style={styles.spanButton}
                           content="Ajouter cet évènement au calendrier"
@@ -306,7 +306,7 @@ class Festival extends React.Component {
                   style={styles.inscriptionButton}
                   onPress={() => Linking.openURL(festival.link)}
                 >
-                  <FontAwesome5 name="ticket-alt" size={16} color="#9D9D9D" />
+                  <FontAwesome5 name="ticket-alt" size={24} color="#000" />
                   <Span
                     style={styles.spanButton}
                     content="Accéder à la billeterie de l'évènement"
@@ -357,9 +357,17 @@ const styles = StyleSheet.create({
   inscriptionButton: {
     flex: 1,
     flexDirection: 'row',
+    height: 40,
+    color: 'black',
+    backgroundColor: 'white',
+    borderRadius: 25,
+    justifyContent: 'center',
+    alignItems:'center'
   },
   spanButton: {
+    fontSize: 14,
     marginLeft: 8,
+    color:'black'
   },
   centeredView: {
     flex: 1,

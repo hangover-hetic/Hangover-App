@@ -32,7 +32,7 @@ class ScrollContainer extends React.Component {
         style={[styles.container, this.props.style]}
         refreshControl={refreshControl}
         contentContainerStyle={{
-          paddingTop: 20,
+          paddingTop: this.props.noPadding === true ? 0 : 20,
           paddingBottom: 105,
         }}
       >

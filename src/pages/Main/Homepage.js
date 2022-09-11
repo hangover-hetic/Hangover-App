@@ -5,6 +5,7 @@ import RadioButton from '../../components/RadioButton';
 import CustomButton from '../../components/ui/CustomButton';
 import SectionTitle from '../../components/semantics/SectionTitle';
 import Span from '../../components/semantics/Span';
+import Title from '../../components/semantics/Title';
 import CarouselContainer from '../../components/ui/CarouselContainer';
 import CardCarouselFestival from '../../components/CardCarouselFestival';
 import { fetchAllFestivals } from '../../redux/Festival/festival-async-actions';
@@ -51,46 +52,51 @@ class Homepage extends React.Component {
     const { radioTagSelect } = this.state;
 
     return (
-      <ScrollContainer>
+      <ScrollContainer noPadding={true}>
         {festivals === null ||
         festivals.length === 0 ||
         userInscription === null ||
         !userInscription ? (
           <LoadingIndicator />
         ) : (
-          <ScrollView>
-            <View style={styles.view}>
-              <RadioButton data={this.data} bindSelected={this.selectTag} />
-              <SectionTitle content="Événements" />
-              <CarouselContainer
-                items={
-                  radioTagSelect === 'Tous'
-                    ? festivals.filter((festival) => dayjs(festival.startDate) >= dayjs())
-                    : festivals.filter(
-                        (festival) =>
-                          dayjs(festival.startDate) >= dayjs() &&
-                          dayjs(festival.startDate) <= dayjs().add(2, 'month')
-                      )
-                }
-                renderItem={CardCarouselFestival}
-              />
-            </View>
-            <View style={styles.view}>
-              <SectionTitle content="Tes amis sont intéressés" />
-              {friendsInscription === [] ? (
-                <Span content="Aucune suggestion de tes amis" />
-              ) : (
+          <ScrollView style={styles.scrollview}>
+            <View style={styles.firstview}>
+              <Title content={'Hangover'} alignSelf="center" fontSize={45}/>
+              <View style={styles.view}>
+                
+                <SectionTitle content="Événements" />
+                <RadioButton data={this.data} bindSelected={this.selectTag} />
                 <CarouselContainer
-                  items={friendsInscription}
+                  items={
+                    radioTagSelect === 'Tous'
+                      ? festivals.filter((festival) => dayjs(festival.startDate) >= dayjs())
+                      : festivals.filter(
+                          (festival) =>
+                            dayjs(festival.startDate) >= dayjs() &&
+                            dayjs(festival.startDate) <= dayjs().add(2, 'month')
+                        )
+                  }
                   renderItem={CardCarouselFestival}
-                  userInscription={true}
                 />
-              )}
+              </View>
+              <View style={styles.view}>
+                <SectionTitle content="Tes amis sont intéressés" />
+                {friendsInscription === [] ? (
+                  <Span content="Aucune suggestion de tes amis" />
+                ) : (
+                  <CarouselContainer
+                    items={friendsInscription}
+                    renderItem={CardCarouselFestival}
+                    userInscription={true}
+                  />
+                )}
 
-              <CustomButton title="Ajouter des amis" />
+                <CustomButton title="Ajouter des amis" />
+              </View>
+              <SectionTitle style={{marginTop: 30}} content="Calendrier" />
             </View>
-            <View style={styles.view}>
-              <SectionTitle content="Calendrier" />
+            <View style={styles.calendar}>
+              
               <CalendarInscription data={userInscription} />
             </View>
           </ScrollView>
@@ -101,9 +107,14 @@ class Homepage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  view: {
-    marginTop: 25,
+  view:{
+    marginTop: 15
   },
+  firstview:{
+    padding:20,
+    paddingBottom: 0
+  }
+  
 });
 
 const mapStateToProps = (state) => ({

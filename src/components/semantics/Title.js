@@ -20,13 +20,13 @@ class Title extends React.Component {
   getStyles() {
     return {
       view: {
-        height: 50,
+        height: this.props.fontSize ? this.props.fontSize*1.6 : 50,
         width: this.props.width ? this.props.width : '100%',
       },
       text: {
-        fontSize: 32,
+        fontSize: this.props.fontSize ? this.props.fontSize : 32,
         fontFamily: 'Poppins-Bold',
-        alignSelf: 'baseline',
+        alignSelf: this.props.alignSelf ? this.props.alignSelf : 'baseline',
       },
     };
   }
