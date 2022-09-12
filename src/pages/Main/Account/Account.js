@@ -56,8 +56,9 @@ class Account extends React.Component {
   render() {
     const { actualUser, userInscription } = this.props;
     return (
-      <ScrollContainer>
-        <View style={{ display: 'flex' }}>
+      <ScrollContainer style={{paddingTop: 20}} noPadding={true}>
+        
+        <View style={[{ display: 'flex' }, styles.view]}>
           <Title content="Mon compte" />
           <Ionicons
             name="settings-outline"
@@ -86,11 +87,11 @@ class Account extends React.Component {
             <Paragraph content="loading" />
           ) : (
             <>
-              <View>
+              <View style={styles.view}>
                 <WhiteSpan content={actualUser.firstName + ' ' + actualUser.lastName} />
                 <Span content={actualUser.email} />
               </View>
-              <View>
+              <View style={styles.view}>
                 <SectionTitle content="Mes amis" />
                 {/*<WhiteSpan content="Email de votre ami"/>*/}
                 {/*<View style={styles.searchSection}>*/}
@@ -105,7 +106,8 @@ class Account extends React.Component {
                 {/*    />*/}
                 {/*</View>*/}
                 <CustomButton title="Voir mes amis" onPress={this.navigateToFriends.bind(this)} />
-                <View>
+                </View>
+                <View style={styles.view}>
                   <SectionTitle content="Mes évènements" />
                   <CarouselContainer
                     items={userInscription}
@@ -114,10 +116,10 @@ class Account extends React.Component {
                   />
                 </View>
                 <View>
-                  <SectionTitle content="Mon calendrier" />
+                  <SectionTitle style={{marginLeft:20, marginTop:30}} content="Mon calendrier" />
                   <CalendarInscription data={userInscription} />
                 </View>
-              </View>
+              
             </>
           )}
         </View>
@@ -127,6 +129,11 @@ class Account extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
+  view:{
+    paddingHorizontal:20,
+    marginTop: 15
+  },
   searchSection: {
     flexDirection: 'row',
     alignItems: 'center',

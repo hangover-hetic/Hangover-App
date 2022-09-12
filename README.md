@@ -1,22 +1,18 @@
 # Hangover App
+Application du projet Hangover
 
 ## Démarrer l'appli :
 
+Installer les dépendances
 ```
-yarn install
+yarn
 ```
-
+Lancer expo
 ```
-yarn start
+expo start
 ```
 
 ## Formater :
-
 ```
 yarn format
-```
-## Ps Information pour les utilisateurs de redux : 
-
-```
-userReducer à été remplacer par user dans le store.
 ```

@@ -78,7 +78,7 @@ class Feed extends React.Component {
     const { posts, actualUser, actualFestival } = this.props;
     const { isRefreshing } = this.state;
     return (
-      <Container
+      <Container style={{paddingBottom: 105}}
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={this.onRefresh.bind(this)} />
         }
