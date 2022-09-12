@@ -4,16 +4,18 @@ import reduxStore from './src/redux/store';
 import App from './App';
 import { registerRootComponent } from 'expo';
 
-const ignoreWarns = ['ViewPropTypes will be removed'];
-const warn = console.warn;
-console.warn = (...arg) => {
-  for (let i = 0; i < ignoreWarns.length; i++) {
-    if (arg[0].startsWith(ignoreWarns[i])) return;
-  }
-  warn(...arg);
-};
+// const ignoreWarns = ['ViewPropTypes will be removed'];
+// const warn = console.warn;
+// console.warn = (...arg) => {
+//   for (let i = 0; i < ignoreWarns.length; i++) {
+//     if (arg[0].startsWith(ignoreWarns[i])) return;
+//   }
+//   warn(...arg);
+// };
+//
+// LogBox.ignoreLogs(ignoreWarns);
 
-LogBox.ignoreLogs(ignoreWarns);
+LogBox.ignoreAllLogs();
 
 const RNRedux = () => (
   <Provider store={reduxStore}>
