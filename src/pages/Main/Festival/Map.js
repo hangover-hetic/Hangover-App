@@ -82,8 +82,8 @@ class Map extends Component {
           topics.push(`https://hangoverapp.fr/loc/api/friend/user/${friend.user.id}`);
           friends.push({
             id: friend.user.id,
-            firstname: friend.user.firstName,
-            lastname: friend.user.lastName,
+            firstName: friend.user.firstName,
+            lastName: friend.user.lastName,
             profilePicture: getProfilePicture(friend.user.profilePicture),
           });
         }
@@ -93,6 +93,8 @@ class Map extends Component {
       this.setState({
         friends,
       });
+
+      console.log(this.state)
 
       listenMercure(topics, mercureToken, this.onFriendLocalisationReceive.bind(this));
 
@@ -115,6 +117,7 @@ class Map extends Component {
   }
 
   setUserMarker(user, location) {
+    console.log("user", user)
     const { latitude, longitude } = this.getNormalizedLatitude(location);
     this.setMarker({
       id: user.id,
@@ -126,7 +129,7 @@ class Map extends Component {
   }
 
   getFriendById(id) {
-    const user = this.state.friends[id];
+    const user = this.state.friends.find((f) => f.id === id);
     if (!user) {
       console.error(`User ${id} is not one of your friends`);
       return null;
