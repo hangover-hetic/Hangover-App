@@ -323,55 +323,7 @@ class Festival extends React.Component {
 
                         </View>
                       </View>
-                    </Modal>
-                    {userInscription.filter(
-                      (inscription) => inscription.festival.id === festival.id
-                    ).length !== 0 ? (
-                      <>
-                        <Span content="Vous êtes déjà inscrit"></Span>
-                        <TouchableOpacity
-                          style={styles.inscriptionButton}
-                          onPress={() =>
-                            this.deleteInscription(
-                              userInscription.filter(
-                                (inscription) => inscription.festival.id === festival.id
-                              )[0].id
-                            )
-                          }
-                        >
-                          <Span style={styles.spanButton} content="Se désinscrire" />
-                        </TouchableOpacity>
-                      </>
-                    ) : (
-                      <TouchableOpacity
-                        style={styles.inscriptionButton}
-                        onPress={() => this.setModalVisible()}
-                      >
-                        <Feather name="calendar" size={24} color="#000" />
-                        <Span
-                          style={styles.spanButton}
-                          content="Ajouter cet évènement au calendrier"
-                        />
-                      </TouchableOpacity>
-                    )}
-                  </>
-                )}
-              </View>
-              <View style={styles.view}>
-                <SectionTitle content="Billeterie" />
-                <TouchableOpacity
-                  style={styles.inscriptionButton}
-                  onPress={() => Linking.openURL(festival.link)}
-                >
-                  <FontAwesome5 name="ticket-alt" size={24} color="#000" />
-                  <Span
-                    style={styles.spanButton}
-                    content="Accéder à la billeterie de l'évènement"
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
+                    
         )}
       </ScrollContainer>
     );
@@ -441,18 +393,11 @@ const styles = StyleSheet.create({
     shadowOffset: {
       width: 0,
       height: 2,
-    },
+    }},
     circleGradient: {
         margin: 1,
         backgroundColor: '#202020',
         borderRadius: 25,
-    },
-    inscriptionButton: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    spanButton: {
-        marginLeft: 8,
     },
     centeredView: {
         flex: 1,

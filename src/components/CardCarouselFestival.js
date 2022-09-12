@@ -12,6 +12,7 @@ const CardCarouselFestival = ({item, index, onPress}) => {
     const imageUrl = item.cover
         ? appUrl.concat(item.cover.contentUrl)
         : 'https://renonvstakeinfo.org/wp-content/uploads/2019/07/nocontentyet.jpg';
+    
 
     return (
         <TouchableOpacity onPress={onPress}>

@@ -8,7 +8,7 @@ import Span from '../../components/semantics/Span';
 import Title from '../../components/semantics/Title';
 import CarouselContainer from '../../components/ui/CarouselContainer';
 import CardCarouselFestival from '../../components/CardCarouselFestival';
-import {fetchAllFestivals, fetchFestival} from '../../redux/Festival/festival-async-actions';
+import { fetchAllFestivals, fetchFestival } from '../../redux/Festival/festival-async-actions';
 import {
   fetchInscriptionFestival,
   fetchInscriptionFriends,
@@ -45,10 +45,9 @@ class Homepage extends React.Component {
       console.error(e);
     }
   }
-
   selectTag = (data) => {
     this.setState({ radioTagSelect: data });
-  }
+  };
 
   async onPressFestival({item}) {
     try {
@@ -63,7 +62,7 @@ class Homepage extends React.Component {
   }
 
   renderCardCarousel(item, index) {
-    return <CardCarouselFestival item={item} index={index} onPress={() => this.onPressFestival(item)}/>
+    return <CardCarouselFestival item={item.item} index={index} onPress={() => this.onPressFestival(item)}/>
   }
 
   render() {
@@ -95,7 +94,7 @@ class Homepage extends React.Component {
                             dayjs(festival.startDate) <= dayjs().add(2, 'month')
                         )
                   }
-                  renderItem={CardCarouselFestival}
+                  renderItem={this.renderCardCarousel.bind(this)}
                 />
               </View>
               <View style={styles.view}>
