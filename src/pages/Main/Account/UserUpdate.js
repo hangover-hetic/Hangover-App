@@ -78,7 +78,7 @@ class UserUpdate extends React.Component {
       await this.props.updateDataUser(this.props.actualUser.id, dataWithImage);
 
       Vibration.vibrate();
-      Toast.show('Votre post est bien posté, il est en attente de modération !');
+      Toast.show('Votre profil est bien modifié');
     } catch (e) {
       Toast.show('Error : ' + e);
     }
